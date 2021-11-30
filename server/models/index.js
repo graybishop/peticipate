@@ -1,1 +1,2 @@
-console.log('IMPORT MODELS HERE')
+// IMPORT MODELS HERE
+const biiggies = require('./Biiggie');
