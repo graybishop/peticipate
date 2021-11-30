@@ -20,6 +20,11 @@ const biiggieSchema = new Schema({
         type: String,
     },
     helpOptions: [
-        
+        {
+            name: {
+                type: String,
+                require: true,
+            },
+        }
     ]
 })
