@@ -8,3 +8,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/biiggie',
     useFindAndModify: false,
     useUnifiedTopology: true,
 });
+
+const biiggieSeed = [
+    {
+        
+    }
+]
