@@ -10,7 +10,7 @@ const typeDefs = gql`
 
     type Query {
         user: User
-        Biiggie: [Biiggie]
+        biiggie: [Biiggie]
     }
 
     type Biiggie {
