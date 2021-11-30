@@ -1,1 +1,1 @@
-console.log('server is up')
+console.log('This is the server file')
