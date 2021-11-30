@@ -1,4 +1,4 @@
 // IMPORT MODELS HERE
-const Biiggies = require('./Biiggie');
+const Biiggie = require('./Biiggie');
 
 moduele.exports = { Biiggies };
