@@ -1,16 +1,26 @@
 const { gql } = require('apollo-server-express');
 
-
-// Temp Query for server testing
 const typeDefs = gql`
-    type User{
-      message: String
+    type User {
+        _id: ID
+        username: String
+        email: String
+        password: String
     }
 
-    type Query{
-      user: User
+    type Query {
+        user: User
+        biiggie: [Biiggie]
     }
-`
-// Temp Query for server testing
 
-module.exports = typeDefs
+    type Biiggie {
+        title: String
+        deadline: Date
+        description: String
+        sources: Array
+        images: String
+        helpOptions: [helpOption]!
+    }
+    `;
+
+    module.exports = typeDefs;
