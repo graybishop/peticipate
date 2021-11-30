@@ -43,4 +43,4 @@ const BiiggieSchema = new Schema({
 
 const Biiggie = mongoose.model("Biiggie", BiiggieSchema);
 
-moduele.exports = Biiggie;
+module.exports = Biiggie;
