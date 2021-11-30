@@ -36,3 +36,5 @@ const biiggieSeed = [
     },
 ]
 
+db.Biiggie.deleteMany({})
+    .then(() => db.Biiggie.collection.insertMany(biiggieSeed))
