@@ -29,6 +29,9 @@ const biiggieSchema = new Schema({
                 type: String,
                 require: true,
             },
+            numOfPeople: {
+                type: Number,
+            }
         }
     ]
 })
