@@ -15,11 +15,10 @@ const typeDefs = gql`
 
     type Biiggie {
         title: String
-        deadline: Date
+        deadline: Int
         description: String
-        sources: Array
+        sources: [String]
         images: String
-        helpOptions: [helpOption]!
     }
     `;
 
