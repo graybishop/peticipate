@@ -1,25 +1,29 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
+const UserSchema = new Schema(
+  {
     username: {
-        String,
-        unique: true
+      type: String,
+      unique: true,
     },
     password: {
-        type: String,
-        // bcrypt
+      type: String,
+      // bcrypt
     },
     email: {
-        type: String,
-        match: [/.+@.+\..+/, 'Invalid, enter an e-mail address']
+      type: String,
+      match: [/.+@.+\..+/, "Invalid, enter an e-mail address"],
     },
     description: {
-        type: String
+      type: String,
     },
-    timestamps: true
-});
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const User = mongoose.model("User", UserSchema);
 

@@ -1,5 +1,13 @@
-const mongoose = require('mongoose');
 const db = require('../models');
+const connection = require('../config/connection');
+
+connection.once('open', async () => {
+    await db.Biiggie.deleteMany({})
+    console.log('we made it!!')
+    let data = await db.Biiggie.collection.insertMany(biiggieSeed);
+    console.log(data);
+    process.exit(0);
+});
 
 const biiggieSeed = [
     {
@@ -28,13 +36,16 @@ const biiggieSeed = [
     },
 ]
 
-db.Biiggie.deleteMany({})
-    .then(() => db.Biiggie.collection.insertMany(biiggieSeed))
-    .then((data) => {
-        console.log(data.result.n + 'records inserted!');
-        process.exit(0);
-    })
-    .catch((err) => {
-        console.error(err);
-        process.exit(1);
-    });
+// db.Biiggie.deleteOne({})
+//     .then(() => {
+//         console.log('made it!');
+//         db.Biiggie.collection.insertMany(biiggieSeed)
+//     })
+//     .then((data) => {
+//         console.log(data.result.n + 'records inserted!');
+//         process.exit(0);
+//     })
+//     .catch((err) => {
+//         console.error(err);
+//         process.exit(1);
+//     });
