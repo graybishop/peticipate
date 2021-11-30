@@ -12,5 +12,8 @@ const biiggieSchema = new Schema({
     description: {
         type: String,
         require: true,
+    },
+    sources: {
+        type: Array,
     }
 })
