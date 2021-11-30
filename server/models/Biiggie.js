@@ -1,6 +1,7 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const biiggieSchema = new Schema({
+const BiiggieSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -40,6 +41,6 @@ const biiggieSchema = new Schema({
     ]
 });
 
-const Biiggie = mongoose.model("Biiggie", biiggieSchema);
+const Biiggie = mongoose.model("Biiggie", BiiggieSchema);
 
 moduele.exports = Biiggie;
