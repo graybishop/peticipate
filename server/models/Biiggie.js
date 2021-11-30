@@ -15,5 +15,8 @@ const biiggieSchema = new Schema({
     },
     sources: {
         type: Array,
-    }
+    },
+    images: {
+        type: String,
+    },
 })
