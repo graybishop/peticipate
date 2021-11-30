@@ -9,4 +9,8 @@ const biiggieSchema = new Schema({
         type: Date,
         required: true,
     },
+    description: {
+        type: String,
+        require: true,
+    }
 })
