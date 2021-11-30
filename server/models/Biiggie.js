@@ -19,4 +19,7 @@ const biiggieSchema = new Schema({
     images: {
         type: String,
     },
+    helpOptions: [
+        
+    ]
 })
