@@ -11,7 +11,6 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
-      // bcrypt
     },
     email: {
       type: String,
@@ -33,21 +32,11 @@ const UserSchema = new Schema(
 );
 
 UserSchema.pre('save', function(next) {
-  bcrypt.genSalt(10, function (saltError, salt) {
-    if (saltError) {
-      throw saltError
-    } else {
-      bcrypt.hash(this.password, salt, function(hashError, hash) {
-        if (hashError) {
-          throw hashError
-        } else {
-          this.password = hash
-        }
-
-      })
-    }
-  })
+  if(this.password) {                                                                                                                                                        
+    let salt = bcrypt.genSaltSync(10)                                                                                                                                     
+    this.password  = bcrypt.hashSync(this.password, salt)
   next()
+  }
 });
 
 const User = mongoose.model("User", UserSchema);
