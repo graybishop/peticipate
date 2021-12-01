@@ -19,6 +19,12 @@ const UserSchema = new Schema(
     description: {
       type: String,
     },
+    createdBiiggies: [
+        {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'Biiggies'
+        }
+    ],
   },
   {
     timestamps: true,
