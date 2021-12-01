@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 // import Auth from '../utils/auth';
 import { ADD_USER } from "../../utils/mutations";
+import Auth from '../../utils/auth.js'
+
 
 function Signup(props) {
   const [formState, setFormState] = useState({
@@ -16,18 +18,19 @@ function Signup(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // const mutationResponse =
+    // 
     try {
-      await addUser({
+      const mutationResponse = await addUser({
         variables: {
           ...formState,
         },
       });
+      console.log(mutationResponse)
+      const token = mutationResponse.data.newUser.token;
+      Auth.login(token);
     } catch (err) {
       console.error(err);
     }
-    // const token = mutationResponse.data.addUser.token;
-    // Auth.login(token);
   };
 
   const handleChange = (event) => {

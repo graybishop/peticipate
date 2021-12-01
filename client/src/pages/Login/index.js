@@ -11,15 +11,19 @@ function Login(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await loginMutation({
-      variables: {
-        username: formState.username,
-        password: formState.password,
-      },
-    });
-    console.log(mutationResponse)
-    const token = mutationResponse.data.login.token;
-    Auth.login(token);
+    try {
+      const mutationResponse = await loginMutation({
+        variables: {
+          username: formState.username,
+          password: formState.password,
+        },
+      });
+      console.log(mutationResponse)
+      const token = mutationResponse.data.login.token;
+      Auth.login(token);    
+    } catch (error) {
+      console.error(error)
+    }
   };
 
   const handleChange = (event) => {
