@@ -41,6 +41,7 @@ const typeDefs = gql`
     type Query {
         user(_id: String): User
         biiggies: [Biiggie]
+        authBiggiesReq: [Biiggie]
     }
 
     type Mutation {
