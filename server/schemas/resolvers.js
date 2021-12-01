@@ -5,9 +5,9 @@ const User = require('../models/User');
 const resolvers ={
   // Temp resolver for server testing
   Query:{
-    user: async ({ _id })=>{
+    user: async (parent, { _id })=>{
       const params = _id ? { _id } : {};
-      return User.find(params);
+      return User.findOne(params);
     },
     biiggies: async ()=>{
       return await Biiggie.find({})

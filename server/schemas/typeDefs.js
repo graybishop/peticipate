@@ -27,7 +27,7 @@ const typeDefs = gql`
     }
     
     type Query {
-        user: User
+        user(_id: String): User
         biiggies: [Biiggie]
     }
 
