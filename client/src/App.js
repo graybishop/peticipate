@@ -5,6 +5,7 @@ import Login from "./pages/Login/index.js";
 import Signup from "./pages/Signup/index.js";
 import Header from "./components/PageComponents/Header.js";
 import { NewBiiggieForm } from "./components/PageComponents/NewBiiggieForm.js";
+import TestPage from "./pages/TestPage/index.js";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/new-biiggie" element={<NewBiiggieForm />} />
+          <Route path="/test" element={<TestPage />} />
           <Route
             path="*"
             element={
