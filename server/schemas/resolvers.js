@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-errors');
 const Biiggie = require('../models/Biiggie.js');
 const User = require('../models/User');
+const { signToken } = require('../utils/index.js');
 
 
 const resolvers ={
@@ -25,6 +26,22 @@ const resolvers ={
     newUser: async (parent, args) => {
       const user = await User.create(args);
       return user;
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new AuthenticationError('No user with this username found!');
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect password!');
+      }
+
+      const token = signToken(user);
+      return { token, user };
     },
   }
 }

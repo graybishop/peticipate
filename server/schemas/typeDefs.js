@@ -10,6 +10,11 @@ const typeDefs = gql`
         createdBiiggies: [Biiggie]
     }
 
+    type Auth {
+        token: ID!
+        user: User
+    }
+
     type HelpOption{
         name: String
         description: String
@@ -46,6 +51,7 @@ const typeDefs = gql`
 
     type Mutation {
         newUser(username: String, password: String, email: String, firstName: String!, lastName: String): User
+        login(email: String!, password: String!): Auth
     }
     `;
 
