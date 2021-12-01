@@ -33,8 +33,10 @@ const typeDefs = gql`
     }
     
     type Query {
-        user: User
+        me: User
         biiggies: [Biiggie]
+        keywords: [keyword]
+        categories: [category]
     }
     `;
 
