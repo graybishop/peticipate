@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const userSchema = require('./User');
+
 const BiiggieSchema = new Schema({
   title: {
     type: String,
     required: true,
+  },
+  createdBy: {
+    type: userSchema,
   },
   createdAt: {
     type: Date,
