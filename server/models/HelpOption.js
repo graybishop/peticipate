@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const HelpOptionsSchema = new Schema({
-    helpOptions: [
+const HelpOptionSchema = new Schema(
         {
           name: {
             type: String,
@@ -15,22 +14,27 @@ const HelpOptionsSchema = new Schema({
           numOfPeople: {
             type: Number,
           },
-          contributor: [
+          registeredUsers: [
             {
                 type: mongoose.Schema.Types.ObjectId, 
                 ref: 'User'
-            }
+            },
           ],
-          biiggie: [
+          moneyRequested: {
+            type: Number,
+          },
+          moneyReceived: {
+            type: Number,
+          },
+          biiggie: 
               {
                   type: mongoose.Schema.Types.ObjectId,
                   ref: 'Biiggie'
               }
-          ]
         },
-    ]
-});
 
-const HelpOptions = mongoose.model("HelpOptions", HelpOptionsSchema);
+);
 
-module.exports = HelpOptions;
+const HelpOption = mongoose.model("HelpOption", HelpOptionSchema);
+
+module.exports = HelpOption;
