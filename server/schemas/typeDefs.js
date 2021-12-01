@@ -12,6 +12,8 @@ const typeDefs = gql`
         name: String
         description: String
         numOfPeople: Int
+        contributor: [User]
+        biiggie: [Biiggie]
     }
 
     
