@@ -41,6 +41,12 @@ const BiiggieSchema = new Schema({
       numOfPeople: {
         type: Number,
       },
+      moneyRequested: {
+        type: Number,
+      },
+      moneyRecieved: {
+        type: Number,
+      }
     },
   ],
 });
