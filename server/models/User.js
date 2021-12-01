@@ -8,6 +8,7 @@ const UserSchema = new Schema(
     username: {
       type: String,
       unique: true,
+      required: true,
     },
     password: {
       type: String,
@@ -22,7 +23,7 @@ const UserSchema = new Schema(
     createdBiiggies: [
         {
             type: mongoose.Schema.Types.ObjectId, 
-            ref: 'Biiggies'
+            ref: 'Biiggie'
         }
     ],
   },
