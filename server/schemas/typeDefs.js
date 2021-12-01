@@ -5,6 +5,8 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
+        firstName: String!
+        lastName: String
         createdBiiggies: [Biiggie]
     }
 
@@ -42,7 +44,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        newUser(username: String, password: String, email: String): User
+        newUser(username: String, password: String, email: String, firstName: String!, lastName: String): User
     }
     `;
 
