@@ -15,7 +15,11 @@ const typeDefs = gql`
     }
 
     type Comment {
-        
+        author: User!
+        title: String
+        body: String!
+        biiggie: Biiggie
+        thread: [Comment]
     }
 
     type Biiggie {
@@ -25,6 +29,7 @@ const typeDefs = gql`
         sources: [String]
         images: [String]
         helpOptions:[HelpOptions]
+        comments: [Comment]
     }
     
     type Query {

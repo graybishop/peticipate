@@ -14,7 +14,7 @@ const CommentSchema = new Schema(
       type: String,
       required: true,
     },
-    biggie: {
+    biiggie: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Biiggie",
     },
