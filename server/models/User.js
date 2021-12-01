@@ -22,7 +22,7 @@ const UserSchema = new Schema(
     createdBiiggies: [
         {
             type: mongoose.Schema.Types.ObjectId, 
-            ref: 'Biiggies'
+            ref: 'Biiggie'
         }
     ],
   },
