@@ -4,9 +4,9 @@ import { AUTH_BIGGIES } from '../../utils/queries.js';
 const TestPage = (props) => {
   const {data,error} = useQuery(AUTH_BIGGIES)
 
-  console.log(data?.biiggies)
+  console.log(data?.authBiggiesReq)
 
-  let mappedBs = data?.biiggies.map((item)=>{
+  let mappedBs = data?.authBiggiesReq.map((item)=>{
     return (
       <div className='flex flex-col gap-1'>
         <p className='text-2xl'>{item.title}</p>
