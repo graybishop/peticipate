@@ -6,6 +6,7 @@ const typeDefs = gql`
         username: String
         email: String
         password: String
+        createdBiiggies: [Biiggie]
     }
 
     type HelpOptions{
