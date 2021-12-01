@@ -27,24 +27,9 @@ const BiiggieSchema = new Schema(
     },
     helpOptions: [
       {
-        name: {
-          type: String,
-          require: true,
-        },
-        description: {
-          type: String,
-          require: true,
-        },
-        numOfPeople: {
-          type: Number,
-        },
-        moneyRequested: {
-          type: Number,
-        },
-        moneyRecieved: {
-          type: Number,
-        },
-      },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "HelpOption"
+      }
     ],
     comments: [
       {
