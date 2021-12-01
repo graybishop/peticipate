@@ -17,6 +17,13 @@ const UserSchema = new Schema(
       type: String,
       match: [/.+@.+\..+/, "Invalid, enter an e-mail address"],
     },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+    },
     description: {
       type: String,
     },
