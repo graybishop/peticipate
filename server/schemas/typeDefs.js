@@ -8,17 +8,25 @@ const typeDefs = gql`
         password: String
     }
 
-    type Query {
-        user: User
-        biiggie: [Biiggie]
+    type HelpOptions{
+        name: String
+        description: String
+        numOfPeople: Int
     }
 
+    
     type Biiggie {
         title: String
-        deadline: Int
+        deadline: Float
         description: String
         sources: [String]
-        images: String
+        images: [String]
+        helpOptions:[HelpOptions]
+    }
+    
+    type Query {
+        user: User
+        biiggies: [Biiggie]
     }
     `;
 
