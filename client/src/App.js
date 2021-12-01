@@ -45,8 +45,9 @@ function App() {
           <Route
             path="*"
             element={
-              <main style={{ padding: "1rem" }}>
-                <p className='text-red-700 text-3xl'>404 There's nothing here!</p>
+              <main className='container mx-auto p-4 flex flex-row justify-center'>
+                <p className='text-red-700 text-5xl'>404 - There's no react router route to get here!</p>
+                <p className='text-red-700 text-5xl'> 💩</p>
               </main>
             }
           />

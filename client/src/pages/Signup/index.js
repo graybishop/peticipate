@@ -42,7 +42,7 @@ function Signup(props) {
   };
 
   return (
-    <div className="container my-1">
+    <div className="container mx-auto my-1 flex flex-col gap-2">
       {/* <Link to="/login">← Go to Login</Link> */}
 
       <h2>Signup</h2>
