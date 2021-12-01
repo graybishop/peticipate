@@ -17,7 +17,8 @@
     "express": "^4.17.1",
     "graphql": "^16.0.1",
     "mongoose": "^6.0.14",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "bcrypt": "^5.0.1"
   },
   "devDependencies": {
     "eslint": "^8.3.0",
