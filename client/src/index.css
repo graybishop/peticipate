@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
+
 @layer components{
   .test{
     @apply bg-green-400
   }
-} */
+}

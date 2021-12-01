@@ -1,12 +1,18 @@
 import { gql } from '@apollo/client';
 
 export const GET_BIIGIES = gql`
-query lmnop {
-  user {
-    _id
-    username
-    email
-    password
+query GiveMeTheBiiggies {
+  biiggies {
+    title
+    deadline
+    description
+    sources
+    images
+    helpOptions {
+      name
+      description
+      numOfPeople
+    }
   }
 }
 `
