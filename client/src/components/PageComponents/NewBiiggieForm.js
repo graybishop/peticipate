@@ -86,3 +86,5 @@ export function NewBiiggieForm() {
     </section>
   );
 }
+
+export default NewBiiggieForm
