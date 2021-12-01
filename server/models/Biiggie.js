@@ -7,8 +7,8 @@ const BiiggieSchema = new Schema({
     required: true,
   },
   createdBy: {
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User',
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   createdAt: {
     type: Date,
@@ -23,10 +23,10 @@ const BiiggieSchema = new Schema({
     require: true,
   },
   sources: {
-    type: Array,
+    type: [String],
   },
   images: {
-    type: Array,
+    type: [String],
   },
   helpOptions: [
     {
@@ -46,7 +46,13 @@ const BiiggieSchema = new Schema({
       },
       moneyRecieved: {
         type: Number,
-      }
+      },
+    },
+  ],
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
     },
   ],
 });

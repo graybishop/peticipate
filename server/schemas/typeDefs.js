@@ -14,6 +14,10 @@ const typeDefs = gql`
         numOfPeople: Int
     }
 
+    type Comment {
+        
+    }
+
     type Biiggie {
         title: String
         deadline: Float
