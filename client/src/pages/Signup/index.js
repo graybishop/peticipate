@@ -1,23 +1,31 @@
 import React, { useState } from "react";
 // import { Link } from "react-router-dom";
-// import { useMutation } from '@apollo/client';
+import { useMutation } from "@apollo/client";
 // import Auth from '../utils/auth';
-// import { ADD_USER } from '../utils/mutations';
+import { ADD_USER } from "../../utils/mutations";
 
 function Signup(props) {
-  const [formState, setFormState] = useState({ email: "", password: "" });
-  //   const [addUser] = useMutation(ADD_USER);
+  const [formState, setFormState] = useState({
+    username: "",
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+  });
+  const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // const mutationResponse = await addUser({
-    //   variables: {
-    //     email: formState.email,
-    //     password: formState.password,
-    //     firstName: formState.firstName,
-    //     lastName: formState.lastName,
-    //   },
-    // });
+    // const mutationResponse =
+    try {
+      await addUser({
+        variables: {
+          ...formState,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+    }
     // const token = mutationResponse.data.addUser.token;
     // Auth.login(token);
   };
@@ -36,6 +44,16 @@ function Signup(props) {
 
       <h2>Signup</h2>
       <form onSubmit={handleFormSubmit}>
+      <div className="flex-row space-between my-2">
+          <label htmlFor="username">Username:</label>
+          <input
+            placeholder="username"
+            name="username"
+            type="username"
+            id="username"
+            onChange={handleChange}
+          />
+        </div>
         <div className="flex-row space-between my-2">
           <label htmlFor="firstName">First Name:</label>
           <input
