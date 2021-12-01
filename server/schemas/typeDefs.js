@@ -6,12 +6,15 @@ const typeDefs = gql`
         username: String
         email: String
         password: String
+        createdBiiggies: [Biiggie]
     }
 
     type HelpOptions{
         name: String
         description: String
         numOfPeople: Int
+        contributor: [User]
+        biiggie: [Biiggie]
     }
 
     

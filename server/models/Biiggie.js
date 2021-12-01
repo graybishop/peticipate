@@ -28,21 +28,6 @@ const BiiggieSchema = new Schema({
   images: {
     type: Array,
   },
-  helpOptions: [
-    {
-      name: {
-        type: String,
-        require: true,
-      },
-      description: {
-        type: String,
-        require: true,
-      },
-      numOfPeople: {
-        type: Number,
-      },
-    },
-  ],
 });
 
 const Biiggie = mongoose.model("Biiggie", BiiggieSchema);
