@@ -17,7 +17,7 @@ const Home = (props) => {
         <div className='flex flex-col gap-1'>
         <h2 className='text-xl'>What can you do to help?</h2>
           {
-            item.helpOptions.map(option=>{
+            item.helpOptions?.map(option=>{
               return (
               <div>
                 <p className='font-bold'>{option.name}</p>
