@@ -7,7 +7,8 @@ const BiiggieSchema = new Schema({
     required: true,
   },
   createdBy: {
-    type: mongoose.Schema.Types.ObjectId, ref: 'User',
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User',
   },
   createdAt: {
     type: Date,
