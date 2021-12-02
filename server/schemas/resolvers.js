@@ -18,6 +18,10 @@ const resolvers ={
       const user = await User.create(args);
       return user;
     },
+    createBiiggie: async (parent, args) => {
+      const biiggie = await Biiggie.create(args);
+      return biiggie;
+    },
   }
 }
 // Temp resolver for server testing
