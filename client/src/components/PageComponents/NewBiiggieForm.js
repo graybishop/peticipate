@@ -50,7 +50,7 @@ export function NewBiiggieForm() {
        const deadline = event.target.value;
        const dateNum = new Date(deadline);
        console.log(dateNum);
-       setFormState({ ...formState, [event.target.name]: deadline });
+       setFormState({ ...formState, [event.target.name]: dateNum.valueOf() });
        console.log(dateNum.valueOf());
        console.log("deadline changed", formState)
        console.dir(deadline);
