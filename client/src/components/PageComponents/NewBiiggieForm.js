@@ -7,25 +7,34 @@ import { CREATE_BIIGGIE } from '../../utils/mutations';
 
 export function NewBiiggieForm() {
   const [formState, setFormState] = useState({
-    name: "", // name of user
-    type: "", // type of biggie ie: human rights, environment
-    title: "", // title for user biggie
-    action: "", // who can take action ie: anyone, company
-    biiggie: "", // how you hope this idea changes the world
+    title: "", // title of Biiggie
+    deadline: "", // deadline for user Biiggie
+    description: "", // description for user biggie
+    sources: "", // links to help get your Biiggie across
+    images: "", // images to add to your Biiggie
   });
 
   const [createBiiggie] = useMutation(CREATE_BIIGGIE);
-  
-  // const [errorMessage, setErrorMessage] = useState('');
-  const { name, type, title, action, biiggie } = formState;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const [errorMessage, setErrorMessage] = useState('');
+  // const { name, type, title, action, biiggie } = formState;
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await createBiiggie({
+        variables: {
+          ...formState,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+    }
     console.log("form submitted");
   };
 
-  const handleChange = (e) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
+  const handleChange = (event) => {
+    setFormState({ ...formState, [event.target.name]: event.target.value });
     console.log("Handle Form", formState);
   };
 
