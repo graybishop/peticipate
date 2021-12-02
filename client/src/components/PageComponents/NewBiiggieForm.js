@@ -25,7 +25,7 @@ export function NewBiiggieForm() {
   };
 
   return (
-    <section>
+    <section className='container mx-auto'>
       <form id="pageData" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="pageData">
@@ -86,3 +86,5 @@ export function NewBiiggieForm() {
     </section>
   );
 }
+
+export default NewBiiggieForm

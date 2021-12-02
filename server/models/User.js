@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
 
@@ -7,14 +8,21 @@ const UserSchema = new Schema(
     username: {
       type: String,
       unique: true,
+      required: true,
     },
     password: {
       type: String,
-      // bcrypt
     },
     email: {
       type: String,
       match: [/.+@.+\..+/, "Invalid, enter an e-mail address"],
+    },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
     },
     description: {
       type: String,
@@ -22,7 +30,7 @@ const UserSchema = new Schema(
     createdBiiggies: [
         {
             type: mongoose.Schema.Types.ObjectId, 
-            ref: 'Biiggies'
+            ref: 'Biiggie'
         }
     ],
   },
@@ -30,6 +38,18 @@ const UserSchema = new Schema(
     timestamps: true,
   }
 );
+
+UserSchema.pre('save', function(next) {
+  if(this.password) {                                                                                                                                                        
+    let salt = bcrypt.genSaltSync(10)                                                                                                                                     
+    this.password  = bcrypt.hashSync(this.password, salt)
+  next()
+  }
+});
+
+UserSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 const User = mongoose.model("User", UserSchema);
 
