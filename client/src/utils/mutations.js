@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_BIIGGIE = gql`
-  mutation createBiiggie(
+  mutation Mutation(
     $title: String!
     $deadline: Float!
     $description: String!
@@ -15,7 +15,6 @@ export const CREATE_BIIGGIE = gql`
       sources: $sources
       images: $images
     ) {
-      _id
       title
       deadline
       description
