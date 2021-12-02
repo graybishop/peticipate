@@ -14,6 +14,8 @@ export function NewBiiggieForm() {
     biiggie: "", // how you hope this idea changes the world
   });
 
+  const [createBiiggie] = useMutation(CREATE_BIIGGIE);
+  
   // const [errorMessage, setErrorMessage] = useState('');
   const { name, type, title, action, biiggie } = formState;
 
