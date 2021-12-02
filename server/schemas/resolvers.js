@@ -49,35 +49,46 @@ const resolvers ={
       }
 
       //find the option in the database
-      console.log("these are the args:", args)
       let helpOption = await HelpOption.findOne({_id: args.helpOptionId})
-      console.log(helpOption)
 
-      //check if this option involves people or money
+      //check if this option is asking for people or money
       //people route
       if (helpOption.numOfPeople){
+
         //if the helpOption already has all of the commitment it needs, then just skip adding the person
         if (helpOption.registeredUsers.length < helpOption.numOfPeople){
-          helpOption = await HelpOption.findOneAndUpdate({_id: args.helpOptionId}, {$addToSet: {registeredUsers: context.user._id}}, {new:true} )
+          helpOption = await HelpOption.findOneAndUpdate(
+            {_id: args.helpOptionId}, 
+            //addToSet will only add new entries if they are not already in the array
+            {$addToSet: {registeredUsers: context.user._id}}, 
+            {new:true} 
+            )
         }
-  
+
+        //return the doc to apollo to serve to the client
         return helpOption
+      } 
       
-        // Money route
-      } else {
+      // Money route
+      if (helpOption.moneyRequested){
+        if(!args.moneyCommitted){
+          throw new Error('If the help option is asking for a money commitment, we need a moneyCommitted variable in the mutation.')
+        }
         if(helpOption.moneyReceived < helpOption.moneyRequested){
 
           //add the committed money to the money received
           helpOption.moneyReceived = args.moneyCommitted + helpOption.moneyReceived
           console.log('value of money received:', helpOption.moneyReceived)
 
-          //if the commitment is over the requested amount, set it to be the requested amount
+          //if the commitment is over the requested amount, set the total money received to be the requested amount
           if (helpOption.moneyReceived > helpOption.moneyRequested){
             helpOption.moneyReceived = helpOption.moneyRequested
           }
-
         }
+
+        //save any changes made to document to the database
         helpOption.save()
+        //return the doc to apollo to serve to the client
         return helpOption
       }
     }

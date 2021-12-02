@@ -75,10 +75,11 @@ const TestPage = (props) => {
         {mappedBs}
       </div>
       <div>
-        <p>test button here</p>
-        <button onClick={() => { runMutation(); }}>Test the Mutation</button>
-        <p>separate these two</p>
-        <button onClick={() => { runMutation2(); }}>Test the Money Mutation</button>
+        <h2 className='text-2xl text-center border-b'>Test Buttons Here</h2>
+        <div className='flex flex-row gap-2 justify-center'>
+        <button className='border p-2 bg-yellow-600 rounded' onClick={() => { runMutation(); }}>Test the User Mutation</button>
+        <button className='border p-2 bg-green-600 rounded' onClick={() => { runMutation2(); }}>Test the Money Mutation</button>
+        </div>
       </div>
     </div>
   );
