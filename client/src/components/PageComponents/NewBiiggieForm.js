@@ -12,6 +12,14 @@ export function NewBiiggieForm() {
     description: "", // description for user biggie
     sources: [], // links to help get your Biiggie across
     images: [], // images to add to your Biiggie
+    helpOptions: [
+      {
+        name: "",
+        description: "",
+        numOfPeople: "",
+        moneyRequested: "",
+      }
+    ],
   });
 
   const [createBiiggie] = useMutation(CREATE_BIIGGIE);
@@ -124,6 +132,15 @@ export function NewBiiggieForm() {
           <input
             type="text"
             name="images"
+            defaultValue={images}
+            onBlur={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="helpOptions">Provide a link to an image you want associated with your BIIGGIE (image, image, etc.):</label>
+          <input
+            type="text"
+            name=""
             defaultValue={images}
             onBlur={handleChange}
           />
