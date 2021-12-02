@@ -2,12 +2,30 @@ const db = require('../models');
 const connection = require('../config/connection');
 
 let biiggieId;
+let userId;
 
 connection.once('open', async () => {
-    await db.Biiggie.deleteMany({})
-    console.log('we made it!!')
-    let data = await db.Biiggie.collection.insertMany(biiggieSeed);
-    console.log(data);
+    await db.User.collection.deleteMany({});
+    console.log('Deleted User collection');
+    let userInsert = await db.User.collection.insertMany(userSeed);
+    console.log(userInsert);
+    userId = await db.User.findOne({});
+    console.log(userId._id);
+    let biiggieSeed = [
+        {
+            title: 'Taco Food Truck Startup',
+            createdBy: userId._id,
+            deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
+            description: 'My Biiggie that I I need help getting my dream taco food truck business off the ground. I serve all types of tacos and have worked very hard renovating an old truck I but. Any help is welcome!',
+            images: ['https://mobile-cuisine.com/wp-content/uploads/2015/09/food-truck-branding.jpg'],
+        },
+    ];
+    await db.Biiggie.deleteMany({});
+    console.log('Deleted Biiggie collection');
+    let biiggieInsert = await db.Biiggie.collection.insertMany(biiggieSeed);
+    console.log(biiggieInsert);
+    await db.User.updateMany({}, {$set: {createdBiiggies: [ biiggieInsert.insertedIds[0] ]}});
+    console.log(await db.User.findOne({}).populate('createdBiiggies'))
     biiggieId = await db.Biiggie.findOne({});
     console.log(biiggieId._id);
     let helpOptionSeed = [
@@ -29,35 +47,29 @@ connection.once('open', async () => {
             numOfPeople: 3,
             biiggie: biiggieId._id
         },
-    ]
+    ];
     await db.HelpOption.deleteMany({});
-    let data2 = await db.HelpOption.collection.insertMany(helpOptionSeed);
-    console.log(data2);
-    await db.Biiggie.updateMany({}, {$set: {helpOptions: [ data2.insertedIds[0], data2.insertedIds[1], data2.insertedIds[2] ]}});
+    console.log('Deleted HelpOptions collection')
+    let helpOptionsInsert = await db.HelpOption.collection.insertMany(helpOptionSeed);
+    console.log(helpOptionsInsert);
+    let helpOptionsArr = helpOptionsInsert.insertedIds
+    console.log(helpOptionsArr);
+    /*for ( let i = 0; i < helpOptionsInsert.insertedIds.length; i++) {
+        helpOptionsArr = helpOptionsInsert.insertedIds[i];
+        await db.Biiggie.updateMany({}, {$set: {helpOptions: [ helpOptionsArr ]}});
+        console.log(await db.Biiggie.findOne({}).populate('helpOptions'))
+    }*/
+    //await db.Biiggie.updateMany({}, {$set: {helpOptions: [ helpOptionsArr.length ]}});
+    await db.Biiggie.updateMany({}, {$set: {helpOptions: [ helpOptionsArr[0], helpOptionsArr[1], helpOptionsArr[2] ]}});
     console.log(await db.Biiggie.findOne({}).populate('helpOptions'))
     process.exit(0);
 });
 
-const biiggieSeed = [
+const userSeed = [
     {
-        title: 'Taco Food Truck Startup',
-        createdAt: new Date(new Date().setDate(new Date().getDate())),
-        deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
-        description: 'My Biiggie that I I need help getting my dream taco food truck business off the ground. I serve all types of tacos and have worked very hard renovating an old truck I but. Any help is welcome!',
-        images: ['https://mobile-cuisine.com/wp-content/uploads/2015/09/food-truck-branding.jpg'],
-    },
-]
-
-// db.Biiggie.deleteOne({})
-//     .then(() => {
-//         console.log('made it!');
-//         db.Biiggie.collection.insertMany(biiggieSeed)
-//     })
-//     .then((data) => {
-//         console.log(data.result.n + 'records inserted!');
-//         process.exit(0);
-//     })
-//     .catch((err) => {
-//         console.error(err);
-//         process.exit(1);
-//     });
+        username: 'Test',
+        password: 'Testing',
+        email: 'test@mail.com',
+        description: 'I am a test'
+    }
+];
