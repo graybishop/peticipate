@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-errors');
-const {Biiggie, HelpOption, User} = require('../models/index.js')
+const {Biiggie, User} = require('../models/index.js')
 const { signToken } = require('../utils/index.js');
 
 
