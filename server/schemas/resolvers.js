@@ -1,6 +1,5 @@
 const { AuthenticationError } = require('apollo-server-errors');
-const Biiggie = require('../models/Biiggie.js');
-const User = require('../models/User');
+const {Biiggie, HelpOption, User} = require('../models/index.js')
 const { signToken } = require('../utils/index.js');
 
 
@@ -12,7 +11,7 @@ const resolvers ={
       return User.findOne(params);
     },
     biiggies: async ()=>{
-      return await Biiggie.find({})
+      return await Biiggie.find({}).populate('helpOptions')
     },
     authBiggiesReq: async (parent, args, context)=>{
       console.log('Context looks like this:', context.user)
