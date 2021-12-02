@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
-import { GET_BIIGIES } from '../../utils/queries.js';
+import { AUTH_BIGGIES } from '../../utils/queries.js';
 
-const Home = (props) => {
-  const {data,error} = useQuery(GET_BIIGIES)
+const TestPage = (props) => {
+  const {data,error} = useQuery(AUTH_BIGGIES)
 
-  console.log(data?.biiggies)
+  console.log(data?.authBiggiesReq)
 
-  let mappedBs = data?.biiggies.map((item)=>{
+  let mappedBs = data?.authBiggiesReq.map((item)=>{
     return (
       <div className='flex flex-col gap-1'>
         <p className='text-2xl'>{item.title}</p>
@@ -48,4 +48,4 @@ const Home = (props) => {
   )
 }
 
-export default Home
+export default TestPage

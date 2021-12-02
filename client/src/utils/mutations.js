@@ -40,10 +40,48 @@ export const ADD_USER = gql`
       password: $password
       username: $username
     ) {
-      username
-      email
-      firstName
-      lastName
+      token
+      user {
+        email
+        firstName
+        lastName
+        username
+        _id
+        createdBiiggies {
+          title
+          deadline
+          description
+          sources
+          images
+          helpOptions {
+            name
+          }
+        }
+      }
     }
   }
 `;
+
+
+export const LOGIN_USER = gql`mutation Login($password: String!, $username: String!) {
+  login(password: $password, username: $username) {
+    token
+    user {
+      email
+      firstName
+      lastName
+      username
+      _id
+      createdBiiggies {
+        title
+        deadline
+        description
+        sources
+        images
+        helpOptions {
+          name
+        }
+      }
+    }
+  }
+}`
