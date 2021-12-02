@@ -45,7 +45,7 @@ const typeDefs = gql`
 
     type Mutation {
         newUser(username: String, password: String, email: String, firstName: String!, lastName: String): User
-        
+        createBiiggie(title: String!, deadline: Date!, description: String!, sources: [String], images: [String])
     }
     `;
 
