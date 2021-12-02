@@ -135,6 +135,12 @@ export function NewBiiggieForm() {
             onBlur={handleChange}
           />
         </div>
+        {/* Start of help options form */}
+        <div>
+          <label htmlFor="pageData">
+            Must fill out all sections to get a help option added to your BIIGGIE
+          </label>
+        </div>
         <div>
           <label htmlFor="helpOptions.name">Provide the title of this help option:</label>
           <input
@@ -150,6 +156,33 @@ export function NewBiiggieForm() {
             type="text"
             name="helpOptions.description"
             defaultValue={helpOptions.description}
+            onBlur={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="helpOptions.description">Provide the description of this help option:</label>
+          <input
+            type="text"
+            name="helpOptions.description"
+            defaultValue={helpOptions.description}
+            onBlur={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="helpOptions.numOfPeople">Provide the number of people that can fill this help option role:</label>
+          <input
+            type="number"
+            name="helpOptions.numOfPeople"
+            defaultValue={helpOptions.numOfPeople}
+            onBlur={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="helpOptions.moneyRequested">Provide the amount of money you need to support your BIIGGIE:</label>
+          <input
+            type="number"
+            name="helpOptions.moneyRequested"
+            defaultValue={helpOptions.moneyRequested}
             onBlur={handleChange}
           />
         </div>
