@@ -3,14 +3,16 @@ const Schema = mongoose.Schema;
 
 const KeywordSchema = new Schema(
     {
-        keyword:{
+        keyword: {
             type: String,
             require: true,
         },
-        biiggie: {
+        biiggie: [
+            {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Biiggie'
-        }
+            }
+        ]
     },
 );
 

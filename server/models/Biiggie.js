@@ -31,6 +31,12 @@ const BiiggieSchema = new Schema(
         ref: "HelpOption"
       }
     ],
+    keywords: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Keywords'
+      }
+    ],
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,
