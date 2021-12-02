@@ -12,20 +12,19 @@ export function NewBiiggieForm() {
     description: "", // description for user biggie
     sources: [], // links to help get your Biiggie across
     images: [], // images to add to your Biiggie
-    helpOptions: [
+    helpOptions: 
       {
         name: "",
         description: "",
         numOfPeople: "",
         moneyRequested: "",
-      }
-    ],
+      },
   });
 
   const [createBiiggie] = useMutation(CREATE_BIIGGIE);
 
   // const [errorMessage, setErrorMessage] = useState('');
-  const { title, deadline, description, sources, images } = formState;
+  const { title, deadline, description, sources, images, helpOptions } = formState;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -137,11 +136,20 @@ export function NewBiiggieForm() {
           />
         </div>
         <div>
-          <label htmlFor="helpOptions">Provide a link to an image you want associated with your BIIGGIE (image, image, etc.):</label>
+          <label htmlFor="helpOptions.name">Provide the title of this help option:</label>
           <input
             type="text"
-            name=""
-            defaultValue={images}
+            name="helpOptions.name"
+            defaultValue={helpOptions.name}
+            onBlur={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="helpOptions.description">Provide the description of this help option:</label>
+          <input
+            type="text"
+            name="helpOptions.description"
+            defaultValue={helpOptions.description}
             onBlur={handleChange}
           />
         </div>
