@@ -46,6 +46,16 @@ export function NewBiiggieForm() {
        console.log("sources changed", formState)
        return;
     }
+    if (event.target.name === 'deadline') {
+       const deadline = event.target.value;
+       const dateNum = new Date(deadline);
+       console.log(dateNum);
+       setFormState({ ...formState, [event.target.name]: deadline });
+       console.log(dateNum.valueOf());
+       console.log("deadline changed", formState)
+       console.dir(deadline);
+       return;
+    }
     setFormState({ ...formState, [event.target.name]: event.target.value });
     console.log("Handle Form", formState);
   };
@@ -84,7 +94,7 @@ export function NewBiiggieForm() {
             What is the deadline for your BIIGGIE (YYYY-MM-DD):
           </label>
           <input
-            type="text"
+            type="date"
             name="deadline"
             defaultValue={deadline}
             onBlur={handleChange}

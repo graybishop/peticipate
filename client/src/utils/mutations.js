@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 export const CREATE_BIIGGIE = gql`
   mutation createBiiggie(
     $title: String!
-    $deadline: Int!
+    $deadline: Float!
     $description: String!
     $sources: [String]
     $images: [String]
