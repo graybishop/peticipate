@@ -7,6 +7,7 @@ export const CREATE_BIIGGIE = gql`
     $description: String!
     $sources: [String]
     $images: [String]
+    $helpOptions: [HelpOptionContent]
   ) {
     createBiiggie(
       title: $title
@@ -14,12 +15,11 @@ export const CREATE_BIIGGIE = gql`
       description: $description
       sources: $sources
       images: $images
+      helpOptions: $helpOptions
     ) {
       title
       deadline
       description
-      sources
-      images
     }
   }
 `;
@@ -61,41 +61,42 @@ export const ADD_USER = gql`
   }
 `;
 
-
-export const LOGIN_USER = gql`mutation Login($password: String!, $username: String!) {
-  login(password: $password, username: $username) {
-    token
-    user {
-      email
-      firstName
-      lastName
-      username
-      _id
-      createdBiiggies {
-        title
-        deadline
-        description
-        sources
-        images
-        helpOptions {
-          name
+export const LOGIN_USER = gql`
+  mutation Login($password: String!, $username: String!) {
+    login(password: $password, username: $username) {
+      token
+      user {
+        email
+        firstName
+        lastName
+        username
+        _id
+        createdBiiggies {
+          title
+          deadline
+          description
+          sources
+          images
+          helpOptions {
+            name
+          }
         }
       }
     }
   }
-}`
+`;
 
 export const USER_COMMIT_TO_HELP = gql`
-mutation Mutation($helpOptionId: ID! $moneyCommitted: Int) {
-  commitToHelp(helpOptionId: $helpOptionId, moneyCommitted: $moneyCommitted) {
-    name
-    description
-    numOfPeople
-    registeredUsers {
-      _id
+  mutation Mutation($helpOptionId: ID!, $moneyCommitted: Int) {
+    commitToHelp(helpOptionId: $helpOptionId, moneyCommitted: $moneyCommitted) {
+      name
+      description
+      numOfPeople
+      registeredUsers {
+        _id
+      }
+      moneyReceived
+      moneyRequested
     }
-    moneyReceived
-    moneyRequested
   }
-}
-`
+`;

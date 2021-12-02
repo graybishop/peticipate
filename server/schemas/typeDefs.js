@@ -27,6 +27,14 @@ const typeDefs = gql`
         biiggie: Biiggie
     }
 
+    input HelpOptionContent {
+        name: String
+        description: String
+        numOfPeople: Int
+        moneyRequested: Int
+        moneyReceived: Int
+    }
+
     type Comment {
         author: User
         title: String
@@ -45,6 +53,14 @@ const typeDefs = gql`
         comments: [Comment]
     }
 
+    input BiiggieContent {
+        title: String
+        deadline: Float!
+        description: String
+        sources: [String]
+        images: [String]
+    }
+
     type Keywords {
         keyword: String
         biiggie: [Biiggie]
@@ -57,7 +73,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        createBiiggie(title: String!, deadline: Float!, description: String!, sources: [String], images: [String]): Biiggie
+        createBiiggie(title: String!, deadline: Float!, description: String!, sources: [String], images: [String], helpOptions: [HelpOptionContent]): Biiggie
         newUser(username: String, password: String, email: String, firstName: String!, lastName: String): Auth
         login(username: String!, password: String!): Auth
         commitToHelp(helpOptionId: ID!, moneyCommitted: Int): HelpOption
