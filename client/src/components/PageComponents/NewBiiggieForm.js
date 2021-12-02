@@ -17,7 +17,7 @@ export function NewBiiggieForm() {
   const [createBiiggie] = useMutation(CREATE_BIIGGIE);
 
   // const [errorMessage, setErrorMessage] = useState('');
-  // const { name, type, title, action, biiggie } = formState;
+  const { title, deadline, description, sources, images } = formState;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -43,19 +43,19 @@ export function NewBiiggieForm() {
       <form id="pageData" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="pageData">
-            Must fill out all sections to generate biiggie
+            Must fill out all sections to get your BIIGGIE published
           </label>
         </div>
         <div>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="title">Desired title for BIIGGIE:</label>
           <input
             type="text"
-            name="name"
-            defaultValue={name}
+            name="title"
+            defaultValue={title}
             onBlur={handleChange}
           />
         </div>
-        <div>
+        {/* <div>
           <label htmlFor="type">
             Describe what your cause pertains to: ie: Health, Environment,
             Political
@@ -66,31 +66,43 @@ export function NewBiiggieForm() {
             defaultValue={type}
             onBlur={handleChange}
           />
-        </div>
+        </div> */}
         <div>
-          <label htmlFor="title">Desired title for biiggie:</label>
+          <label htmlFor="deadline">
+            What is the deadline for your BIIGGIE (YYYY-MM-DD):
+          </label>
           <input
             type="text"
-            name="title"
-            defaultValue={title}
+            name="deadline"
+            defaultValue={deadline}
             onBlur={handleChange}
           />
         </div>
         <div>
-          <label htmlFor="action">Summarize who can take action</label>
+          <label htmlFor="description">Tell us all about your BIIGGIE:</label>
           <input
             type="text"
-            name="action"
-            defaultValue={action}
-            onBlur={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="biiggie">Tell us all about your big Idea!</label>
-          <textarea
-            name="biiggie"
+            name="description"
             rows="7"
-            defaultValue={biiggie}
+            defaultValue={description}
+            onBlur={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="sources">Provide any links that you want associated with your BIIGGIE (link, link, link, etc.):</label>
+          <input
+            type="text"
+            name="sources"
+            defaultValue={sources}
+            onBlur={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="images">Provide any links to images you want associated with your BIIGGIE (image, image, image, etc.):</label>
+          <input
+            type="text"
+            name="images"
+            defaultValue={images}
             onBlur={handleChange}
           />
         </div>
