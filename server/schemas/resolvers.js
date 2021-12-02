@@ -14,7 +14,6 @@ const resolvers ={
       return await Biiggie.find({}).populate('helpOptions')
     },
     authBiggiesReq: async (parent, args, context)=>{
-      console.log('Context looks like this:', context.user)
       if(!context.user){
         throw new AuthenticationError('You need to be logged in to pull these Biggies')
       }
@@ -44,21 +43,43 @@ const resolvers ={
       return { token, user };
     },
     commitToHelp: async (parent, args, context)=>{
-      console.log('Context looks like this:', context.user)
-
+      //check that the user is logged in, if not send back an error
       if(!context.user){
         throw new AuthenticationError('You need to be logged in to commit to an Idea.')
       }
 
-      console.log(context.user)
-
-      let helpOption = await HelpOption.findOneAndUpdate({id: args.helpOptionId}, {$addToSet: {registeredUsers: context.user._id}}, {new:true} )
-
+      //find the option in the database
+      console.log("these are the args:", args)
+      let helpOption = await HelpOption.findOne({_id: args.helpOptionId})
       console.log(helpOption)
-      return helpOption
-      //need to add user to the help option as a new item in the 'registeredUsers' array
 
-      //then i want to update the button to say weather 
+      //check if this option involves people or money
+      //people route
+      if (helpOption.numOfPeople){
+        //if the helpOption already has all of the commitment it needs, then just skip adding the person
+        if (helpOption.registeredUsers.length < helpOption.numOfPeople){
+          helpOption = await HelpOption.findOneAndUpdate({_id: args.helpOptionId}, {$addToSet: {registeredUsers: context.user._id}}, {new:true} )
+        }
+  
+        return helpOption
+      
+        // Money route
+      } else {
+        if(helpOption.moneyReceived < helpOption.moneyRequested){
+
+          //add the committed money to the money received
+          helpOption.moneyReceived = args.moneyCommitted + helpOption.moneyReceived
+          console.log('value of money received:', helpOption.moneyReceived)
+
+          //if the commitment is over the requested amount, set it to be the requested amount
+          if (helpOption.moneyReceived > helpOption.moneyRequested){
+            helpOption.moneyReceived = helpOption.moneyRequested
+          }
+
+        }
+        helpOption.save()
+        return helpOption
+      }
     }
   }
 }

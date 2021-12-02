@@ -1,30 +1,42 @@
 import { useQuery, useMutation } from '@apollo/client';
 import { USER_COMMIT_TO_HELP } from '../../utils/mutations.js';
-import { AUTH_BIGGIES} from '../../utils/queries.js';
+import { AUTH_BIGGIES } from '../../utils/queries.js';
 
 const TestPage = (props) => {
-  const {data,error} = useQuery(AUTH_BIGGIES)
-  
-  const [testMutation, mutationObject] = useMutation(USER_COMMIT_TO_HELP, {
-    variables: {
-      
-        "helpOptionId": "61a81ed284b20dcd907511f9"
-      
-    }
-  })
+  const { data, error } = useQuery(AUTH_BIGGIES);
 
-  console.log(data?.authBiggiesReq)
+  const [testMutation] = useMutation(USER_COMMIT_TO_HELP, );
 
-  const runMutation = async (params) => {
-    try{
-      let mutationResponse = await testMutation()
-      console.log(mutationResponse)
+  const [testMutationForMoney] = useMutation(USER_COMMIT_TO_HELP);
+
+  const runMutation = async () => {
+    try {
+      let mutationResponse = await testMutation({
+        variables: {
+          "helpOptionId": "61a831f09eef024cac40a409"
+        }
+      });
+      console.log(mutationResponse.data);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
-  let mappedBs = data?.authBiggiesReq.map((item)=>{
+  const runMutation2 = async () => {
+    try {
+      let mutationResponse2 = await testMutationForMoney({
+        variables: {
+          "helpOptionId": "61a831f09eef024cac40a40a",
+           moneyCommitted: 5
+        }
+      });
+      console.log(mutationResponse2.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  let mappedBs = data?.authBiggiesReq.map((item) => {
     return (
       <div className='flex flex-col gap-1'>
         <p className='text-2xl'>{item.title}</p>
@@ -33,41 +45,43 @@ const TestPage = (props) => {
         <p>{item.sources}</p>
         <p>Deadline: {new Date(item.deadline).toLocaleDateString()}</p>
         <div className='flex flex-col gap-1'>
-        <h2 className='text-xl'>What can you do to help?</h2>
+          <h2 className='text-xl'>What can you do to help?</h2>
           {
-            item.helpOptions?.map(option=>{
+            item.helpOptions?.map(option => {
               return (
-              <div>
-                <p className='font-bold'>{option.name}</p>
-                <p>{option.description}</p>
-                <p>Number Required:{option.numOfPeople}</p>
-              </div>
-              )
+                <div>
+                  <p className='font-bold'>{option.name}</p>
+                  <p>{option.description}</p>
+                  <p>Number Required:{option.numOfPeople}</p>
+                </div>
+              );
             })
           }
         </div>
       </div>
-    )
-  })
-  
+    );
+  });
+
   return (
 
     <div className='flex flex-col bg-gray-100 gap-2 container mx-auto py-4 rounded-sm my-2 shadow- p-4'>
       <h1 className='text-3xl'>
-      This is the homepage, dude.
+        This is the homepage, dude.
       </h1>
       <p>
-      {error?.toString()}
+        {error?.toString()}
       </p>
       <div>
         {mappedBs}
       </div>
       <div>
         <p>test button here</p>
-        <button onClick={()=>{runMutation()}}>Test the Mutation</button>
+        <button onClick={() => { runMutation(); }}>Test the Mutation</button>
+        <p>separate these two</p>
+        <button onClick={() => { runMutation2(); }}>Test the Money Mutation</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TestPage
+export default TestPage;

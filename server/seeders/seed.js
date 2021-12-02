@@ -18,9 +18,10 @@ connection.once('open', async () => {
             biiggie: biiggieId._id
         },
         {
-            name: 'Vehicle Wrap Installer',
-            description: 'A vehible wrap artist to install a wrap on the truck.',
-            numOfPeople: 1,
+            name: 'Donation for Vehicle Wrap',
+            description: '$100 for a Vehicle wrap artist to install a wrap on the truck.',
+            moneyRequested: 100,
+            moneyReceived: 0,
             biiggie: biiggieId._id
         },
         {
