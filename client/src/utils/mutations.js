@@ -6,7 +6,7 @@ export const CREATE_BIIGGIE = gql`
     $deadline: Int!
     $description: String!
     $sources: [String]
-    $images: String
+    $images: [String]
   ) {
     createBiiggie(
       title: $title

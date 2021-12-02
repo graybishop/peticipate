@@ -10,8 +10,8 @@ export function NewBiiggieForm() {
     title: "", // title of Biiggie
     deadline: "", // deadline for user Biiggie
     description: "", // description for user biggie
-    sources: "", // links to help get your Biiggie across
-    images: "", // images to add to your Biiggie
+    sources: [], // links to help get your Biiggie across
+    images: [], // images to add to your Biiggie
   });
 
   const [createBiiggie] = useMutation(CREATE_BIIGGIE);
@@ -34,6 +34,18 @@ export function NewBiiggieForm() {
   };
 
   const handleChange = (event) => {
+    if (event.target.name === 'images') {
+       const imagesArray = [event.target.value];
+       setFormState({ ...formState, [event.target.name]: imagesArray });
+       console.log("images changed", formState)
+       return;
+    }
+    if (event.target.name === 'sources') {
+       const sourcesArray = [event.target.value];
+       setFormState({ ...formState, [event.target.name]: sourcesArray });
+       console.log("sources changed", formState)
+       return;
+    }
     setFormState({ ...formState, [event.target.name]: event.target.value });
     console.log("Handle Form", formState);
   };
@@ -89,7 +101,7 @@ export function NewBiiggieForm() {
           />
         </div>
         <div>
-          <label htmlFor="sources">Provide any links that you want associated with your BIIGGIE (link, link, link, etc.):</label>
+          <label htmlFor="sources">Provide a link that you want associated with your BIIGGIE :</label>
           <input
             type="text"
             name="sources"
@@ -98,7 +110,7 @@ export function NewBiiggieForm() {
           />
         </div>
         <div>
-          <label htmlFor="images">Provide any links to images you want associated with your BIIGGIE (image, image, image, etc.):</label>
+          <label htmlFor="images">Provide a link to an image you want associated with your BIIGGIE (image, image, etc.):</label>
           <input
             type="text"
             name="images"
