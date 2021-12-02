@@ -42,6 +42,10 @@ const resolvers ={
       const token = signToken(user);
       return { token, user };
     },
+    createBiiggie: async (parent, args) => {
+      const biiggie = await Biiggie.create(args);
+      return biiggie;
+    },
     commitToHelp: async (parent, args, context)=>{
       //check that the user is logged in, if not send back an error
       if(!context.user){
