@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/client";
 // import Auth from '../utils/auth';
 import { ADD_USER } from "../../utils/mutations";
 import Auth from '../../utils/auth.js'
+import { Link } from "react-router-dom";
 
 
 function Signup(props) {
@@ -42,66 +43,81 @@ function Signup(props) {
   };
 
   return (
-    <div className="container mx-auto my-1 flex flex-col gap-2">
+    <div className="bg-gray-300 min-h-screen flex flex-col">
+            <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+                <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
       {/* <Link to="/login">← Go to Login</Link> */}
 
-      <h2>Signup</h2>
+      <h1 class="mb-8 text-3xl text-center font-bold">Sign Up</h1>
       <form onSubmit={handleFormSubmit}>
-      <div className="flex-row space-between my-2">
-          <label htmlFor="username">Username:</label>
+        <div>
+        <label htmlFor="firstName"></label>
           <input
-            placeholder="username"
-            name="username"
-            type="username"
-            id="username"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="firstName">First Name:</label>
-          <input
-            placeholder="First"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            placeholder="First Name"
             name="firstName"
-            type="firstName"
+            type="text"
             id="firstName"
             onChange={handleChange}
           />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="lastName">Last Name:</label>
+        <label htmlFor="lastName"></label>
           <input
-            placeholder="Last"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            placeholder="Last Name"
             name="lastName"
-            type="lastName"
+            type="text"
             id="lastName"
             onChange={handleChange}
           />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="username"></label>
           <input
-            placeholder="youremail@test.com"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            placeholder="Username"
+            name="username"
+            type="text"
+            id="username"
+            onChange={handleChange}
+          />
+          <label htmlFor="email"></label>
+          <input
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            placeholder="Email"
             name="email"
             type="email"
             id="email"
             onChange={handleChange}
           />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
+          <label htmlFor="pwd"></label>
           <input
-            placeholder="******"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            placeholder="Password"
             name="password"
             type="password"
             id="pwd"
             onChange={handleChange}
           />
-        </div>
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+          {/* <input 
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            placeholder="Confirm Password"
+            name="confirm_password"
+            type="password"
+            id="pwd"
+            onChange={handleChange}/> */}
+        <button
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 my-1 rounded text-center w-full"
+            >Create Account</button>
         </div>
       </form>
+      <div class="text-grey-dark mt-6">
+            Already have an account? 
+            <Link class="no-underline border-b border-blue text-blue-600" to="/login">
+             Log in
+            </Link>.
+      </div>
     </div>
+  </div>
+  </div>
   );
 }
 
