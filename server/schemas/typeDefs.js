@@ -15,7 +15,7 @@ const typeDefs = gql`
         user: User
     }
 
-    type HelpOption{
+    type HelpOption {
         name: String
         description: String
         numOfPeople: Int
@@ -41,6 +41,11 @@ const typeDefs = gql`
         images: [String]
         helpOptions:[HelpOption]
         comments: [Comment]
+    }
+
+    type Keywords {
+        keyword: String
+        biiggie: [Biiggie]
     }
     
     type Query {
