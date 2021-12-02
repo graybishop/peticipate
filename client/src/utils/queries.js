@@ -16,3 +16,13 @@ query GiveMeTheBiiggies {
   }
 }
 `
+
+export const AUTH_BIGGIES = gql`
+query AuthBiggiesReq {
+  authBiggiesReq {
+    title
+    deadline
+    description
+  }
+}
+`

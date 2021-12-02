@@ -4,13 +4,15 @@ const morgan = require("morgan");
 const path = require('path');
 const db = require('./config/connection');
 const { typeDefs, resolvers } = require('./schemas/index.js');
+const { authMiddleware } = require("./utils/index.js");
 
 console.log('This is the server file')
 
 const server = new ApolloServer(
   {
     typeDefs,
-    resolvers
+    resolvers,
+    context: authMiddleware
   }
 )
 
@@ -38,7 +40,7 @@ if (process.env.NODE_ENV === 'production') {
 
 db.once('open', () => {
   app.listen(PORT, () => {
-    console.log(`Now listening on localhost:${PORT}`);
+    console.log(`Now listening on http://localhost:${PORT}`);
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   }
   );

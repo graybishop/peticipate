@@ -31,6 +31,7 @@ const Home = (props) => {
       </div>
     )
   })
+  
   return (
 
     <div className='flex flex-col bg-gray-100 gap-2 container mx-auto py-4 rounded-sm my-2 shadow- p-4'>

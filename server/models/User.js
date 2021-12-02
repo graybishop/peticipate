@@ -28,10 +28,10 @@ const UserSchema = new Schema(
       type: String,
     },
     createdBiiggies: [
-        {
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'Biiggie'
-        }
+      {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Biiggie'
+      }
     ],
   },
   {
@@ -46,6 +46,10 @@ UserSchema.pre('save', function(next) {
   next()
   }
 });
+
+UserSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 const User = mongoose.model("User", UserSchema);
 
