@@ -85,3 +85,16 @@ export const LOGIN_USER = gql`mutation Login($password: String!, $username: Stri
     }
   }
 }`
+
+export const USER_COMMIT_TO_HELP = gql`
+mutation Mutation($helpOptionId: ID!) {
+  commitToHelp(helpOptionId: $helpOptionId) {
+    name
+    description
+    numOfPeople
+    registeredUsers {
+      _id
+    }
+  }
+}
+`

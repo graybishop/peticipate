@@ -1,10 +1,28 @@
-import { useQuery } from '@apollo/client';
-import { AUTH_BIGGIES } from '../../utils/queries.js';
+import { useQuery, useMutation } from '@apollo/client';
+import { USER_COMMIT_TO_HELP } from '../../utils/mutations.js';
+import { AUTH_BIGGIES} from '../../utils/queries.js';
 
 const TestPage = (props) => {
   const {data,error} = useQuery(AUTH_BIGGIES)
+  
+  const [testMutation, mutationObject] = useMutation(USER_COMMIT_TO_HELP, {
+    variables: {
+      
+        "helpOptionId": "61a81ed284b20dcd907511f9"
+      
+    }
+  })
 
   console.log(data?.authBiggiesReq)
+
+  const runMutation = async (params) => {
+    try{
+      let mutationResponse = await testMutation()
+      console.log(mutationResponse)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   let mappedBs = data?.authBiggiesReq.map((item)=>{
     return (
@@ -43,6 +61,10 @@ const TestPage = (props) => {
       </p>
       <div>
         {mappedBs}
+      </div>
+      <div>
+        <p>test button here</p>
+        <button onClick={()=>{runMutation()}}>Test the Mutation</button>
       </div>
     </div>
   )

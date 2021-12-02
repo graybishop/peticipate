@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-errors');
-const {Biiggie, User} = require('../models/index.js')
+const {Biiggie, User, HelpOption} = require('../models/index.js')
 const { signToken } = require('../utils/index.js');
 
 
@@ -43,6 +43,23 @@ const resolvers ={
       const token = signToken(user);
       return { token, user };
     },
+    commitToHelp: async (parent, args, context)=>{
+      console.log('Context looks like this:', context.user)
+
+      if(!context.user){
+        throw new AuthenticationError('You need to be logged in to commit to an Idea.')
+      }
+
+      console.log(context.user)
+
+      let helpOption = await HelpOption.findOneAndUpdate({id: args.helpOptionId}, {$addToSet: {registeredUsers: context.user._id}}, {new:true} )
+
+      console.log(helpOption)
+      return helpOption
+      //need to add user to the help option as a new item in the 'registeredUsers' array
+
+      //then i want to update the button to say weather 
+    }
   }
 }
 // Temp resolver for server testing
