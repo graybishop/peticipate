@@ -9,7 +9,7 @@ const BiiggieCard = ({ biiggie }) => {
         <div className='absolute px-4 py-2 bg-blue-secondary rounded-br'>
           <p className=' text-white filter drop-shadow text-lg font-extrabold '> <span className='font-bold'>#1</span> Biggie</p>
         </div>
-        <img src={biiggie.images} alt="" className='object-cover h-96' />
+        <img src={biiggie.images} alt="" className='object-cover h-80' />
         <div className='border-blue-secondary bg-blue-header flex flex-row p-4 items-center'>
           <div className='flex-1 flex flex-col gap-4'>
             <div>
