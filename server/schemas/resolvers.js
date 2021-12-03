@@ -10,6 +10,10 @@ const resolvers ={
       const params = _id ? { _id } : {};
       return User.findOne(params);
     },
+    biiggie: async (parent, { _id })=>{
+      const params = _id ? { _id } : {};
+      return await Biiggie.findById(params).populate('helpOptions');
+    },
     biiggies: async ()=>{
       return await Biiggie.find({}).populate('helpOptions')
     },

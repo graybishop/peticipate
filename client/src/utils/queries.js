@@ -27,3 +27,40 @@ query AuthBiggiesReq {
   }
 }
 `
+export const BIIGGIE = gql`
+query Biiggie($id: ID) {
+  biiggie(_id: $id) {
+    _id
+    title
+    deadline
+    description
+    sources
+    images
+    keywords {
+      keyword
+    }
+    helpOptions {
+      name
+      description
+      numOfPeople
+      registeredUsers {
+        username
+      }
+      moneyRequested
+      moneyReceived
+    }
+    comments {
+      author {
+        username
+      }
+      title
+      body
+      thread {
+        body
+      }
+    }
+  }
+}
+
+
+`
