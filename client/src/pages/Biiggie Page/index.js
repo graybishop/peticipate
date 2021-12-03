@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { BIIGGIE } from "../../utils/queries";
+import { useQuery } from '@apollo/client';
 
 const BiiggiePage = (props) => {
-    // let {data,error, loading} = useQuery()
-    let {biiggieId} = useParams()
-  const data = 
+  let {biiggieId} = useParams()
+  let {data,error, loading} = useQuery(BIIGGIE, {variables:{id:biiggieId}})
+   
+  const data2 = 
     {
       title: "Taco Food Truck Startup",
       createdAt: new Date(new Date().setDate(new Date().getDate())),
@@ -29,6 +32,8 @@ const BiiggiePage = (props) => {
       [name]: value,
     });
   };
+  if (loading) return <p>Loading ...</p>;
+  data = data.biiggie
   return (
       
     <div className="flex flex-col gap-1 text-xl">
@@ -36,7 +41,7 @@ const BiiggiePage = (props) => {
       <p className="text-2xl">Biiggie Title{data.title}</p>
       <p>Biiggie Description{data.description}</p>
       <img src={data.images} alt="" />
-      <p>Date Created {data.createdAt.toLocaleString()}</p>
+      {/* <p>Date Created {data.createdAt.toLocaleString()}</p> */}
       <p className="text-xl">Deadline here{data.deadline.toLocaleString()}</p>
       <h2 className="text-xl">View Sources </h2>
       <h3>Total number of assignees to achieve my goal:{data.assignee}</h3>
