@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 export const GET_BIIGIES = gql`
 query GiveMeTheBiiggies {
   biiggies {
+    _id
     title
     deadline
     description
