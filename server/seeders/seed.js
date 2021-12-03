@@ -9,6 +9,7 @@ connection.once('open', async () => {
     console.log('Deleted User collection');
     let userInsert = await db.User.collection.insertMany(userSeed);
     console.log(userInsert);
+
     userId = await db.User.findOne({});
     console.log(userId._id);
     let biiggieSeed = [
@@ -26,8 +27,8 @@ connection.once('open', async () => {
     console.log(biiggieInsert);
     await db.User.updateMany({}, {$set: {createdBiiggies: [ biiggieInsert.insertedIds[0] ]}});
     console.log(await db.User.findOne({}).populate('createdBiiggies'))
+
     biiggieId = await db.Biiggie.findOne({});
-    console.log(biiggieId._id);
     let helpOptionSeed = [
         {
             name: 'Graphic Designer',
@@ -62,7 +63,20 @@ connection.once('open', async () => {
     }*/
     //await db.Biiggie.updateMany({}, {$set: {helpOptions: [ helpOptionsArr.length ]}});
     await db.Biiggie.updateMany({}, {$set: {helpOptions: [ helpOptionsArr[0], helpOptionsArr[1], helpOptionsArr[2] ]}});
-    console.log(await db.Biiggie.findOne({}).populate('helpOptions'))
+    console.log(await db.Biiggie.findOne({}).populate('helpOptions'));
+
+    let keywordSeed = [
+        {
+            keyword: 'Food',
+            biiggie: biiggieId._id
+        },
+    ];
+    console.log('Deleted Keywords collection')
+    await db.Keywords.deleteMany({});
+    let keywordInsert = await db.Keywords.collection.insertMany(keywordSeed);
+    console.log(keywordInsert);
+    await db.Biiggie.updateMany({}, {$set: {keywords: [ keywordInsert.insertedIds[0] ]}});
+    console.log(await db.Biiggie.findOne({}).populate('keywords'));
     process.exit(0);
 });
 
