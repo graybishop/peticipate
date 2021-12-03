@@ -2,7 +2,7 @@ import {FiThumbsUp} from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 
 const BiiggieCard = ({ biiggie }) => {
-
+  console.log('card got this info:', biiggie)
   return (
     <div>
       <div className='flex flex-col border-4 border-blue-secondary shadow relative' key={biiggie._id}>

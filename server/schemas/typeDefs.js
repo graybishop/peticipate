@@ -7,7 +7,7 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
-        firstName: String!
+        firstName: String
         lastName: String
         createdBiiggies: [Biiggie]
     }
@@ -53,6 +53,7 @@ const typeDefs = gql`
         keywords: [Keywords]
         helpOptions:[HelpOption]
         comments: [Comment]
+        createdBy: User
     }
 
     input BiiggieContent {

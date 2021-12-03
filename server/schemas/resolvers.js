@@ -15,7 +15,7 @@ const resolvers ={
       return await Biiggie.findById(params).populate('helpOptions');
     },
     biiggies: async ()=>{
-      return await Biiggie.find({}).populate('helpOptions')
+      return await Biiggie.find({}).populate('helpOptions').populate('createdBy')
     },
     authBiggiesReq: async (parent, args, context)=>{
       if(!context.user){
