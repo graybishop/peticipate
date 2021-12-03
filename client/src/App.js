@@ -46,7 +46,7 @@ function App() {
           <Route path="/test" element={<TestPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/biiggie/" element={<BiiggiePage />} />
-          <Route path="/biiggie/:biiggieId" element={<Profile />} />
+          <Route path="/biiggie/:biiggieId" element={<BiiggiePage />} />
           <Route
             path="*"
             element={
