@@ -49,6 +49,7 @@ const typeDefs = gql`
         description: String
         sources: [String]
         images: [String]
+        keywords: [Keywords]
         helpOptions:[HelpOption]
         comments: [Comment]
     }
