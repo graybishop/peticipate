@@ -36,7 +36,7 @@ function Login(props) {
   };
 
   return (
-    <div className="bg-gray-300 min-h-screen flex flex-col">
+    <div className="bg-body-background-blue min-h-screen flex flex-col">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
       {/* <Link to="/login">← Go to Login</Link> */}
@@ -64,13 +64,13 @@ function Login(props) {
           />
         <button
             type="submit"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 my-1 rounded text-center w-full"
+            class="bg-orange-primary hover:bg-orange-hover text-white font-bold py-3 my-1 rounded text-center w-full"
             >Login</button>
         </div>
       </form>
       <div class="text-grey-dark mt-6">
-            Not Registered?  
-            <Link class="no-underline border-b border-blue text-blue-600" to="/sign-up">
+            Not Registered?&nbsp;  
+            <Link class="no-underline border-b text-orange-primary" to="/sign-up">
             Sign up
             </Link>.
       </div>
