@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom';
 
 const BiiggieCard = ({ biiggie }) => {
   console.log('card got this info:', biiggie)
+
+  const getFullName = () => {
+    if(!biiggie.createdBy.firstName){
+      return 'Anonymous'
+    }
+
+    return `${biiggie.createdBy.firstName} ${biiggie.createdBy.lastName}`
+  }
+
   return (
     <div>
       <div className='flex flex-col border-4 border-blue-secondary shadow relative' key={biiggie._id}>
@@ -18,13 +27,12 @@ const BiiggieCard = ({ biiggie }) => {
             <div>
               <p className='leading-tight'>{biiggie.description}</p>
               <p>{biiggie.sources}</p>
-
             </div>
           </div>
           <div className='p-2 w-32 flex flex-col items-center justify-center'>
             <img className="object-contain rounded-full border-2 shadow h-3/6 border-blue-secondary" id="profileImage" src="https://source.unsplash.com/featured/1000x1000/?profile" alt="user profile" />
-            <p className='font-semibold'>Your Name </p>
-            <p>Orlando, FL</p>
+            <p className='font-semibold text-center'>{getFullName()}</p>
+            <p>{biiggie.createdBy.username}</p>
           </div>
         </div>
         <div className="bg-blue-secondary flex flex-row px-4 py-2 justify-between">
