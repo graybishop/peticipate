@@ -6,6 +6,7 @@ module.exports = {
       colors:{
         test: '#293847',
         'orange-primary': '#FF6F00',
+        'orange-hover': '#EA580C',
         'blue-secondary': '#8FD3FF',
         'blue-header' : '#D9F0FF',
         'blue-nav-button':'#009BFF',
