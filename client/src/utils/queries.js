@@ -61,6 +61,19 @@ query Biiggie($id: ID) {
     }
   }
 }
-
-
 `
+
+export const QUERY_ME = gql`
+query Me {
+  me {
+    username
+    _id
+    email
+    lastName
+    createdBiiggies {
+      _id
+      title
+    }
+  }
+}
+`;

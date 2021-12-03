@@ -1,26 +1,24 @@
 import React from 'react';
-// import { Redirect, useParams } from 'react-router-dom';
-// import { useQuery } from '@apollo/client';
-// import NewBiiggieForm from '../components/NewBiiggieForm';
-// import { Get_BIIGIES } from '../utils/queries';
+import { Redirect, useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { QUERY_SINGLE_PROFILE, QUERY_ME } from '../../utils/queries';
+
 
 const Profile = () => {
-    // const { profileId } = useParams();
-    const data = {
-        username: 'Name',
-        email: 'test@test.com',
-        description: 'I am testing',
-        createdBiiggies: [
-            'biiggie1, biiggie2'
-        ]
-    }
+    const { userId } = useParams();
+    const { loading, data } = useQuery(
+      userId ? QUERY_SINGLE_PROFILE : QUERY_ME
+    )
+    const user = data?.me || data?.user || {};
+    console.log(user)
     return(
         <div className="text-center box-border p-4 border-4 m-4 mx-auto">
             <img class="object-contain rounded-full border shadow max-h-60 mx-auto" id="profileImage"          src="https://source.unsplash.com/featured/1000x1000/?profile" alt="user profile" />
-            <div className="box-border">{data.username}</div>
-            <div>{data.email}</div>
-            <div>{data.description}</div>
-            {/* <div>{data.createdBiiggies}</div> */}
+            <div className="box-border">{user.username}</div>
+            <div>{user.email}</div>
+            <div>{user.firstName} {user.lastName} </div>
+            {/* <div>{user.description}</div> */}
+            {/* <div>{user.createdBiiggies}</div> */}
             <div>
             <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
     {/* <!--Card 1--> */}
