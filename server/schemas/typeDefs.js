@@ -72,6 +72,7 @@ const typeDefs = gql`
         user(_id: String): User
         biiggies: [Biiggie]
         authBiggiesReq: [Biiggie]
+        keywords: [Keywords]
     }
 
     type Mutation {

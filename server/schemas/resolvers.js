@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-errors');
-const {Biiggie, User, HelpOption} = require('../models/index.js')
+const {Biiggie, User, HelpOption, Keywords} = require('../models/index.js')
 const { signToken } = require('../utils/index.js');
 
 
@@ -18,6 +18,9 @@ const resolvers ={
         throw new AuthenticationError('You need to be logged in to pull these Biggies')
       }
       return await Biiggie.find({})
+    },
+    keywords: async () => {
+      return await Keywords.find({}).populate('biiggie')
     }
   },
   Mutation: {
