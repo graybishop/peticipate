@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-errors');
-const {Biiggie, User, HelpOption} = require('../models/index.js')
+const {Biiggie, User, HelpOption, Keywords} = require('../models/index.js')
 const { signToken } = require('../utils/index.js');
 
 
@@ -8,20 +8,23 @@ const resolvers ={
   Query:{
     user: async (parent, { _id })=>{
       const params = _id ? { _id } : {};
-      return User.findOne(params);
+      return User.findOne(params).populate('createdBiiggies').populate({path: 'createdBiiggies', populate: [ { path: 'keywords' }, { path: 'helpOptions'}]});
     },
     biiggie: async (parent, { _id })=>{
       const params = _id ? { _id } : {};
       return await Biiggie.findById(params).populate('helpOptions');
     },
     biiggies: async ()=>{
-      return await Biiggie.find({}).populate('helpOptions')
+      return await Biiggie.find({}).populate('helpOptions').populate('keywords');
     },
     authBiggiesReq: async (parent, args, context)=>{
       if(!context.user){
         throw new AuthenticationError('You need to be logged in to pull these Biggies')
       }
       return await Biiggie.find({})
+    },
+    keywords: async () => {
+      return await Keywords.find({}).populate('biiggie').populate({path: 'biiggie', populate: { path: 'helpOptions' }}).populate({ path: 'biiggie', populate: {path: 'helpOptions', populate: { path: 'registeredUsers' }}});
     }
   },
   Mutation: {
@@ -78,7 +81,7 @@ const resolvers ={
 
       //find the option in the database
       let helpOption = await HelpOption.findOne({_id: args.helpOptionId})
-
+      
       //check if this option is asking for people or money
       //people route
       if (helpOption.numOfPeople){

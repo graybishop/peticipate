@@ -73,6 +73,7 @@ const typeDefs = gql`
         biiggie(_id: ID): Biiggie
         biiggies: [Biiggie]
         authBiggiesReq: [Biiggie]
+        keywords: [Keywords]
     }
 
     type Mutation {

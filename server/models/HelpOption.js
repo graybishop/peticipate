@@ -14,7 +14,7 @@ const HelpOptionSchema = new Schema(
       numOfPeople: {
       type: Number,
     },
-    createdBy: [
+    registeredUsers: [
       {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User'
