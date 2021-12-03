@@ -34,6 +34,7 @@ const typeDefs = gql`
     }
 
     type Biiggie {
+        _id: ID
         title: String
         deadline: Float
         description: String
