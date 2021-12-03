@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-errors');
-const {Biiggie, User, HelpOption, Keywords} = require('../models/index.js')
+const {Biiggie, User, HelpOption, Keywords, } = require('../models/index.js')
 const { signToken } = require('../utils/index.js');
 
 
@@ -25,7 +25,13 @@ const resolvers ={
     },
     keywords: async () => {
       return await Keywords.find({}).populate('biiggie').populate({path: 'biiggie', populate: { path: 'helpOptions' }}).populate({ path: 'biiggie', populate: {path: 'helpOptions', populate: { path: 'registeredUsers' }}});
-    }
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id });
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
   Mutation: {
     newUser: async (parent, args) => {

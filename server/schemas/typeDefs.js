@@ -7,7 +7,7 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
-        firstName: String!
+        firstName: String
         lastName: String
         createdBiiggies: [Biiggie]
     }
@@ -74,6 +74,7 @@ const typeDefs = gql`
         biiggies: [Biiggie]
         authBiggiesReq: [Biiggie]
         keywords: [Keywords]
+        me: User
     }
 
     type Mutation {
