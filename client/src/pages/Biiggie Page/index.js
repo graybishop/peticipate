@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const BiiggiePage = (props) => {
-  const data = [
+    // let {data,error, loading} = useQuery()
+    let {biiggieId} = useParams()
+  const data = 
     {
       title: "Taco Food Truck Startup",
       createdAt: new Date(new Date().setDate(new Date().getDate())),
@@ -12,8 +15,7 @@ const BiiggiePage = (props) => {
         "https://mobile-cuisine.com/wp-content/uploads/2015/09/food-truck-branding.jpg",
       ],
       comment: "",
-    },
-  ];
+    }
   const Comments = [
     {
       comments: "",
@@ -28,13 +30,14 @@ const BiiggiePage = (props) => {
     });
   };
   return (
+      
     <div className="flex flex-col gap-1 text-xl">
       Biiggie Page
       <p className="text-2xl">Biiggie Title{data.title}</p>
       <p>Biiggie Description{data.description}</p>
       <img src={data.images} alt="" />
-      <p>Date Created {data.createdAt}</p>
-      <p className="text-xl">Deadline here{data.deadline}</p>
+      <p>Date Created {data.createdAt.toLocaleString()}</p>
+      <p className="text-xl">Deadline here{data.deadline.toLocaleString()}</p>
       <h2 className="text-xl">View Sources </h2>
       <h3>Total number of assignees to achieve my goal:{data.assignee}</h3>
       <button link="Signup">Sign Up</button>
