@@ -7,6 +7,8 @@ import Header from "./components/PageComponents/Header.js";
 import { NewBiiggieForm } from "./components/PageComponents/NewBiiggieForm.js";
 import TestPage from "./pages/TestPage/index.js";
 import { setContext } from '@apollo/client/link/context';
+import Profile from "./pages/ProfilePage/index.js";
+import BiiggiePage from "./pages/Biiggie Page/index.js";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -42,6 +44,9 @@ function App() {
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/new-biiggie" element={<NewBiiggieForm />} />
           <Route path="/test" element={<TestPage />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/biiggie/" element={<BiiggiePage />} />
+          <Route path="/biiggie/:biiggieId" element={<Profile />} />
           <Route
             path="*"
             element={

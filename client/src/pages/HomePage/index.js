@@ -7,32 +7,6 @@ const Home = (props) => {
 
   console.log(data?.biiggies);
 
-  let mappedBs = data?.biiggies.map((item) => {
-    return (
-      <div className='flex flex-col gap-1'>
-        <p className='text-2xl'>{item.title}</p>
-        <p>{item.description}</p>
-        <img src={item.images} alt="" />
-        <p>{item.sources}</p>
-        <p>Deadline: {new Date(item.deadline).toLocaleDateString()}</p>
-        <div className='flex flex-col gap-1'>
-          <h2 className='text-xl'>What can you do to help?</h2>
-          {
-            item.helpOptions?.map(option => {
-              return (
-                <div>
-                  <p className='font-bold'>{option.name}</p>
-                  <p>{option.description}</p>
-                  <p>Number Required:{option.numOfPeople}</p>
-                </div>
-              );
-            })
-          }
-        </div>
-      </div>
-    );
-  });
-
   let biggieCards = data?.biiggies.map((item)=>{
     return <BiiggieCard biiggie={item}/>
   })
@@ -59,9 +33,6 @@ const Home = (props) => {
       </p>
       <div className='p-4 container mx-auto'>
         {biggieCards}
-      </div>
-      <div>
-        {mappedBs}
       </div>
     </div>
   );
