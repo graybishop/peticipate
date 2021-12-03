@@ -84,6 +84,8 @@ const userSeed = [
     {
         username: 'Test',
         password: 'Testing',
+        firstName: 'Tester',
+        lastName: 'Testington',
         email: 'test@mail.com',
         description: 'I am a test'
     }

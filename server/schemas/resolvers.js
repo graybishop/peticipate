@@ -8,10 +8,10 @@ const resolvers ={
   Query:{
     user: async (parent, { _id })=>{
       const params = _id ? { _id } : {};
-      return User.findOne(params);
+      return User.findOne(params).populate('createdBiiggies').populate({path: 'createdBiiggies', populate: [ { path: 'keywords' }, { path: 'helpOptions'}]});
     },
     biiggies: async ()=>{
-      return await Biiggie.find({}).populate('helpOptions')
+      return await Biiggie.find({}).populate('helpOptions').populate('keywords');
     },
     authBiggiesReq: async (parent, args, context)=>{
       if(!context.user){
@@ -20,7 +20,7 @@ const resolvers ={
       return await Biiggie.find({})
     },
     keywords: async () => {
-      return await Keywords.find({}).populate('biiggie')
+      return await Keywords.find({}).populate('biiggie').populate({path: 'biiggie', populate: { path: 'helpOptions' }}).populate({ path: 'biiggie', populate: {path: 'helpOptions', populate: { path: 'registeredUsers' }}});
     }
   },
   Mutation: {
@@ -77,7 +77,7 @@ const resolvers ={
 
       //find the option in the database
       let helpOption = await HelpOption.findOne({_id: args.helpOptionId})
-
+      
       //check if this option is asking for people or money
       //people route
       if (helpOption.numOfPeople){
