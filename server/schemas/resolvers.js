@@ -43,8 +43,28 @@ const resolvers ={
       return { token, user };
     },
     createBiiggie: async (parent, args) => {
-      const biiggie = await Biiggie.create(args);
-      return biiggie;
+      const helpOptionsArray = args.helpOptions;
+      console.log({...args})
+      console.log(helpOptionsArray);
+      const createHelpOptions = async () => {
+      let helpOptionIds = [];
+        for (let helpOption of helpOptionsArray) {
+          let newHelpOptionDoc = await HelpOption.create(helpOption);
+          console.log(newHelpOptionDoc);
+          console.log(newHelpOptionDoc._id)
+          helpOptionIds.push(newHelpOptionDoc._id);
+          console.log(helpOptionIds);
+        }
+        console.log(helpOptionIds);
+        return await createBiiggie(helpOptionIds);
+      }
+      
+      const createBiiggie = async (helpOptionIds) => {
+        const biiggie = await Biiggie.create({...args, helpOptions: helpOptionIds});
+        return biiggie;
+      }
+      
+      return await createHelpOptions()
     },
     commitToHelp: async (parent, args, context)=>{
       //check that the user is logged in, if not send back an error

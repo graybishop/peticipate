@@ -8,19 +8,28 @@ import { CREATE_BIIGGIE } from '../../utils/mutations';
 export function NewBiiggieForm() {
   const [formState, setFormState] = useState({
     title: "", // title of Biiggie
-    deadline: "", // deadline for user Biiggie
+    deadline: 0, // deadline for user Biiggie
     description: "", // description for user biggie
     sources: [], // links to help get your Biiggie across
     images: [], // images to add to your Biiggie
+    helpOptions: [
+      {
+        name: "",
+        description: "",
+        numOfPeople: 3,
+        moneyRequested: null,
+      }
+    ]
   });
 
   const [createBiiggie] = useMutation(CREATE_BIIGGIE);
 
   // const [errorMessage, setErrorMessage] = useState('');
-  const { title, deadline, description, sources, images } = formState;
+  const { title, deadline, description, sources, images, helpOptions } = formState;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log({...formState});
     try {
       await createBiiggie({
         variables: {
@@ -125,6 +134,48 @@ export function NewBiiggieForm() {
             type="text"
             name="images"
             defaultValue={images}
+            onBlur={handleChange}
+          />
+        </div>
+        {/* Start of help options form */}
+        <div>
+          <label htmlFor="pageData">
+            Must fill out all sections to get a help option added to your BIIGGIE
+          </label>
+        </div>
+        <div>
+          <label htmlFor="helpOptions[0].name">Provide the title of this help option:</label>
+          <input
+            type="text"
+            name="helpOptions[0].name"
+            defaultValue={helpOptions[0].name}
+            onBlur={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="helpOptions[0].description">Provide the description of this help option:</label>
+          <input
+            type="text"
+            name="helpOptions[0].description"
+            defaultValue={helpOptions[0].description}
+            onBlur={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="helpOptions[0].numOfPeople">Provide the number of people that can fill this help option role:</label>
+          <input
+            type="number"
+            name="helpOptions[0].numOfPeople"
+            defaultValue={helpOptions[0].numOfPeople}
+            onBlur={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="helpOptions[0].moneyRequested">Provide the amount of money you need to support your BIIGGIE:</label>
+          <input
+            type="number"
+            name="helpOptions[0].moneyRequested"
+            defaultValue={helpOptions[0].moneyRequested}
             onBlur={handleChange}
           />
         </div>
