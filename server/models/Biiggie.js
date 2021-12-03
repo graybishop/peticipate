@@ -11,6 +11,7 @@ const BiiggieSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+
     deadline: {
       type: Date,
       required: true,
@@ -29,6 +30,12 @@ const BiiggieSchema = new Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "HelpOption"
+      }
+    ],
+    keywords: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Keywords'
       }
     ],
     comments: [

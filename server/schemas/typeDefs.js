@@ -1,5 +1,7 @@
 const { gql } = require('apollo-server-express');
 
+// const { GraphQLScalarType, Kind } = require('graphql')
+
 const typeDefs = gql`
     type User {
         _id: ID
@@ -15,7 +17,7 @@ const typeDefs = gql`
         user: User
     }
 
-    type HelpOption{
+    type HelpOption {
         name: String
         description: String
         numOfPeople: Int
@@ -23,6 +25,14 @@ const typeDefs = gql`
         moneyRequested: Int
         moneyReceived: Int
         biiggie: Biiggie
+    }
+
+    input HelpOptionContent {
+        name: String
+        description: String
+        numOfPeople: Int
+        moneyRequested: Int
+        moneyReceived: Int
     }
 
     type Comment {
@@ -36,12 +46,26 @@ const typeDefs = gql`
     type Biiggie {
         _id: ID
         title: String
-        deadline: Float
+        deadline: Float!
         description: String
         sources: [String]
         images: [String]
+        keywords: [Keywords]
         helpOptions:[HelpOption]
         comments: [Comment]
+    }
+
+    input BiiggieContent {
+        title: String
+        deadline: Float!
+        description: String
+        sources: [String]
+        images: [String]
+    }
+
+    type Keywords {
+        keyword: String
+        biiggie: [Biiggie]
     }
     
     type Query {
@@ -51,6 +75,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
+        createBiiggie(title: String!, deadline: Float!, description: String!, sources: [String], images: [String], helpOptions: [HelpOptionContent]): Biiggie
         newUser(username: String, password: String, email: String, firstName: String!, lastName: String): Auth
         login(username: String!, password: String!): Auth
         commitToHelp(helpOptionId: ID!, moneyCommitted: Int): HelpOption

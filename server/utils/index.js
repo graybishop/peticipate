@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
+require('dotenv').config('../.env');
 
-const secret = 'NEEDTOREPLACEWITHDOTENV';
+const secret = process.env.JWT_TOKEN;
 const expiration = '2h';
 
 const authMiddleware = ({req}) => {

@@ -28,10 +28,10 @@ const UserSchema = new Schema(
       type: String,
     },
     createdBiiggies: [
-        {
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'Biiggie'
-        }
+      {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Biiggie'
+      }
     ],
   },
   {
