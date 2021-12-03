@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/index.js";
 import Signup from "./pages/Signup/index.js";
 import Header from "./components/PageComponents/Header.js";
+import Footer from "./components/PageComponents/Footer.js";
 import { NewBiiggieForm } from "./components/PageComponents/NewBiiggieForm.js";
 import TestPage from "./pages/TestPage/index.js";
 import { setContext } from '@apollo/client/link/context';
@@ -59,6 +60,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </ApolloProvider>
   );

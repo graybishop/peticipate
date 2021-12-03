@@ -41,12 +41,12 @@ function Login(props) {
                 <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
       {/* <Link to="/login">← Go to Login</Link> */}
 
-      <h1 class="mb-8 text-3xl text-center font-bold">Login</h1>
+      <h1 className="mb-8 text-3xl text-center font-bold">Login</h1>
       <form onSubmit={handleFormSubmit}>
         <div className="">
           <label htmlFor="username"></label>
           <input
-            class="block border border-grey-light w-full p-3 rounded mb-4"
+            className="block border border-grey-light w-full p-3 rounded mb-4"
             placeholder="Username"
             name="username"
             type="username"
@@ -55,7 +55,7 @@ function Login(props) {
           />
           <label htmlFor="pwd"></label>
           <input
-            class="block border border-grey-light w-full p-3 rounded mb-4"
+            className="block border border-grey-light w-full p-3 rounded mb-4"
             placeholder="Password"
             name="password"
             type="password"
@@ -64,11 +64,11 @@ function Login(props) {
           />
         <button
             type="submit"
-            class="bg-orange-primary hover:bg-orange-hover text-white font-bold py-3 my-1 rounded text-center w-full"
+            className="bg-orange-primary hover:bg-orange-hover text-white font-bold py-3 my-1 rounded text-center w-full"
             >Login</button>
         </div>
       </form>
-      <div class="text-grey-dark mt-6">
+      <div className="text-grey-dark mt-6">
             Not Registered?&nbsp;  
             <Link class="no-underline border-b text-orange-primary" to="/sign-up">
             Sign up
