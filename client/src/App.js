@@ -9,6 +9,7 @@ import TestPage from "./pages/TestPage/index.js";
 import { setContext } from '@apollo/client/link/context';
 import Profile from "./pages/ProfilePage/index.js";
 import BiiggiePage from "./pages/Biiggie Page/index.js";
+import TestForm from "./pages/FromDemo/index.js";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -45,6 +46,7 @@ function App() {
           <Route path="/new-biiggie" element={<NewBiiggieForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/demo-form" element={<TestForm />} />
           <Route path="/biiggie/" element={<BiiggiePage />} />
           <Route path="/biiggie/:biiggieId" element={<BiiggiePage />} />
           <Route

@@ -5,20 +5,20 @@ import { useQuery } from '@apollo/client';
 
 const BiiggiePage = (props) => {
   let {biiggieId} = useParams()
-  let {data,error, loading} = useQuery(BIIGGIE, {variables:{id:biiggieId}})
+  let {data, loading} = useQuery(BIIGGIE, {variables:{id:biiggieId}})
    
-  const data2 = 
-    {
-      title: "Taco Food Truck Startup",
-      createdAt: new Date(new Date().setDate(new Date().getDate())),
-      deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
-      description:
-        "My Biiggie that I I need help getting my dream taco food truck business off the ground. I serve all types of tacos and have worked very hard renovating an old truck I but. Any help is welcome!",
-      images: [
-        "https://mobile-cuisine.com/wp-content/uploads/2015/09/food-truck-branding.jpg",
-      ],
-      comment: "",
-    }
+  // const data2 = 
+  //   {
+  //     title: "Taco Food Truck Startup",
+  //     createdAt: new Date(new Date().setDate(new Date().getDate())),
+  //     deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
+  //     description:
+  //       "My Biiggie that I I need help getting my dream taco food truck business off the ground. I serve all types of tacos and have worked very hard renovating an old truck I but. Any help is welcome!",
+  //     images: [
+  //       "https://mobile-cuisine.com/wp-content/uploads/2015/09/food-truck-branding.jpg",
+  //     ],
+  //     comment: "",
+  //   }
   const Comments = [
     {
       comments: "",
