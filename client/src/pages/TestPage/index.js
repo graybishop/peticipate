@@ -13,7 +13,7 @@ const TestPage = (props) => {
     try {
       let mutationResponse = await testMutation({
         variables: {
-          "helpOptionId": "61a831f09eef024cac40a409"
+          "helpOptionId": "61aa44a65ce7ff4dbc647ba8"
         }
       });
       console.log(mutationResponse.data);
@@ -26,7 +26,7 @@ const TestPage = (props) => {
     try {
       let mutationResponse2 = await testMutationForMoney({
         variables: {
-          "helpOptionId": "61a831f09eef024cac40a40a",
+          "helpOptionId": "61aa44a65ce7ff4dbc647ba9",
            moneyCommitted: 5
         }
       });
