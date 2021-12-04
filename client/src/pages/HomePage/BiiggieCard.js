@@ -8,8 +8,11 @@ const BiiggieCard = ({ biiggie }) => {
     if(!biiggie.createdBy.firstName){
       return 'Anonymous'
     }
-
     return `${biiggie.createdBy.firstName} ${biiggie.createdBy.lastName}`
+  }
+
+  const processHelpOptions = () => {
+    
   }
 
   return (

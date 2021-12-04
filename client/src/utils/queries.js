@@ -19,6 +19,8 @@ query GiveMeTheBiiggies {
       name
       description
       numOfPeople
+      moneyReceived
+      moneyRequested
     }
   }
 }
