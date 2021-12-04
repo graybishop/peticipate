@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
-import { FiUser, FiSearch, FiPlus } from 'react-icons/fi';
+import { FiUser, FiSearch, FiPlus, FiLogIn, FiLogOut } from 'react-icons/fi';
+import auth from "../../utils/auth";
 
 
 const Header = () => {
+  const logout = (event) => {
+    event.preventDefault();
+    auth.logout();
+  }
   return (
     <div className='bg-blue-header'>
       <div className='container mx-auto flex flex-row items-center justify-between py-6 px-6 '>
@@ -16,10 +21,20 @@ const Header = () => {
           {/* <Link to="/">Home Page</Link> */}
           {/* <Link to="/login">Login Page</Link> */}
           {/* <Link to="/sign-up">Sign Up</Link> */}
+          {auth.loggedIn() ? (
+            <>
           <Link to="/search"><FiSearch /></Link>
-          <Link to="/profile"><FiUser /></Link>
           <Link to="/new-biiggie"><FiPlus /></Link>
-          {/* <Link to="/test">Test Page</Link> */}
+          <Link to="/profile"><FiUser /></Link>
+          <button onClick={logout}><FiLogOut /></button>
+          </>
+          ) : (
+            <>
+          <Link to="/search"><FiSearch /></Link>
+          <Link to="/new-biiggie"><FiPlus /></Link>
+          <Link to="/login"><FiLogIn /></Link>
+          </>
+          )}
         </div>
       </div>
     </div>
