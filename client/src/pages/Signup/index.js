@@ -4,10 +4,10 @@ import { useMutation } from "@apollo/client";
 // import Auth from '../utils/auth';
 import { ADD_USER } from "../../utils/mutations";
 import Auth from '../../utils/auth.js'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
-function Signup(props) {
+function Signup({setLoggedIn}) {
   const [formState, setFormState] = useState({
     username: "",
     email: "",
@@ -15,6 +15,7 @@ function Signup(props) {
     firstName: "",
     lastName: "",
   });
+  let navigate = useNavigate();
   const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
@@ -29,6 +30,8 @@ function Signup(props) {
       console.log(mutationResponse)
       const token = mutationResponse.data.newUser.token;
       Auth.login(token);
+      setLoggedIn(true)
+      navigate(-1)
     } catch (err) {
       console.error(err);
     }
@@ -111,7 +114,7 @@ function Signup(props) {
       </form>
       <div className="text-grey-dark mt-6">
             Already have an account?&nbsp;
-            <Link class="no-underline border-b text-orange-primary" to="/login">
+            <Link class="no-underline border-b text-orange-primary" to="/login" replace>
             Log in
             </Link>.
       </div>

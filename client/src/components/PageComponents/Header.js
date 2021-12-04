@@ -6,11 +6,13 @@ import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 
 
-const Header = () => {
+const Header = ({loggedIn}) => {
+
   const logout = (event) => {
     event.preventDefault();
     auth.logout();
   }
+
   return (
     <div className='bg-blue-header'>
       <div className='container mx-auto flex flex-row items-center justify-between py-6 px-6 '>
@@ -24,7 +26,7 @@ const Header = () => {
           {/* <Link to="/">Home Page</Link> */}
           {/* <Link to="/login">Login Page</Link> */}
           {/* <Link to="/sign-up">Sign Up</Link> */}
-          {auth.loggedIn() ? (
+          {loggedIn ? (
             <>
           <Tippy theme={"light"} content={<span>Search <span className="text-orange-primary font-extrabold">Biiggies</span></span>}>
             <Link to="/search"><FiSearch /></Link>

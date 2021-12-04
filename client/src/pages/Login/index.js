@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations.js';
 import Auth from '../../utils/auth.js'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Login(props) {
+function Login({setLoggedIn}) {
   const [formState, setFormState] = useState({ username: "", password: "" });
+  let navigate = useNavigate();
 
   const [loginMutation] = useMutation(LOGIN_USER);
 
@@ -22,6 +23,8 @@ function Login(props) {
       console.log(mutationResponse)
       const token = mutationResponse.data.login.token;
       Auth.login(token);    
+      setLoggedIn(true)
+      navigate(-1)
     } catch (error) {
       console.error(error)
     }
@@ -70,7 +73,7 @@ function Login(props) {
       </form>
       <div className="text-grey-dark mt-6">
             Not Registered?&nbsp;  
-            <Link class="no-underline border-b text-orange-primary" to="/sign-up">
+            <Link className="no-underline border-b text-orange-primary" to="/sign-up" replace>
             Sign up
             </Link>.
       </div>
