@@ -2,8 +2,6 @@ import { FiThumbsUp } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 const BiiggieCard = ({ biiggie }) => {
-  console.log('card got this info:', biiggie);
-
   const getFullName = () => {
     if (!biiggie.createdBy.firstName) {
       return 'Anonymous';
@@ -18,8 +16,6 @@ const BiiggieCard = ({ biiggie }) => {
     let registeredUsersTotal = 0;
 
     for (const option of biiggie.helpOptions) {
-      console.log(option);
-
       if (option.numOfPeople) {
         numOfPeopleReqTotal += option.numOfPeople;
         registeredUsersTotal += option.registeredUsers.length;

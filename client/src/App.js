@@ -1,4 +1,6 @@
 import Home from "./pages/HomePage/index.js";
+import React, { useEffect, useState } from "react";
+
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/index.js";
@@ -11,6 +13,7 @@ import { setContext } from '@apollo/client/link/context';
 import Profile from "./pages/ProfilePage/index.js";
 import BiiggiePage from "./pages/Biiggie Page/index.js";
 import DemoForm from "./pages/DemoForm/index.js";
+import auth from "./utils/auth";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -36,15 +39,22 @@ const client = new ApolloClient({
 
 
 function App() {
+  let [loggedIn, setLoggedIn] = useState(false)
+
+  useEffect(()=>{
+    setLoggedIn(auth.loggedIn())
+  },[])
+
+
   return (
     <ApolloProvider client={client}>
       <div className='flex flex-col min-h-screen'>
       <BrowserRouter>
-        <Header/>
+        <Header loggedIn={loggedIn}/>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<Signup />} />
+          <Route path="/login" element={<Login setLoggedIn={setLoggedIn}/>} />
+          <Route path="/sign-up" element={<Signup setLoggedIn={setLoggedIn}/>} />
           <Route path="/new-biiggie" element={<NewBiiggieForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/profile" element={<Profile />} />
