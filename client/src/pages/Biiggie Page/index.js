@@ -12,7 +12,7 @@ const BiiggiePage = (props) => {
   data = data.biiggie
   return (
       
-    <div className="flex flex-col gap-1 text-xl">
+    <div className="container mx-auto flex flex-col gap-1 text-xl">
       Biiggie Page
       <p className="text-2xl">{data.title}</p>
       <p>{data.description}</p>
