@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { FiUser, FiSearch, FiPlus, FiLogIn, FiLogOut } from 'react-icons/fi';
 import auth from "../../utils/auth";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/light.css';
 
 
 const Header = () => {
@@ -23,16 +26,30 @@ const Header = () => {
           {/* <Link to="/sign-up">Sign Up</Link> */}
           {auth.loggedIn() ? (
             <>
-          <Link to="/search"><FiSearch /></Link>
-          <Link to="/new-biiggie"><FiPlus /></Link>
-          <Link to="/profile"><FiUser /></Link>
-          <button onClick={logout}><FiLogOut /></button>
+          <Tippy theme={"light"} content={<span>Search <span className="text-orange-primary font-extrabold">Biiggies</span></span>}>
+            <Link to="/search"><FiSearch /></Link>
+          </Tippy>
+          <Tippy theme={"light"} content={<span>Build Your Own <span className="text-orange-primary font-extrabold">Biiggie</span></span>}>
+            <Link to="/new-biiggie"><FiPlus /></Link>
+          </Tippy>
+          <Tippy theme={"light"} content="View Profile">
+            <Link to="/profile"><FiUser /></Link>
+          </Tippy>
+          <Tippy theme={"light"} content="Log Out">
+            <button onClick={logout}><FiLogOut /></button>
+          </Tippy>
           </>
           ) : (
             <>
-          <Link to="/search"><FiSearch /></Link>
-          <Link to="/new-biiggie"><FiPlus /></Link>
-          <Link to="/login"><FiLogIn /></Link>
+          <Tippy theme={"light"} content={<span>Search <span className="text-orange-primary font-extrabold">Biiggies</span></span>}>
+            <Link to="/search"><FiSearch /></Link>
+          </Tippy>
+          <Tippy theme={"light"} content={<span>Build Your Own <span className="text-orange-primary font-extrabold">Biiggie</span></span>}>
+            <Link to="/new-biiggie"><FiPlus /></Link>
+          </Tippy>
+          <Tippy theme={"light"} content="Log In">
+            <Link to="/login"><FiLogIn /></Link>
+          </Tippy>
           </>
           )}
         </div>
