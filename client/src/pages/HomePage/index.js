@@ -34,7 +34,7 @@ const Home = (props) => {
       <p>
         {error?.toString()}
       </p>
-      <div className='p-4 container mx-auto'>
+      <div className='p-4 container mx-auto flex flex-col gap-2 grid-cols-2 md:grid xl:grid-cols-3'>
         {biggieCards}
       </div>
     </div>
