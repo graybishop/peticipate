@@ -53,6 +53,7 @@ const typeDefs = gql`
         keywords: [Keywords]
         helpOptions:[HelpOption]
         comments: [Comment]
+        createdBy: User
     }
 
     input BiiggieContent {

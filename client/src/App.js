@@ -10,6 +10,7 @@ import TestPage from "./pages/TestPage/index.js";
 import { setContext } from '@apollo/client/link/context';
 import Profile from "./pages/ProfilePage/index.js";
 import BiiggiePage from "./pages/Biiggie Page/index.js";
+import DemoForm from "./pages/DemoForm/index.js";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -37,6 +38,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+      <div className='flex flex-col min-h-screen'>
       <BrowserRouter>
         <Header/>
         <Routes>
@@ -46,12 +48,13 @@ function App() {
           <Route path="/new-biiggie" element={<NewBiiggieForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/demo-form" element={<DemoForm />} />
           <Route path="/biiggie/" element={<BiiggiePage />} />
           <Route path="/biiggie/:biiggieId" element={<BiiggiePage />} />
           <Route
             path="*"
             element={
-              <main className='container mx-auto p-4 flex flex-row justify-center'>
+              <main className='container mx-auto p-4 flex flex-row justify-center py-56'>
                 <p className='text-red-700 text-5xl'>404 - There's no react router route to get here!</p>
                 <p className='text-red-700 text-5xl'> 💩</p>
               </main>
@@ -60,6 +63,7 @@ function App() {
         </Routes>
         <Footer/>
       </BrowserRouter>
+      </div>
     </ApolloProvider>
   );
 }

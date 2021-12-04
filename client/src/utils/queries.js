@@ -9,6 +9,12 @@ query GiveMeTheBiiggies {
     description
     sources
     images
+    createdBy{
+      _id
+      firstName
+      lastName
+      username
+    }
     helpOptions {
       name
       description
