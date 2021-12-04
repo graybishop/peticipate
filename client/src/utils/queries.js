@@ -21,6 +21,9 @@ query GiveMeTheBiiggies {
       numOfPeople
       moneyReceived
       moneyRequested
+      registeredUsers{
+        _id
+      }
     }
   }
 }

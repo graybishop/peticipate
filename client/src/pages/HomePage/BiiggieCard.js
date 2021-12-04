@@ -12,7 +12,8 @@ const BiiggieCard = ({ biiggie }) => {
   }
 
   const processHelpOptions = () => {
-    
+    let moneyRequestedTotal, moneyReceivedTotal, numOfPeopleReqTotal
+
   }
 
   return (
