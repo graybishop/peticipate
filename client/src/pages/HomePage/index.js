@@ -6,10 +6,8 @@ import { Link } from "react-router-dom";
 const Home = (props) => {
   const { data, error } = useQuery(GET_BIIGIES);
 
-  console.log(data?.biiggies);
-
   let biggieCards = data?.biiggies.map((item) => {
-    return <BiiggieCard biiggie={item} />;
+    return <BiiggieCard biiggie={item} key='item._id'/>;
   });
 
   return (
