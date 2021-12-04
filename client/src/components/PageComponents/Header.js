@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { FiUser, FiSearch, FiPlus, FiLogIn, FiLogOut } from 'react-icons/fi';
 import auth from "../../utils/auth";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 
 const Header = () => {
@@ -23,16 +25,30 @@ const Header = () => {
           {/* <Link to="/sign-up">Sign Up</Link> */}
           {auth.loggedIn() ? (
             <>
-          <Link to="/search"><FiSearch /></Link>
-          <Link to="/new-biiggie"><FiPlus /></Link>
-          <Link to="/profile"><FiUser /></Link>
-          <button onClick={logout}><FiLogOut /></button>
+          <Tippy content={<span>Search <strong>Biiggies</strong></span>}>
+            <Link to="/search"><FiSearch /></Link>
+          </Tippy>
+          <Tippy content={<span>Build Your Own <strong>Biiggie</strong></span>}>
+            <Link to="/new-biiggie"><FiPlus /></Link>
+          </Tippy>
+          <Tippy content="View Profile">
+            <Link to="/profile"><FiUser /></Link>
+          </Tippy>
+          <Tippy content="Log Out">
+            <button onClick={logout}><FiLogOut /></button>
+          </Tippy>
           </>
           ) : (
             <>
-          <Link to="/search"><FiSearch /></Link>
-          <Link to="/new-biiggie"><FiPlus /></Link>
-          <Link to="/login"><FiLogIn /></Link>
+          <Tippy content={<span>Search <strong>Biiggies</strong></span>}>
+            <Link to="/search"><FiSearch /></Link>
+          </Tippy>
+          <Tippy content={<span>Build Your Own <strong>Biiggie</strong></span>}>
+            <Link to="/new-biiggie"><FiPlus /></Link>
+          </Tippy>
+          <Tippy content="Log In">
+            <Link to="/login"><FiLogIn /></Link>
+          </Tippy>
           </>
           )}
         </div>
