@@ -19,6 +19,11 @@ query GiveMeTheBiiggies {
       name
       description
       numOfPeople
+      moneyReceived
+      moneyRequested
+      registeredUsers{
+        _id
+      }
     }
   }
 }
