@@ -45,8 +45,6 @@ const BiiggieCard = ({ biiggie }) => {
 
   const helpOptionsTotals = processHelpOptions();
 
-  console.log(biiggie.createdBy?.image)
-
   return (
     <div className='h-full flex flex-col'>
       <div className='flex flex-col border-4 border-blue-secondary shadow relative flex-grow' key={biiggie._id}>
