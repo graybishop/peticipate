@@ -228,7 +228,8 @@ const userSeed = [
         firstName: 'Tester',
         lastName: 'Testington',
         email: 'test@mail.com',
-        description: 'I am a test'
+        description: 'I am a test',
+        image: 'https://i.guim.co.uk/img/media/a5fb31e646d2677f9d44104a3b26ee42955f0acc/0_170_5100_3059/master/5100.jpg?width=620&quality=85&auto=format&fit=max&s=84e762f61ca6617a5161279b33dff75e'
     },
     {
         username: 'TheEse89',
@@ -236,7 +237,8 @@ const userSeed = [
         firstName: 'Jose',
         lastName: 'Gonzales',
         email: 'tacotaker@mail.com',
-        description: 'Tacos are my passion, I want them to be my career.'
+        description: 'Tacos are my passion, I want them to be my career.',
+        image: 'http://www1.pictures.zimbio.com/gi/Cambridge+Folk+Festival+2019+nHeJhqaeJvox.jpg'
     },
     {
         username: 'Crazyriffs182',
@@ -252,7 +254,8 @@ const userSeed = [
         firstName: 'Elon',
         lastName: 'Musk',
         email: 'CosmosStrider@mail.com',
-        description: 'I will pave the future for the 1%.'
+        description: 'I will pave the future for the 1%.',
+        image: 'http://static5.businessinsider.com/image/5aa5a87cbe4120ce5f8b4653-2000/elon-musk-spacex-colonize-mars-1.jpg'
     },
     {
         username: 'jdawg64',
@@ -260,7 +263,8 @@ const userSeed = [
         firstName: 'Jeff',
         lastName: 'Bezos',
         email: 'bigJ64@mail.com',
-        description: 'I will own the world.'
+        description: 'I will own the world.',
+        image: 'https://www.the-sun.com/wp-content/uploads/sites/6/2020/05/NINTCHDBPICT000574792789.jpg'
     },
     {
         username: 'TeamPlayer',
@@ -268,13 +272,15 @@ const userSeed = [
         firstName: 'Joe',
         lastName: 'Schmo',
         email: 'joe@mail.com',
-        description: "Your community is your everything"
+        description: "Your community is your everything",
+        image: 'https://www.realityblurred.com/realitytv/images/2018/09/joe-schmo-show-matt-kennedy-gould.jpg'
     },
     {
         username: 'Batman05',
         password: 'superman12',
         firstName: 'Will',
         lastName: 'Turner',
-        description: 'Planning my roadmap to UF'
+        description: 'Planning my roadmap to UF',
+        images: 'https://disney-planet.fr/wp-content/uploads/2017/05/will-turner-personnage-pirate-caraibes-malediction-black-pearl-01.jpg'
     }
 ];
