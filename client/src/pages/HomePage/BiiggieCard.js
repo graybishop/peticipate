@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 
 const BiiggieCard = ({ biiggie }) => {
   const getFullName = () => {
+    if (!biiggie.createdBy) {
+      return `that's you`
+    }
+
     if (!biiggie.createdBy.firstName) {
       return 'Anonymous';
     }
@@ -18,12 +22,21 @@ const BiiggieCard = ({ biiggie }) => {
     for (const option of biiggie.helpOptions) {
       if (option.numOfPeople) {
         numOfPeopleReqTotal += option.numOfPeople;
-        registeredUsersTotal += option.registeredUsers.length;
+        if (!option.registeredUsers) {
+          registeredUsersTotal = 0
+        } else {
+          registeredUsersTotal += option.registeredUsers.length;
+        }
       }
 
       if (option.moneyRequested) {
         moneyRequestedTotal += option.moneyRequested;
         moneyReceivedTotal += option.moneyReceived;
+        if (!option.moneyReceived) {
+          moneyReceivedTotal = 0
+        } else {
+          moneyReceivedTotal += option.moneyReceived;
+        }
       }
     }
 
@@ -53,7 +66,7 @@ const BiiggieCard = ({ biiggie }) => {
             <img className="object-contain rounded-full border-2 shadow h-3/6 border-blue-secondary"
               id="profileImage" src="https://source.unsplash.com/featured/1000x1000/?profile" alt="user profile" />
             <p className='font-semibold text-center'>{getFullName()}</p>
-            <p>{biiggie.createdBy.username}</p>
+            <p>{biiggie.createdBy?.username}</p>
           </div>
         </div>
         <div className="bg-blue-secondary flex flex-row px-4 py-2 justify-between">
