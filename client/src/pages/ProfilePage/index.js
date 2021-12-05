@@ -7,10 +7,11 @@ import { Link } from 'react-router-dom';
 const Profile = () => {
     const { loading, data } = useQuery(QUERY_ME)
     const user = data?.me || data?.user || {};
-    const profileBiiggieCards = <p>Created Biiggies will display here...</p>
+    let profileBiiggieCards = <p>Created Biiggies will display here...</p>
+    console.log(data);
 
     if (user.createdBiiggies != null) {
-      let profileBiiggieCards = user.createdBiiggies.map((item) => {
+      profileBiiggieCards = user.createdBiiggies.map((item) => {
         return <ProfileBiiggieCard biiggie={item} key={item._id} />;
       });
     } else {
@@ -26,7 +27,7 @@ const Profile = () => {
 
     return(
         <div className="text-center box-border p-4 border-4 m-4 mx-auto">
-            <img className="object-contain rounded-full border shadow max-h-60 mx-auto" id="profileImage"          src="https://source.unsplash.com/featured/1000x1000/?profile" alt="user profile" />
+            <img className="object-cover rounded-full border shadow h-60 w-60  mx-auto" id="profileImage"          src={user.image} alt="user profile" />
             <div className="box-border">{user.username}</div>
             <div>{user.email}</div>
             <div>{user.firstName} {user.lastName} </div>

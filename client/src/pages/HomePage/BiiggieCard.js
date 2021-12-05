@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const BiiggieCard = ({ biiggie }) => {
   const getFullName = () => {
     if (!biiggie.createdBy) {
-      return `that's you`;
+      return `Your Name Here!`;
     }
 
     if (!biiggie.createdBy.firstName) {
@@ -68,8 +68,8 @@ const BiiggieCard = ({ biiggie }) => {
             </div>
           </div>
           <div className='p-2 w-32 flex flex-col items-center justify-center'>
-            <img className="object-contain rounded-full border-2 shadow h-20 border-blue-secondary"
-              id="profileImage" src="https://source.unsplash.com/featured/1000x1000/?profile" alt="user profile" />
+            <img className="object-cover rounded-full border-2 shadow h-20 w-20 border-blue-secondary"
+              id="profileImage" src={biiggie.createdBy?.image} alt="user profile" />
             <p className='font-semibold text-center'>{getFullName()}</p>
             <p>{biiggie.createdBy?.username}</p>
           </div>

@@ -87,6 +87,7 @@ const userSeed = [
         firstName: 'Tester',
         lastName: 'Testington',
         email: 'test@mail.com',
-        description: 'I am a test'
+        description: 'I am a test',
+        image: 'https://i.guim.co.uk/img/media/a5fb31e646d2677f9d44104a3b26ee42955f0acc/0_170_5100_3059/master/5100.jpg?width=620&quality=85&auto=format&fit=max&s=84e762f61ca6617a5161279b33dff75e'
     }
 ];

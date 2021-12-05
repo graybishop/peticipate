@@ -14,6 +14,7 @@ query GiveMeTheBiiggies {
       firstName
       lastName
       username
+      image
     }
     helpOptions {
       name
@@ -82,6 +83,8 @@ query Query {
     email
     firstName
     lastName
+    firstName
+    image
     createdBiiggies {
       _id
       title
