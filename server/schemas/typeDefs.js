@@ -10,6 +10,7 @@ const typeDefs = gql`
         firstName: String
         lastName: String
         createdBiiggies: [Biiggie]
+        image: String
     }
 
     type Auth {
@@ -80,7 +81,7 @@ const typeDefs = gql`
 
     type Mutation {
         createBiiggie(title: String!, deadline: Float!, description: String!, sources: [String], images: [String], helpOptions: [HelpOptionContent]): Biiggie
-        newUser(username: String, password: String, email: String, firstName: String!, lastName: String): Auth
+        newUser(username: String!, password: String!, email: String!, firstName: String!, lastName: String!, image:String): Auth
         login(username: String!, password: String!): Auth
         commitToHelp(helpOptionId: ID!, moneyCommitted: Int): HelpOption
     }

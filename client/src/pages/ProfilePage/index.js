@@ -9,7 +9,7 @@ const Profile = () => {
     if (loading) return <p>Loading ...</p>;
     return(
         <div className="text-center box-border p-4 border-4 m-4 mx-auto">
-            <img className="object-contain rounded-full border shadow max-h-60 mx-auto" id="profileImage"          src="https://source.unsplash.com/featured/1000x1000/?profile" alt="user profile" />
+            <img className="object-cover rounded-full border shadow h-60 w-60  mx-auto" id="profileImage"          src={user.image} alt="user profile" />
             <div className="box-border">{user.username}</div>
             <div>{user.email}</div>
             <div>{user.firstName} {user.lastName} </div>
