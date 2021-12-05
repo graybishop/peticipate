@@ -15,10 +15,15 @@ const BiiggiePage = ({biiggie}) => {
     <div className="container mx-auto flex flex-col gap-1 text-xl">
       <p className="text-3xl font-extrabold text-center p-8">{data.title}</p>
       <img src={data.images} alt="" />
-      <p className="content-center font-semibold text-2xl p-4 bg-blue-nav-button rounded-b-lg">{data.description}</p>
+      <div className="bg-blue-nav-button rounded-b-lg divide-x-2">
+      <img className="object-contain  float-left rounded-full min-w-12 h-12" id="profileImage"
+          src="https://source.unsplash.com/featured/1000x1000/?profile" alt="biggie author" />
+          <p className="italic font-bold">{data.createdBy}Taco Bob</p>
+          <p className="content-center font-semibold text-1xl p-2 ">{data.description}</p>
+      </div>
       {/* <p>Date Created {data.createdAt.toLocaleString()}</p> */}
       <p className="text-3xl text-center text-orange-hover font-semibold animate-pulse">Deadline: {Math.floor((new Date(data.deadline) - new Date()) / 1000 / 86400)} Days Left!</p>
-      <h2 className="text-xl font-semibold">Sources: </h2>
+      <h2 className="text-xl font-semibold">{data.sources}Sources: </h2>
       <h3 className="font-semibold">Collaborators: 1/3 {data.numOfPeople}</h3>
       <div className="space-x-2">
       <Link to="/sign-up"> 
