@@ -1,7 +1,7 @@
 import { FiThumbsUp } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-const BiiggieCard = ({ biiggie }) => {
+const BiiggieCard = ({ biiggie, rank }) => {
   const getFullName = () => {
     if (!biiggie.createdBy) {
       return `Your Name Here!`;
@@ -50,7 +50,7 @@ const BiiggieCard = ({ biiggie }) => {
       <div className='flex flex-col border-4 border-blue-secondary shadow relative flex-grow' key={biiggie._id}>
         {/* Rank Flag */}
         <div className='absolute px-4 py-2 bg-blue-secondary rounded-br'>
-          <p className=' text-white filter drop-shadow text-lg font-extrabold '> <span className='font-bold'>#1</span> Biggie</p>
+          <p className=' text-white filter drop-shadow text-lg font-extrabold '> <span className='font-bold'>#{rank || '1'}</span> Biggie</p>
         </div>
         {/* End Rank Flag */}
         {/* IMG */}

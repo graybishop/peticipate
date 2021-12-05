@@ -7,8 +7,8 @@ import honeycombImage from "../../assets/images/hex-bg-5.png";
 const Home = (props) => {
   const { data, error } = useQuery(GET_BIIGIES);
 
-  let biggieCards = data?.biiggies.map((item) => {
-    return <BiiggieCard biiggie={item} key={item._id} />;
+  let biggieCards = data?.biiggies.map((item, index) => {
+    return <BiiggieCard biiggie={item} key={item._id} rank={index+1}/>;
   });
 
   return (
