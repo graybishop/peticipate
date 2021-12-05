@@ -246,7 +246,8 @@ const userSeed = [
         firstName: 'Mark',
         lastName: 'Hoppus',
         email: 'rockshow@mail.com',
-        description: 'Gonna pave the way for pop punk'
+        description: 'Gonna pave the way for pop punk',
+        image: 'https://theblemish.com/images/2018/07/mark-hoppus-640x587.jpg'
     },
     {
         username: 'astronaut71',
@@ -276,11 +277,11 @@ const userSeed = [
         image: 'https://www.realityblurred.com/realitytv/images/2018/09/joe-schmo-show-matt-kennedy-gould.jpg'
     },
     {
-        username: 'Batman05',
-        password: 'superman12',
+        username: 'JacksSidekick',
+        password: 'DavyJones',
         firstName: 'Will',
         lastName: 'Turner',
         description: 'Planning my roadmap to UF',
-        images: 'https://disney-planet.fr/wp-content/uploads/2017/05/will-turner-personnage-pirate-caraibes-malediction-black-pearl-01.jpg'
+        image: 'https://disney-planet.fr/wp-content/uploads/2017/05/will-turner-personnage-pirate-caraibes-malediction-black-pearl-01.jpg'
     }
 ];
