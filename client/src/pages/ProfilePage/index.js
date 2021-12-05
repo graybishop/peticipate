@@ -1,11 +1,16 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/queries';
+import ProfileBiiggieCard from './ProfileBiiggieCard.js';
 
 const Profile = () => {
     const { loading, data } = useQuery(QUERY_ME)
     const user = data?.me || data?.user || {};
     
+    let profileBiiggieCards = user.CreatedBiiggies.map((item) => {
+      return <ProfileBiiggieCard biiggie={item} key={item._id} />;
+    });
+
     return(
         <div className="text-center box-border p-4 border-4 m-4 mx-auto">
             <img className="object-contain rounded-full border shadow max-h-60 mx-auto" id="profileImage"          src="https://source.unsplash.com/featured/1000x1000/?profile" alt="user profile" />
@@ -18,26 +23,8 @@ const Profile = () => {
             <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
     {/* <!--Card 1--> */}
     {/* if (loading) { return (<p>Loading ...</p>)} */}
-
-    {user.createdBiiggies.map((biiggie) => {
-      return <button className="btn">
-      <div className="rounded overflow-hidden shadow-lg">
-        <img className="w-full" src="" alt="Biiggie"/>
-        <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">{biiggie.title}</div>
-          <p className="text-gray-700 text-base">
-            {biiggie.description}
-          </p>
-        </div>
-        <div className="px-6 pt-4 pb-2">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Food</span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Politics</span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Education</span>
-        </div>
-      </div>
-      </button>
-    })}
-    
+    {/* Renders the users biiggies */}
+    {profileBiiggieCards}
     
   </div>
 </div>
