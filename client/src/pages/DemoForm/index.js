@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 // import { CREATE_BIIGGIE } from '../../utils/mutations';
 import { DateTime } from "luxon";
 import BiiggieCard from "../HomePage/BiiggieCard.js";
+import auth from "../../utils/auth.js";
+import { useNavigate } from "react-router";
 
 const FirstStep = (props) => {
   let [formState, setFormState] = useState({
@@ -221,7 +223,6 @@ const HelpOptionsForm = (props) => {
 
 
 const BiiggiePreview = (props) => {
-  const [biiggieData, setBiiggieData] = useState('')
 
   let fullBiiggieData = {...props.biiggie, helpOptions: [...props.helpOptions]}
   
@@ -265,8 +266,13 @@ const DemoForm = () => {
   });
 
   let [helpOptions, setHelpOptions] = useState([]);
+  let navigate = useNavigate()
 
+  
   useEffect(() => {
+    if (!auth.loggedIn()) {
+      navigate('/login')
+    }
     console.log(biiggie);
     console.log(helpOptions);
   });
