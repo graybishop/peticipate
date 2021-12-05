@@ -63,12 +63,12 @@ const BiiggieCard = ({ biiggie }) => {
               <h3 className='text-2xl font-bold'>{biiggie.title}</h3>
             </div>
             <div>
-              <p className='leading-tight'>{biiggie.description}</p>
+              <p className='leading-tight line-clamp-3'>{biiggie.description}</p>
               <p>{biiggie.sources}</p>
             </div>
           </div>
           <div className='p-2 w-32 flex flex-col items-center justify-center'>
-            <img className="object-contain rounded-full border-2 shadow h-3/6 border-blue-secondary"
+            <img className="object-contain rounded-full border-2 shadow h-20 border-blue-secondary"
               id="profileImage" src="https://source.unsplash.com/featured/1000x1000/?profile" alt="user profile" />
             <p className='font-semibold text-center'>{getFullName()}</p>
             <p>{biiggie.createdBy?.username}</p>
