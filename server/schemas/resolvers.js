@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-errors');
-const {Biiggie, User, HelpOption, Keywords} = require('../models/index.js')
+const {Biiggie, User, HelpOption, Keywords, } = require('../models/index.js')
 const { signToken } = require('../utils/index.js');
 
 
@@ -10,8 +10,13 @@ const resolvers ={
       const params = _id ? { _id } : {};
       return User.findOne(params).populate('createdBiiggies').populate({path: 'createdBiiggies', populate: [ { path: 'keywords' }, { path: 'helpOptions'}]});
     },
+    biiggie: async (parent, { _id })=>{
+      const params = _id ? { _id } : {};
+      return await Biiggie.findById(params).populate('helpOptions');
+    },
     biiggies: async ()=>{
-      return await Biiggie.find({}).populate('helpOptions').populate('keywords');
+      return await Biiggie.find({}).populate('helpOptions').populate('createdBy').populate('keywords')
+      
     },
     authBiggiesReq: async (parent, args, context)=>{
       if(!context.user){
@@ -21,7 +26,13 @@ const resolvers ={
     },
     keywords: async () => {
       return await Keywords.find({}).populate('biiggie').populate({path: 'biiggie', populate: { path: 'helpOptions' }}).populate({ path: 'biiggie', populate: {path: 'helpOptions', populate: { path: 'registeredUsers' }}});
-    }
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id });
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
   Mutation: {
     newUser: async (parent, args) => {
@@ -45,7 +56,11 @@ const resolvers ={
       const token = signToken(user);
       return { token, user };
     },
-    createBiiggie: async (parent, args) => {
+    createBiiggie: async (parent, args, context) => {
+      if(!context.user){
+        throw new AuthenticationError('You need to be logged in to to create a Biiggie.')
+      }
+
       const helpOptionsArray = args.helpOptions;
       console.log({...args})
       console.log(helpOptionsArray);
@@ -63,7 +78,7 @@ const resolvers ={
       }
       
       const createBiiggie = async (helpOptionIds) => {
-        const biiggie = await Biiggie.create({...args, helpOptions: helpOptionIds});
+        const biiggie = await Biiggie.create({...args, helpOptions: helpOptionIds, createdBy: context.user._id});
         return biiggie;
       }
       

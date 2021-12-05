@@ -20,6 +20,7 @@ export const CREATE_BIIGGIE = gql`
       title
       deadline
       description
+      _id
     }
   }
 `;
@@ -27,10 +28,10 @@ export const CREATE_BIIGGIE = gql`
 export const ADD_USER = gql`
   mutation Mutation(
     $firstName: String!
-    $lastName: String
-    $email: String
-    $password: String
-    $username: String
+    $lastName: String!
+    $email: String!
+    $password: String!
+    $username: String!
   ) {
     newUser(
       firstName: $firstName

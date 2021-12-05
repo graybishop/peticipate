@@ -86,18 +86,6 @@ export function NewBiiggieForm() {
             onBlur={handleChange}
           />
         </div>
-        {/* <div>
-          <label htmlFor="type">
-            Describe what your cause pertains to: ie: Health, Environment,
-            Political
-          </label>
-          <input
-            type="text"
-            name="type"
-            defaultValue={type}
-            onBlur={handleChange}
-          />
-        </div> */}
         <div>
           <label htmlFor="deadline">
             What is the deadline for your BIIGGIE (YYYY-MM-DD):

@@ -9,10 +9,22 @@ query GiveMeTheBiiggies {
     description
     sources
     images
+    createdBy{
+      _id
+      firstName
+      lastName
+      username
+      image
+    }
     helpOptions {
       name
       description
       numOfPeople
+      moneyReceived
+      moneyRequested
+      registeredUsers{
+        _id
+      }
     }
   }
 }
@@ -27,3 +39,55 @@ query AuthBiggiesReq {
   }
 }
 `
+export const BIIGGIE = gql`
+query Biiggie($id: ID) {
+  biiggie(_id: $id) {
+    _id
+    title
+    deadline
+    description
+    sources
+    images
+    keywords {
+      keyword
+    }
+    helpOptions {
+      name
+      description
+      numOfPeople
+      registeredUsers {
+        username
+      }
+      moneyRequested
+      moneyReceived
+    }
+    comments {
+      author {
+        username
+      }
+      title
+      body
+      thread {
+        body
+      }
+    }
+  }
+}
+`
+
+export const QUERY_ME = gql`
+query Me {
+  me {
+    username
+    _id
+    email
+    lastName
+    firstName
+    image
+    createdBiiggies {
+      _id
+      title
+    }
+  }
+}
+`;

@@ -7,9 +7,10 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
-        firstName: String!
+        firstName: String
         lastName: String
         createdBiiggies: [Biiggie]
+        image: String
     }
 
     type Auth {
@@ -53,6 +54,7 @@ const typeDefs = gql`
         keywords: [Keywords]
         helpOptions:[HelpOption]
         comments: [Comment]
+        createdBy: User
     }
 
     input BiiggieContent {
@@ -70,14 +72,16 @@ const typeDefs = gql`
     
     type Query {
         user(_id: String): User
+        biiggie(_id: ID): Biiggie
         biiggies: [Biiggie]
         authBiggiesReq: [Biiggie]
         keywords: [Keywords]
+        me: User
     }
 
     type Mutation {
         createBiiggie(title: String!, deadline: Float!, description: String!, sources: [String], images: [String], helpOptions: [HelpOptionContent]): Biiggie
-        newUser(username: String, password: String, email: String, firstName: String!, lastName: String): Auth
+        newUser(username: String!, password: String!, email: String!, firstName: String!, lastName: String!, image:String): Auth
         login(username: String!, password: String!): Auth
         commitToHelp(helpOptionId: ID!, moneyCommitted: Int): HelpOption
     }

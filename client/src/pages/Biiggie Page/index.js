@@ -1,52 +1,46 @@
-import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { BIIGGIE } from "../../utils/queries";
+import { useQuery } from '@apollo/client';
+import  CommentForm  from "./CommentForm"
 
 
-const BiiggiePage = (props) => {
-    const data = [
-        {
-            title: 'Taco Food Truck Startup',
-            createdAt: new Date(new Date().setDate(new Date().getDate())),
-            deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
-            description: 'My Biiggie that I I need help getting my dream taco food truck business off the ground. I serve all types of tacos and have worked very hard renovating an old truck I but. Any help is welcome!',
-            images: ['https://mobile-cuisine.com/wp-content/uploads/2015/09/food-truck-branding.jpg'],
-            comment:'',
-        },
-    ]
-    const Comments = [{
-        comments:''
-    }]
-    const [formState, setFormState] = useState({})
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormState({
-          ...formState,
-          [name]: value,
-        });
-      };
-    return(
-
-        <div className='flex flex-col gap-1 text-xl'>
-            Biiggie Page
-            <p className='text-2xl'>Biiggie Title{data.title}</p>
-            <p>Biiggie Description{data.description}</p>
-            <img src={data.images} alt="" />
-            <p>Date Created {data.createdAt}</p>
-            <p className='text-xl'>Deadline here{data.deadline}</p>
-            <h2 className='text-xl'>View Sources </h2>
-            <h3>Total number of assignees to achieve my goal:{data.assignee}</h3>
-            <button link="Signup">Sign Up</button>
-            <button link="https://www.instagram.com/">Share with Instagram</button>
-            <button link="https://www.reddit.com/">Share with Reddit</button>
-            <label htmlFor="comment">Leave a thought or comment </label>
-            <textarea
-            name="comments"
-            rows="7"
-            defaultValue={Comments}
-            onBlur={handleChange}
-          />
-        </div>
-        
-    )
-}
+const BiiggiePage = ({biiggie}) => {
+  let {biiggieId} = useParams()
+  let {data, loading} = useQuery(BIIGGIE,  {variables:{id:biiggieId}})
+  
+  if (loading) return <p>Loading ...</p>;
+  data = data.biiggie
+  return (
+      
+    <div className="container mx-auto flex flex-col gap-1 text-xl">
+      <p className="text-3xl font-extrabold text-center p-8">{data.title}</p>
+      <img src={data.images} alt="" />
+      <div className="bg-blue-nav-button rounded-b-lg divide-x-2">
+      <img className="object-contain  float-left rounded-full min-w-12 h-12" id="profileImage"
+          src="https://source.unsplash.com/featured/1000x1000/?profile" alt="biggie author" />
+          <p className="italic font-bold">{data.createdBy}Taco Bob</p>
+          <p className="content-center font-semibold text-1xl p-2 ">{data.description}</p>
+      </div>
+      {/* <p>Date Created {data.createdAt.toLocaleString()}</p> */}
+      <p className="text-3xl text-center text-orange-hover font-semibold animate-pulse">Deadline: {Math.floor((new Date(data.deadline) - new Date()) / 1000 / 86400)} Days Left!</p>
+      <h2 className="text-xl font-semibold">{data.sources}Sources: </h2>
+      <h3 className="font-semibold">Collaborators: 1/3 {data.numOfPeople}</h3>
+      <div className="space-x-2">
+      <Link to="/sign-up"> 
+      <button className="bg-orange-primary text-white italic p-2 shadow font-semibold text-lg rounded-full">  Sign Up  </button>
+      </Link>
+      <Link to="https://www.instagram.com/">
+        <button className="bg-orange-primary text-white italic p-2 shadow font-semibold text-lg rounded-full" >Share on Instagram</button>
+      </Link>
+      <Link to="https://www.reddit.com/">
+      <button className="bg-orange-primary text-white italic p-2 shadow font-semibold rounded-full">Share on Reddit</button>
+      </Link>
+      </div>
+      <div>
+        <CommentForm/>
+      </div>
+    </div>
+  );
+};
 
 export default BiiggiePage;

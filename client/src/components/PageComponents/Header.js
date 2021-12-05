@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
-import { FiUser, FiSearch, FiPlus } from 'react-icons/fi';
+import { FiUser, FiSearch, FiPlus, FiLogIn, FiLogOut } from 'react-icons/fi';
+import auth from "../../utils/auth";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/light.css';
 
 
-const Header = () => {
+const Header = ({loggedIn}) => {
+
+  const logout = (event) => {
+    event.preventDefault();
+    auth.logout();
+  }
+
   return (
     <div className='bg-blue-header'>
       <div className='container mx-auto flex flex-row items-center justify-between py-6 px-6 '>
@@ -16,10 +26,34 @@ const Header = () => {
           {/* <Link to="/">Home Page</Link> */}
           {/* <Link to="/login">Login Page</Link> */}
           {/* <Link to="/sign-up">Sign Up</Link> */}
-          <Link to="/search"><FiSearch /></Link>
-          <Link to="/profile"><FiUser /></Link>
-          <Link to="/new-biiggie"><FiPlus /></Link>
-          {/* <Link to="/test">Test Page</Link> */}
+          {loggedIn ? (
+            <>
+          <Tippy theme={"light"} content={<span>Search <span className="text-orange-primary font-extrabold">Biiggies</span></span>}>
+            <Link to="/search"><FiSearch /></Link>
+          </Tippy>
+          <Tippy theme={"light"} content={<span>Build Your Own <span className="text-orange-primary font-extrabold">Biiggie</span></span>}>
+            <Link to="/new-biiggie"><FiPlus /></Link>
+          </Tippy>
+          <Tippy theme={"light"} content="View Profile">
+            <Link to="/profile"><FiUser /></Link>
+          </Tippy>
+          <Tippy theme={"light"} content="Log Out">
+            <button onClick={logout}><FiLogOut /></button>
+          </Tippy>
+          </>
+          ) : (
+            <>
+          <Tippy theme={"light"} content={<span>Search <span className="text-orange-primary font-extrabold">Biiggies</span></span>}>
+            <Link to="/search"><FiSearch /></Link>
+          </Tippy>
+          <Tippy theme={"light"} content={<span>Build Your Own <span className="text-orange-primary font-extrabold">Biiggie</span></span>}>
+            <Link to="/new-biiggie"><FiPlus /></Link>
+          </Tippy>
+          <Tippy theme={"light"} content="Log In">
+            <Link to="/login"><FiLogIn /></Link>
+          </Tippy>
+          </>
+          )}
         </div>
       </div>
     </div>

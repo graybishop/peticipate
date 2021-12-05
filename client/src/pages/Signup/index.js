@@ -4,10 +4,10 @@ import { useMutation } from "@apollo/client";
 // import Auth from '../utils/auth';
 import { ADD_USER } from "../../utils/mutations";
 import Auth from '../../utils/auth.js'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
-function Signup(props) {
+function Signup({setLoggedIn}) {
   const [formState, setFormState] = useState({
     username: "",
     email: "",
@@ -15,6 +15,7 @@ function Signup(props) {
     firstName: "",
     lastName: "",
   });
+  let navigate = useNavigate();
   const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
@@ -29,6 +30,8 @@ function Signup(props) {
       console.log(mutationResponse)
       const token = mutationResponse.data.newUser.token;
       Auth.login(token);
+      setLoggedIn(true)
+      navigate(-1)
     } catch (err) {
       console.error(err);
     }
@@ -43,17 +46,17 @@ function Signup(props) {
   };
 
   return (
-    <div className="bg-gray-300 min-h-screen flex flex-col">
+    <div className="bg-body-background-blue min-h-screen flex flex-col">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
       {/* <Link to="/login">← Go to Login</Link> */}
 
-      <h1 class="mb-8 text-3xl text-center font-bold">Sign Up</h1>
+      <h1 className="mb-8 text-3xl text-center font-bold">Sign Up</h1>
       <form onSubmit={handleFormSubmit}>
         <div>
         <label htmlFor="firstName"></label>
           <input
-            class="block border border-grey-light w-full p-3 rounded mb-4"
+            className="block border border-grey-light w-full p-3 rounded mb-4"
             placeholder="First Name"
             name="firstName"
             type="text"
@@ -62,7 +65,7 @@ function Signup(props) {
           />
         <label htmlFor="lastName"></label>
           <input
-            class="block border border-grey-light w-full p-3 rounded mb-4"
+            className="block border border-grey-light w-full p-3 rounded mb-4"
             placeholder="Last Name"
             name="lastName"
             type="text"
@@ -71,7 +74,7 @@ function Signup(props) {
           />
           <label htmlFor="username"></label>
           <input
-            class="block border border-grey-light w-full p-3 rounded mb-4"
+            className="block border border-grey-light w-full p-3 rounded mb-4"
             placeholder="Username"
             name="username"
             type="text"
@@ -80,7 +83,7 @@ function Signup(props) {
           />
           <label htmlFor="email"></label>
           <input
-            class="block border border-grey-light w-full p-3 rounded mb-4"
+            className="block border border-grey-light w-full p-3 rounded mb-4"
             placeholder="Email"
             name="email"
             type="email"
@@ -89,7 +92,7 @@ function Signup(props) {
           />
           <label htmlFor="pwd"></label>
           <input
-            class="block border border-grey-light w-full p-3 rounded mb-4"
+            className="block border border-grey-light w-full p-3 rounded mb-4"
             placeholder="Password"
             name="password"
             type="password"
@@ -105,14 +108,14 @@ function Signup(props) {
             onChange={handleChange}/> */}
         <button
             type="submit"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 my-1 rounded text-center w-full"
+            className="bg-orange-primary hover:bg-orange-hover text-white font-bold py-3 my-1 rounded text-center w-full"
             >Create Account</button>
         </div>
       </form>
-      <div class="text-grey-dark mt-6">
-            Already have an account? 
-            <Link class="no-underline border-b border-blue text-blue-600" to="/login">
-             Log in
+      <div className="text-grey-dark mt-6">
+            Already have an account?&nbsp;
+            <Link class="no-underline border-b text-orange-primary" to="/login" replace>
+            Log in
             </Link>.
       </div>
     </div>
