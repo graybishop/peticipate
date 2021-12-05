@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { BIIGGIE } from "../../utils/queries";
 import { useQuery } from '@apollo/client';
 import  CommentForm  from "./CommentForm"
-
+import CommentSection from"./CommentSection"
 
 const BiiggiePage = ({biiggie}) => {
   let {biiggieId} = useParams()
@@ -25,7 +25,7 @@ const BiiggiePage = ({biiggie}) => {
       <p className="text-3xl text-center text-orange-hover font-semibold animate-pulse">Deadline: {Math.floor((new Date(data.deadline) - new Date()) / 1000 / 86400)} Days Left!</p>
       <h2 className="text-xl font-semibold">{data.sources}Sources: </h2>
       <h3 className="font-semibold">Collaborators: 1/3 {data.numOfPeople}</h3>
-      <div className="space-x-2">
+      <div className="space-x-2 justify-items-center">
       <Link to="/sign-up"> 
       <button className="bg-orange-primary text-white italic p-2 shadow font-semibold text-lg rounded-full">  Sign Up  </button>
       </Link>
@@ -38,6 +38,9 @@ const BiiggiePage = ({biiggie}) => {
       </div>
       <div>
         <CommentForm/>
+      </div>
+      <div>
+        <CommentSection comments={data.comments}/> 
       </div>
     </div>
   );
