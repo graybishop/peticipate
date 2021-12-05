@@ -4,8 +4,10 @@ import BiiggieCard from './BiiggieCard.js';
 import { Link } from "react-router-dom";
 import honeycombImage from "../../assets/images/hex-bg-5.png";
 
-const Home = (props) => {
-  const { data, error } = useQuery(GET_BIIGIES);
+const Home = () => {
+  const { data, error } = useQuery(GET_BIIGIES,{
+    pollInterval: 500
+  });
 
   let biggieCards = data?.biiggies.map((item, index) => {
     return <BiiggieCard biiggie={item} key={item._id} rank={index+1}/>;
