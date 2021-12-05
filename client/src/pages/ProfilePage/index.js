@@ -43,7 +43,7 @@ const Profile = () => {
 </div>
 <Link to='/new-biiggie'
               className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>
-              Build My <span className='font-extrabold'>Biggie</span> Now</Link>
+              Build My <span className='font-extrabold'>Biiggie</span> Now</Link>
         </div>
 
     )
