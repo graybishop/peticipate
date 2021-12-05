@@ -75,15 +75,27 @@ query Biiggie($id: ID) {
 `
 
 export const QUERY_ME = gql`
-query Me {
+query Query {
   me {
-    username
     _id
+    username
     email
+    firstName
     lastName
     createdBiiggies {
       _id
       title
+      deadline
+      description
+      sources
+      images
+      helpOptions {
+        name
+        description
+        numOfPeople
+        moneyRequested
+        moneyReceived
+      }
     }
   }
 }
