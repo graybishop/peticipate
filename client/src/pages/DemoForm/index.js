@@ -5,6 +5,9 @@ import { DateTime } from "luxon";
 import BiiggieCard from "../HomePage/BiiggieCard.js";
 import auth from "../../utils/auth.js";
 import { useNavigate } from "react-router";
+import { useMutation } from "@apollo/client";
+import { CREATE_BIIGGIE } from '../../utils/mutations';
+import { Link } from "react-router-dom";
 
 const FirstStep = (props) => {
   let [formState, setFormState] = useState({
@@ -14,7 +17,6 @@ const FirstStep = (props) => {
 
   const handleChange = (event) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
-    console.log("Handle Form", formState);
   };
 
   const handleSubmit = (event) => {
@@ -49,7 +51,6 @@ const SecondStep = (props) => {
   const handleChange = (event) => {
     let newDeadline = DateTime.fromISO(event.target.value).toMillis();
     setFormState({ ...formState, [event.target.name]: newDeadline });
-    console.log("Handle Form", formState);
   };
 
   const handleSubmit = (event) => {
@@ -79,7 +80,6 @@ const ThirdStep = (props) => {
 
   const handleChange = (event) => {
     setFormState({ ...formState, [event.target.name]: [event.target.value] });
-    console.log("Handle Form", formState);
   };
 
   const handleSubmit = (event) => {
@@ -111,7 +111,6 @@ const ForthStep = (props) => {
 
   const handleChange = (event) => {
     setFormState({ ...formState, [event.target.name]: [event.target.value] });
-    console.log("Handle Form", formState);
   };
 
   const handleSubmit = (event) => {
@@ -154,11 +153,9 @@ const HelpOptionsForm = (props) => {
   const handleChange = (event) => {
     if (event.target.name === 'numOfPeople' || event.target.name === 'moneyRequested') {
       setFormState({ ...formState, [event.target.name]: Number(event.target.value) });
-      console.log("Handle Form", formState);
       return;
     }
     setFormState({ ...formState, [event.target.name]: event.target.value });
-    console.log("Handle Form", formState);
   };
 
   const handleSubmit = (event) => {
@@ -166,13 +163,9 @@ const HelpOptionsForm = (props) => {
     props.addHelpOption({ ...formState });
   };
 
-  const goToNextPage = () =>{
-    props.moveForward({})
-  }
-
-  useEffect(() => {
-    console.log('the current helpoptions formState is', formState);
-  });
+  const goToNextPage = () => {
+    props.moveForward({});
+  };
 
   let innerElements = (
     <form action="" className='flex flex-col gap-2'>
@@ -224,28 +217,33 @@ const HelpOptionsForm = (props) => {
 
 const BiiggiePreview = (props) => {
 
-  let fullBiiggieData = {...props.biiggie, helpOptions: [...props.helpOptions]}
-  
-  useEffect(()=>{
-    console.log(fullBiiggieData)
-  })
-
-  const goToNextPage = () =>{
-    props.moveForward({})
-  }
+  let fullBiiggieData = { ...props.biiggie, helpOptions: [...props.helpOptions] };
 
   return (
-    <div className='flex flex-col gap-2'> 
-      <h1>Here's a preview of your biiggie</h1>
+    <div className='flex flex-col gap-2'>
+      <h3 className='text-xl'>Here's a preview of your biiggie</h3>
       <div>
-        <BiiggieCard biiggie={fullBiiggieData}/>
+        <BiiggieCard biiggie={fullBiiggieData} />
       </div>
-      <button onClick={goToNextPage}>Next Step</button>
+      <button onClick={props.submitBiiggie}>Next Step</button>
       <button onClick={props.goBack}>Previous Step</button>
     </div>
 
-  )
-}
+  );
+};
+
+const ConfirmationPage = ({ newBiiggieId }) => {
+
+
+
+  return (
+    <div className='flex flex-col gap-2'>
+      <h1>Biiggie Created!</h1>
+      <p>Here is a link to your new biiggie!</p>
+      <Link to={`/biiggie/${newBiiggieId}`}>Link</Link>
+    </div>
+  );
+};
 
 
 
@@ -256,7 +254,6 @@ const DemoForm = () => {
       currentStep: 1
     }
   );
-
   let [biiggie, setBiiggie] = useState({
     title: '',
     description: '',
@@ -264,17 +261,35 @@ const DemoForm = () => {
     images: [],
     keywords: []
   });
-
   let [helpOptions, setHelpOptions] = useState([]);
-  let navigate = useNavigate()
+  let [newBiiggieId, setNewBiiggieId] = useState('');
 
-  
+  let navigate = useNavigate();
+
+  const [createBiiggie] = useMutation(CREATE_BIIGGIE);
+
+
+  const submitBiiggie = async (event) => {
+    event.preventDefault();
+    let fullBiiggieData = { ...biiggie, helpOptions: [...helpOptions] };
+    try {
+      let newBiiggie = await createBiiggie({
+        variables: {
+          ...fullBiiggieData,
+        },
+      });
+      setNewBiiggieId(newBiiggie.data.createBiiggie._id);
+      moveForward({});
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
   useEffect(() => {
     if (!auth.loggedIn()) {
-      navigate('/login')
+      navigate('/login');
     }
-    console.log(biiggie);
-    console.log(helpOptions);
   });
 
   const moveForward = (formData) => {
@@ -317,10 +332,10 @@ const DemoForm = () => {
       innerForm = (<HelpOptionsForm moveForward={moveForward} goBack={goBack} helpOptions={helpOptions} addHelpOption={addHelpOption} />);
       break;
     case 6:
-      innerForm = (<BiiggiePreview moveForward={moveForward} goBack={goBack} helpOptions={helpOptions} biiggie={biiggie} />);
+      innerForm = (<BiiggiePreview moveForward={moveForward} goBack={goBack} helpOptions={helpOptions} biiggie={biiggie} submitBiiggie={submitBiiggie} />);
       break;
     case 7:
-      innerForm = (<div className='bg-green-700'>This is the last step. you can put a link here to send them to the homepage, or their biggie or just redirect them <button onClick={goBack}>Previous Step</button></div>);
+      innerForm = (<ConfirmationPage newBiiggieId={newBiiggieId} />);
       break;
 
     default:

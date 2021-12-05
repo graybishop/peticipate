@@ -20,6 +20,7 @@ export const CREATE_BIIGGIE = gql`
       title
       deadline
       description
+      _id
     }
   }
 `;
