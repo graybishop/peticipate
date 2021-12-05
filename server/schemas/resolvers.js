@@ -56,7 +56,11 @@ const resolvers ={
       const token = signToken(user);
       return { token, user };
     },
-    createBiiggie: async (parent, args) => {
+    createBiiggie: async (parent, args, context) => {
+      if(!context.user){
+        throw new AuthenticationError('You need to be logged in to to create a Biiggie.')
+      }
+
       const helpOptionsArray = args.helpOptions;
       console.log({...args})
       console.log(helpOptionsArray);
@@ -74,7 +78,7 @@ const resolvers ={
       }
       
       const createBiiggie = async (helpOptionIds) => {
-        const biiggie = await Biiggie.create({...args, helpOptions: helpOptionIds});
+        const biiggie = await Biiggie.create({...args, helpOptions: helpOptionIds, createdBy: context.user._id});
         return biiggie;
       }
       
