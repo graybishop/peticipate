@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/queries';
 import ProfileBiiggieCard from './ProfileBiiggieCard.js';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
     const { loading, data } = useQuery(QUERY_ME)
@@ -40,9 +41,9 @@ const Profile = () => {
     
   </div>
 </div>
-<button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
-  Build My <span className="font-bold">Biiggie</span> Now
-</button>
+<Link to='/new-biiggie'
+              className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>
+              Build My <span className='font-extrabold'>Biggie</span> Now</Link>
         </div>
 
     )
