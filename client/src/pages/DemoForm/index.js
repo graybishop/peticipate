@@ -147,7 +147,7 @@ const HelpOptionsForm = (props) => {
 
   const updateOptionType = (event) => {
     setNeedPeopleSelector(event.target.value);
-    setFormState({ ...formState, numOfPeople: 0, moneyRequested: 0 });
+    setFormState({ ...formState, numOfPeople: null, moneyRequested: null });
   };
 
   const handleChange = (event) => {
