@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { GET_BIIGIES } from '../../utils/queries.js';
 import BiiggieCard from './BiiggieCard.js';
 import { Link } from "react-router-dom";
+import honeycombImage from "../../assets/images/hex-bg-5.png";
 
 const Home = (props) => {
   const { data, error } = useQuery(GET_BIIGIES);
@@ -13,7 +14,7 @@ const Home = (props) => {
   return (
 
     <div className='flex flex-col bg-body-background-blue'>
-      <section className=' bg-bottom bg-cover' style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1638500551033-a0f60c8e768e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)' }}>
+      <section className=' bg-bottom bg-cover' style={{ backgroundImage: `url(${honeycombImage})` }}>
         <div className='flex flex-col gap-8 py-20 px-4 items-center backdrop-filter'>
           <h2 className='text-center text-4xl font-semibold'>What's <em>your</em> <span className='font-extrabold text-orange-primary'>Biiggie</span> idea?</h2>
           <div className='text-center text-xl flex flex-col gap-2 md:w-8/12 lg:w-6/12 xl:w-2/6'>
