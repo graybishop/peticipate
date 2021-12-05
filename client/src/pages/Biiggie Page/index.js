@@ -1,29 +1,36 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { BIIGGIE } from "../../utils/queries";
 import { useQuery } from '@apollo/client';
 import  CommentForm  from "./CommentForm"
 
-const BiiggiePage = (props) => {
+
+const BiiggiePage = ({biiggie}) => {
   let {biiggieId} = useParams()
-  let {data, loading} = useQuery(BIIGGIE, {variables:{id:biiggieId}})
-   
+  let {data, loading} = useQuery(BIIGGIE,  {variables:{id:biiggieId}})
   
   if (loading) return <p>Loading ...</p>;
   data = data.biiggie
   return (
       
     <div className="container mx-auto flex flex-col gap-1 text-xl">
-      Biiggie Page
-      <p className="text-2xl">{data.title}</p>
-      <p>{data.description}</p>
+      <p className="text-3xl font-extrabold text-center p-8">{data.title}</p>
       <img src={data.images} alt="" />
+      <p className="content-center font-semibold text-2xl p-4 bg-blue-nav-button rounded-b-lg">{data.description}</p>
       {/* <p>Date Created {data.createdAt.toLocaleString()}</p> */}
-      <p className="text-xl">Deadline{data.deadline.toLocaleString()}</p>
-      <h2 className="text-xl">Sources: </h2>
-      <h3>Total number of assignees to achieve my goal:{data.assignee}</h3>
-      <button link="Signup">Sign Up</button>
-      <button link="https://www.instagram.com/">Share with Instagram</button>
-      <button link="https://www.reddit.com/">Share with Reddit</button>
+      <p className="text-3xl text-center text-orange-hover font-semibold animate-pulse">Deadline: {Math.floor((new Date(data.deadline) - new Date()) / 1000 / 86400)} Days Left!</p>
+      <h2 className="text-xl font-semibold">Sources: </h2>
+      <h3 className="font-semibold">Collaborators: 1/3 {data.numOfPeople}</h3>
+      <div className="space-x-2">
+      <Link to="/sign-up"> 
+      <button className="bg-orange-primary text-white italic p-2 shadow font-semibold text-lg rounded-full">  Sign Up  </button>
+      </Link>
+      <Link to="https://www.instagram.com/">
+        <button className="bg-orange-primary text-white italic p-2 shadow font-semibold text-lg rounded-full" >Share on Instagram</button>
+      </Link>
+      <Link to="https://www.reddit.com/">
+      <button className="bg-orange-primary text-white italic p-2 shadow font-semibold rounded-full">Share on Reddit</button>
+      </Link>
+      </div>
       <div>
         <CommentForm/>
       </div>
