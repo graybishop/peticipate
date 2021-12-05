@@ -1,7 +1,7 @@
 import { FiThumbsUp } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-const BiiggieCard = ({ biiggie }) => {
+const BiiggieCard = ({ biiggie, rank }) => {
   const getFullName = () => {
     if (!biiggie.createdBy) {
       return `Your Name Here!`;
@@ -50,7 +50,7 @@ const BiiggieCard = ({ biiggie }) => {
       <div className='flex flex-col border-4 border-blue-secondary shadow relative flex-grow' key={biiggie._id}>
         {/* Rank Flag */}
         <div className='absolute px-4 py-2 bg-blue-secondary rounded-br'>
-          <p className=' text-white filter drop-shadow text-lg font-extrabold '> <span className='font-bold'>#1</span> Biggie</p>
+          <p className=' text-white filter drop-shadow text-lg font-extrabold '> <span className='font-bold'>#{rank || '1'}</span> Biggie</p>
         </div>
         {/* End Rank Flag */}
         {/* IMG */}
@@ -69,7 +69,7 @@ const BiiggieCard = ({ biiggie }) => {
           </div>
           <div className='p-2 w-32 flex flex-col items-center justify-center'>
             <img className="object-cover rounded-full border-2 shadow h-20 w-20 border-blue-secondary"
-              id="profileImage" src={biiggie.createdBy?.image} alt="user profile" />
+              id="profileImage" src={biiggie.createdBy?.image || 'https://images.unsplash.com/photo-1521754040860-ed38b308ac9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'} alt="user profile" />
             <p className='font-semibold text-center'>{getFullName()}</p>
             <p>{biiggie.createdBy?.username}</p>
           </div>
