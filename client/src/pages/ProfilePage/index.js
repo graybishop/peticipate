@@ -6,10 +6,22 @@ import ProfileBiiggieCard from './ProfileBiiggieCard.js';
 const Profile = () => {
     const { loading, data } = useQuery(QUERY_ME)
     const user = data?.me || data?.user || {};
+    const profileBiiggieCards = <p>Created Biiggies will display here...</p>
+
+    if (user.createdBiiggies != null) {
+      let profileBiiggieCards = user.createdBiiggies.map((item) => {
+        return <ProfileBiiggieCard biiggie={item} key={item._id} />;
+      });
+    } else {
+      return profileBiiggieCards;
+    }
+
     
-    let profileBiiggieCards = user.CreatedBiiggies.map((item) => {
-      return <ProfileBiiggieCard biiggie={item} key={item._id} />;
-    });
+  
+
+    // let profileBiiggieCards = user.CreatedBiiggies.map((item) => {
+    //   return <ProfileBiiggieCard biiggie={item} key={item._id} />;
+    // });
 
     return(
         <div className="text-center box-border p-4 border-4 m-4 mx-auto">
