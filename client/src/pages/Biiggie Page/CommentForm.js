@@ -1,39 +1,45 @@
 import React, { useState } from "react"
-// import { Link } from "react-router-dom";
+import { useMutation } from '@apollo/client';
+import { ADD_COMMENT } from '../../utils/mutations.js';
 
 
-const CommentForm = (params) => {
-
-    // function comment() {
+const CommentForm = ({biiggieId, refetch}) => {
     const [comment, setComment] = useState("");
-
-    const handleFormSubmit = (event) => {
+    const [addComment] = useMutation(ADD_COMMENT);
+    
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
+        try {
+            await addComment({
+                variables: {
+                    body: comment,
+                    biiggieId
+                }
+            })
+            refetch()
+            
+        } catch (error) {
+            console.error(error)
+        }
     }
-
+    
     const handleChange = (event) => {
-        console.log(event)
-        const { name, value } = event.target;
-        console.log(name,value)
+        const { value } = event.target;
         setComment(value)
-        // setFormState({
-        //   ...formState,
-        //   [comment]: value,
-        // });
-      };
+    };
+
+    console.log('comment form biiggieId', biiggieId, comment)
     return(
-        <form onSubmit={handleFormSubmit}>
-            <input
-            className="block border border-grey-light w-full p-3 rounded mb-4"
+        <form onSubmit={handleFormSubmit} className='flex flex-col items-center gap-2 flex-1 w-full'>
+            <textarea
+            className="custom-inputs p-4 w-full"
             placeholder="Comment"
             type="text"
             value={comment}
             name="comment"
             onChange={handleChange}
             />
-            <input type="submit" />
-
-
+            <button type="submit" className='bg-orange-primary text-white py-2 px-4 rounded-lg shadow font-semibold text-center hover:bg-orange-hover'>Submit Comment</button>
         </form>
     )
 

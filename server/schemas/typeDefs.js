@@ -39,10 +39,7 @@ const typeDefs = gql`
 
     type Comment {
         author: User
-        title: String
         body: String!
-        biiggie: Biiggie
-        thread: [Comment]
     }
 
     type Biiggie {
@@ -85,6 +82,7 @@ const typeDefs = gql`
         newUser(username: String!, password: String!, email: String!, firstName: String!, lastName: String!, image:String): Auth
         login(username: String!, password: String!): Auth
         commitToHelp(helpOptionId: ID!, moneyCommitted: Int): HelpOption
+        addComment(body: String!, biiggieId: ID!): Biiggie
     }
     `;
 
