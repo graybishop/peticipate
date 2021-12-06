@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import { useMutation } from "@apollo/client";
 import { CREATE_BIIGGIE } from '../../utils/mutations';
 import { Link } from "react-router-dom";
+import honeycombImage from "../../assets/images/hex-bg-5.png";
 
 const FirstStep = (props) => {
   let [formState, setFormState] = useState({
@@ -25,19 +26,20 @@ const FirstStep = (props) => {
   };
 
 
-  return (
+  return (    
     <div className='flex flex-col gap-2'>
-      <h3 className='text-xl'>Title & Description</h3>
+      <h3 className='text-xl'>Every<span className='font-extrabold text-orange-primary'> Biiggie</span> starts with a great name and a great story.<br></br>
+      Make sure yours are descriptive <em>and</em> interesting.<br></br><br></br></h3>
       <form action="" className='flex flex-col gap-2'>
         <div className='flex flex-col'>
-          <label htmlFor="title">What would you like to call your biiggie?</label>
-          <input type="text" name='title' onBlur={handleChange} defaultValue={props.biiggie.title} />
+          <label htmlFor="title" className='text-xl'>What would you like to call your <span className='font-extrabold text-orange-primary'> Biiggie</span>?<br></br><span className='text-base'><em>(40 characters max.)</em></span></label>
+          <input className="custom-inputs" type="text" maxLength="40" name='title' onBlur={handleChange} defaultValue={props.biiggie.title} />
         </div>
         <div className='flex flex-col'>
-          <label htmlFor="">How would you describe your biiggie? Let people know why you want this to happen, who you are, and why you've decided to reach out.</label>
-          <textarea name='description' onBlur={handleChange} defaultValue={props.biiggie.description} />
+          <label htmlFor="" className='text-xl'><br></br>What's your<span className='font-extrabold text-orange-primary'> Biiggie</span> story?<br></br><span className='text-base'>Now, it's time to tell the world why your<span className='font-extrabold text-orange-primary'> Biiggie</span>  dreams should come true. <br></br>Are you changing the world? Your community? Why and how? <br></br>Why are you the most qualified person to lead this effort? Provide details about everything that you are bringing to the table: What kind of resources and hours are you personally going to invest? Do you have anything to offer to contributors in exchange for their support?</span></label>
+          <textarea className="custom-inputs" name='description' onBlur={handleChange} defaultValue={props.biiggie.description} />
         </div>
-        <button type='submit' onClick={handleSubmit}>Next Step</button>
+        <button type='submit' onClick={handleSubmit} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>Next Step</button>
       </form>
     </div>
   );
@@ -63,11 +65,11 @@ const SecondStep = (props) => {
       <h3 className='text-xl'>What's the deadline?</h3>
       <form action="" className='flex flex-col gap-2'>
         <div className='flex flex-col'>
-          <label htmlFor="deadline">What would you like to call your biiggie?</label>
-          <input type="date" name='deadline' onBlur={handleChange} defaultValue={DateTime.fromMillis(props.biiggie.deadline).toISODate()} />
+          <label htmlFor="deadline">How much time do you have to collect your resources and get started?<br></br>We <em>strongly</em> recommend the shortest timeframe possible. Only in extraordinary circumstances should you have a completion date more than 60 days out. Work fast and work hard to keep excitement and momentum building for your campaign.</label>
+          <input className="custom-inputs" type="date" name='deadline' onBlur={handleChange} defaultValue={DateTime.fromMillis(props.biiggie.deadline).toISODate()} />
         </div>
-        <button type='submit' onClick={handleSubmit}>Next Step</button>
-        <button onClick={props.goBack}>Previous Step</button>
+        <button type='submit' onClick={handleSubmit} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>Next Step</button>
+        <button onClick={props.goBack} className='text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover'>Previous Step</button>
       </form>
     </div>
   );
@@ -90,14 +92,14 @@ const ThirdStep = (props) => {
 
   return (
     <div className='flex flex-col gap-2'>
-      <h3 className='text-xl'>The Big Picture</h3>
+      <h3 className='text-xl'>The<span className='font-extrabold text-orange-primary'> Biiggie</span> Picture</h3>
       <form action="" className='flex flex-col gap-2'>
         <div className='flex flex-col'>
-          <label htmlFor="images">Give us a URL that we can display on the page of your Biiggie.</label>
-          <input type="text" name='images' onBlur={handleChange} defaultValue={props.biiggie.images[0]} />
+          <label htmlFor="images">As the saying goes, "A picture is worth a thousand words." On<span className='font-extrabold text-orange-primary'> Biiggie</span>, a picture is often worth thousands of likes and sometimes dollars, too. Choose your image very carefully!<br></br>You must enter a URL address for the image you want to use. Usually, the simplest way to do this is to right-click your mouse on the image you want to use, and select "Copy Image Link." You can then paste it into the blank field below.</label>
+          <input className="custom-inputs" type="text" name='images' onBlur={handleChange} defaultValue={props.biiggie.images[0]} />
         </div>
-        <button type='submit' onClick={handleSubmit}>Next Step</button>
-        <button onClick={props.goBack}>Previous Step</button>
+        <button type='submit' onClick={handleSubmit} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>Next Step: Choose Keyword</button>
+        <button onClick={props.goBack} className='text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover'>Previous Step: Deadline</button>
       </form>
     </div>
   );
@@ -121,14 +123,14 @@ const ForthStep = (props) => {
 
   return (
     <div className='flex flex-col gap-2'>
-      <h3 className='text-xl'>Slap a Label on It</h3>
+      <h3 className='text-xl'>If you had to describe your <span className='font-extrabold text-orange-primary'> Biiggie</span> in one word, what would it be?</h3>
       <form action="" className='flex flex-col gap-2'>
         <div className='flex flex-col'>
-          <label htmlFor="keywords">Give us a term that allows other users to search for your Biiggie.</label>
-          <input type="text" name='keywords' onBlur={handleChange} defaultValue={props.biiggie.keywords[0]} />
+          <label htmlFor="keywords">Please choose one word or short phrase that will help potential contributors find your <span className='font-extrabold text-orange-primary'> Biiggie</span> when searching.<br></br><span className='text-base'><em>(i.e. Music, Science, Education, Politics, Issues, Business)</em></span></label>
+          <input className="custom-inputs" type="text" name='keywords' onBlur={handleChange} defaultValue={props.biiggie.keywords[0]} />
         </div>
-        <button type='submit' onClick={handleSubmit}>Next Step</button>
-        <button onClick={props.goBack}>Previous Step</button>
+        <button type='submit' onClick={handleSubmit} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>Next Step: Find Contributors</button>
+        <button onClick={props.goBack} className='text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover'>Previous Step: Add Picture</button>
       </form>
     </div>
   );
@@ -147,7 +149,7 @@ const HelpOptionsForm = (props) => {
 
   const updateOptionType = (event) => {
     setNeedPeopleSelector(event.target.value);
-    setFormState({ ...formState, numOfPeople: 0, moneyRequested: 0 });
+    setFormState({ ...formState, numOfPeople: null, moneyRequested: null });
   };
 
   const handleChange = (event) => {
@@ -170,16 +172,16 @@ const HelpOptionsForm = (props) => {
   let innerElements = (
     <form action="" className='flex flex-col gap-2'>
       <div className='flex flex-col'>
-        <label htmlFor="name">Our users want to help you out. What do you need?</label>
-        <input type="text" name='name' onBlur={handleChange} />
+        <label htmlFor="name">Give a brief description of what your project needs.<br></br><span className='text-base'><em>(i.e. Volunteers, Financing, Graphic Designer, Legal Advice)</em></span></label>
+        <input className="custom-inputs" type="text" name='name' onBlur={handleChange} />
       </div>
       <div className='flex flex-col'>
-        <label htmlFor="description">Can you describe this task?</label>
-        <textarea type="text" name='description' onBlur={handleChange} />
+        <label htmlFor="description"><br></br>Now, provide exact details: How much money? How many hours? How about a job description? Are you providing a reward or compensation of any kind in exchange for help? <br></br>The more descriptive you are, the more likely you are to get candidates. Sometimes clarifying what you DON'T need and setting clear boundaries is more important than anything else.</label>
+        <textarea className="custom-inputs" type="text" name='description' onBlur={handleChange} />
       </div>
       <div>
-        <label>On our site users can either contribute money or time to your goal. Which one do you need to complete this task?</label>
-        <select value={needPeopleSelector} onChange={updateOptionType}>
+        <label><br></br>Is this option a request for money or time/labor?</label>
+        <select className="h-10 ml-6 pl-3 pr-6 text-base bg-orange-light border rounded-lg focus:ring-2" value={needPeopleSelector} onChange={updateOptionType} >
           <option value="options" disabled>Pick one...</option>
           <option value="people">Labor / Time</option>
           <option value="money">Funding</option>
@@ -188,15 +190,14 @@ const HelpOptionsForm = (props) => {
 
       {needPeopleSelector === 'options' ?
         <div>
-          <p>Please pick from the dropdown menu above.</p>
         </div>
         :
         <div className='flex flex-col'>
           <label htmlFor={needPeopleSelector === 'people' ? 'numOfPeople' : 'moneyRequested'}>{needPeopleSelector === 'people' ? 'How many people' : 'How much money?'}</label>
-          <input type="number" name={needPeopleSelector === 'people' ? 'numOfPeople' : 'moneyRequested'} onChange={handleChange} value={formState[needPeopleSelector === 'people' ? 'numOfPeople' : 'moneyRequested']} />
+          <input className="custom-inputs" type="number" name={needPeopleSelector === 'people' ? 'numOfPeople' : 'moneyRequested'} onChange={handleChange} value={formState[needPeopleSelector === 'people' ? 'numOfPeople' : 'moneyRequested']} />
         </div>
       }
-      <button type='submit' onClick={handleSubmit}>Add this option!</button>
+      <button type='submit' onClick={handleSubmit} className='bg-blue-nav-button text-white p-4 my-14 rounded-lg shadow font-semibold text-lg text-center hover:bg-blue-hover'>Add This Option!</button>
     </form>
   );
 
@@ -204,12 +205,12 @@ const HelpOptionsForm = (props) => {
 
   return (
     <div className='flex flex-col gap-2'>
-      <h3 className='text-xl'>How can we help? Create some options people may choose from to help make your Biiggie a reality. We recommend three in total.
-        <span className='font-bold'> You currently have
-          {props.helpOptions.length === 0 ? ' none set up, yet. Follow the form below to create your first option!' : ` ${props.helpOptions.length} setup.`}</span></h3>
+      <h3 className='text-xl'>It's recruitment time! Let's get some help!<br></br>Now you'll create some options people can choose from to help make your<span className='font-extrabold text-orange-primary'> Biiggie</span> a reality. We recommend three or more.
+        <span className='font-bold'><br></br><br></br>You currently have
+          {props.helpOptions.length === 0 ? ' NONE set up, yet. Just answer the questions below, select the type of support for this option, and then click the "Add This Option" button to add your first option!' : ` ${props.helpOptions.length} setup. If you want to add more options, simply update the information entered in the various fields, and then click the "Add This Option" button again to add your additional option. If you're all finished, then click the "Next Step" button to review everything you've entered so far.`}<br></br><br></br></span></h3>
       {innerElements}
-      <button onClick={goToNextPage}>Next Step</button>
-      <button onClick={props.goBack}>Previous Step</button>
+      <button onClick={goToNextPage} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>Next Step: Final Review</button>
+      <button onClick={props.goBack} className='text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover'>Previous Step: Choose Keyword</button>
     </div>
   );
 };
@@ -221,12 +222,17 @@ const BiiggiePreview = (props) => {
 
   return (
     <div className='flex flex-col gap-2'>
-      <h3 className='text-xl'>Here's a preview of your biiggie</h3>
+      <h3 className='text-xl'>You did it! The future's already looking so bright!<br></br>Now, introducing... <em>Your</em><span className='font-extrabold text-orange-primary'> Biiggie</span>!</h3>
       <div>
+        <p>
+          Take some time to check for any errors and make sure you've included every support option you need to succeed. When you're ready, then publish this beautiful baby!<br></br>Wishing you all the<span className='font-extrabold text-orange-primary'> Biiggie</span> Blessings!
+        </p>
+      </div>
+      <div className="mt-4">
         <BiiggieCard biiggie={fullBiiggieData} />
       </div>
-      <button onClick={props.submitBiiggie}>Next Step</button>
-      <button onClick={props.goBack}>Previous Step</button>
+      <button onClick={props.submitBiiggie} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>Next Step: Publish My<span className='font-extrabold'> Biiggie</span>!</button>
+      <button onClick={props.goBack} className='text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover'>Previous Step: Add Another Support Option</button>
     </div>
 
   );
@@ -238,8 +244,8 @@ const ConfirmationPage = ({ newBiiggieId }) => {
 
   return (
     <div className='flex flex-col gap-2'>
-      <h1>Biiggie Created!</h1>
-      <p>Here is a link to your new biiggie!</p>
+      <h1><span className='font-extrabold text-orange-primary'> Biiggie</span> Created!</h1>
+      <p>Here is a link to your new<span className='font-extrabold text-orange-primary'> Biiggie</span>!</p>
       <Link to={`/biiggie/${newBiiggieId}`}>Link</Link>
     </div>
   );
@@ -344,16 +350,18 @@ const DemoForm = () => {
 
 
   return (
-    <div className='bg-body-background-blue'>
-      <div className='container mx-auto flex flex-col px-4'>
-        <h1 className='text-2xl py-8'>Create your new Biiggie</h1>
-        <div>
-          {innerForm}
+    
+      <div className='bg-body-background-blue'>
+        <section className=' bg-top bg-cover' style={{ backgroundImage: `url(${honeycombImage})` }}>
+        <div className='container mx-auto flex flex-col px-4'>
+          <h1 className='text-4xl font-semibold py-8'>It's time for <em>your</em><span className='font-extrabold text-orange-primary'> Biiggie</span>!</h1>
+          <div>
+            {innerForm}
+          </div>
+
         </div>
-
+        </section>
       </div>
-    </div>
-
   );
 
 
