@@ -15,6 +15,9 @@ const HelpOptionCard = ({ helpOption, userId }) => {
   const [numberOfPeopleRemaining, setNumberOfPeopleRemaining] = useState(helpOption.numOfPeople - helpOption.registeredUsers.length);
   const [addToHelpOption] = useMutation(USER_COMMIT_TO_HELP);
 
+  useEffect(() => {
+    document.title='Biiggie Page';
+  }, [])
 
   let moneyGoal = false;
   if (!helpOption.numOfPeople) {

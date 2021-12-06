@@ -9,6 +9,9 @@ import { useMutation } from "@apollo/client";
 import { CREATE_BIIGGIE } from '../../utils/mutations';
 import { Link } from "react-router-dom";
 import honeycombImage from "../../assets/images/hex-bg-5.png";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/light.css';
 
 const FirstStep = (props) => {
   let [formState, setFormState] = useState({
@@ -47,7 +50,7 @@ const FirstStep = (props) => {
           <textarea className="custom-inputs" name='description' onBlur={handleChange} defaultValue={props.biiggie.description} />
         </div>
         <div className='flex flex-row w-full'>
-          <button type='submit' onClick={handleSubmit} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover w-full'>Next Step</button>
+          <button type='submit' onClick={handleSubmit} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover w-full'>Next Step: Deadline</button>
         </div>
       </form>
     </div>
@@ -78,8 +81,8 @@ const SecondStep = (props) => {
           <p>We <em>strongly</em> recommend the shortest timeframe possible. Only in extraordinary circumstances should you have a completion date more than 60 days out. Work fast and work hard to keep excitement and momentum building for your campaign.</p>
           <input className="custom-inputs" type="date" name='deadline' onBlur={handleChange} defaultValue={DateTime.fromMillis(props.biiggie.deadline).toISODate()} />
         </div>
-        <button type='submit' onClick={handleSubmit} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>Next Step</button>
-        <button onClick={props.goBack} className='text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover'>Previous Step</button>
+        <button type='submit' onClick={handleSubmit} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>Next Step: Add Picture</button>
+        <button onClick={props.goBack} className='text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover'>Previous Step: Name &amp; Story</button>
       </form>
     </div>
   );
@@ -158,6 +161,7 @@ const HelpOptionsForm = (props) => {
   });
 
   let [needPeopleSelector, setNeedPeopleSelector] = useState('options');
+  let [visible, setVisible] = useState(false);
 
   const updateOptionType = (event) => {
     setNeedPeopleSelector(event.target.value);
@@ -174,12 +178,23 @@ const HelpOptionsForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(event);
+    event.target.parentElement.reset();
     props.addHelpOption({ ...formState });
+    setNeedPeopleSelector("options");
+    if (!visible) {
+      show();
+    } else {
+      hide();
+    }
   };
 
   const goToNextPage = () => {
     props.moveForward({});
   };
+
+  const show = () => setVisible(true);
+  const hide = () => setVisible(false);
 
   let innerElements = (
     <form action="" className='flex flex-col gap-4 py-2 border-t-2 border-b-2 my-6'>
@@ -211,11 +226,11 @@ const HelpOptionsForm = (props) => {
           <input className="custom-inputs" type="number" name={needPeopleSelector === 'people' ? 'numOfPeople' : 'moneyRequested'} onChange={handleChange} value={formState[needPeopleSelector === 'people' ? 'numOfPeople' : 'moneyRequested']} />
         </div>
       }
-      <button type='submit' onClick={handleSubmit} className='bg-blue-nav-button text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-blue-hover'>Add This Option!</button>
+      <Tippy theme={"light"} content="Support option added! To add another option, complete the form and click here again. When finished, click the 'Next Step' button to finalize." visible={visible} onClickOutside={hide}>
+        <button type='submit' onClick={handleSubmit} className='bg-blue-nav-button text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-blue-hover'>Add This Option!</button>
+      </Tippy>
     </form>
   );
-
-
 
   return (
     <div className='flex flex-col gap-2'>
@@ -309,7 +324,7 @@ const DemoForm = () => {
         },
       });
       setNewBiiggieId(newBiiggie.data.createBiiggie._id);
-      navigate(`/biiggie/${newBiiggie.data.createBiiggie._id}`)
+      navigate(`/biiggie/${newBiiggie.data.createBiiggie._id}`);
       moveForward({});
     } catch (err) {
       console.error(err);

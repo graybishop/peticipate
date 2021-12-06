@@ -14,6 +14,10 @@ const Profile = () => {
     }
   });
 
+  useEffect(() => {
+    document.title='Profile';
+  }, [])
+
   const { loading, data } = useQuery(QUERY_ME);
   const user = data?.me || data?.user || {};
 
@@ -28,6 +32,10 @@ const Profile = () => {
     <p>Biiggies you commit to will show up here...</p>
 
   console.log(biiggies);
+
+  if (loading || loadingBiiggies) {
+    return <p>loading</p>;
+  }
 
   if (user.createdBiiggies.length !== 0) {
     profileBiiggieCards = user.createdBiiggies.map((item) => {

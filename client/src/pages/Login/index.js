@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations.js';
@@ -13,6 +13,11 @@ function Login({setLoggedIn}) {
   const [loginMutation] = useMutation(LOGIN_USER);
 
   const [errorMessage, setErrorMessage] = useState('');
+
+  
+  useEffect(() => {
+    document.title='Login';
+  }, [])
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
