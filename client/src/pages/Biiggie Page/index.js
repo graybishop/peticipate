@@ -122,7 +122,7 @@ const HelpOptionCard = ({ helpOption, userId }) => {
 
 const BiiggiePage = ({ biiggie }) => {
   let { biiggieId } = useParams();
-  let { data, loading } = useQuery(BIIGGIE, { variables: { id: biiggieId } });
+  let { data, loading, refetch } = useQuery(BIIGGIE, { variables: { id: biiggieId } });
 
   if (loading) return <p>Loading ...</p>;
   let userId = null;
@@ -172,7 +172,7 @@ const BiiggiePage = ({ biiggie }) => {
           {mappedHelpOptions}
         </div>
         <div>
-          <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Share this <span className='font-extrabold text-orange-primary'>Biggie</span></h2>
+          <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Share this <span className='font-extrabold text-orange-primary'>Biiggie</span></h2>
           <div className="flex justify-center text-2xl gap-2 p-2">
             <Link to="https://www.instagram.com/">
               <button className="bg-orange-primary text-white italic p-2 shadow font-semibold rounded-full" ><BsInstagram /></button>
@@ -185,8 +185,9 @@ const BiiggiePage = ({ biiggie }) => {
             </Link>
           </div>
         </div>
-        <div>
-          <CommentForm biiggieId={biiggieId}/>
+        <div className='flex flex-col container items-center'>
+        <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Leave a Comment</h2>
+          <CommentForm refetch={refetch} biiggieId={biiggieId}/>
         </div>
         <div>
           <CommentSection comments={data.comments} />

@@ -73,6 +73,9 @@ query Biiggie($id: ID) {
     comments {
       author {
         username
+        image
+        firstName
+        lastName
       }
       body
     }

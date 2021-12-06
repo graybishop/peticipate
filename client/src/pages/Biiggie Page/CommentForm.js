@@ -3,19 +3,24 @@ import { useMutation } from '@apollo/client';
 import { ADD_COMMENT } from '../../utils/mutations.js';
 
 
-const CommentForm = ({biiggieId}) => {
+const CommentForm = ({biiggieId, refetch}) => {
     const [comment, setComment] = useState("");
     const [addComment] = useMutation(ADD_COMMENT);
     
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        let result = await addComment({
-            variables: {
-                body: comment,
-                biiggieId
-            }
-        })
-        console.log(result)
+        try {
+            await addComment({
+                variables: {
+                    body: comment,
+                    biiggieId
+                }
+            })
+            refetch()
+            
+        } catch (error) {
+            console.error(error)
+        }
     }
     
     const handleChange = (event) => {
@@ -25,16 +30,16 @@ const CommentForm = ({biiggieId}) => {
 
     console.log('comment form biiggieId', biiggieId, comment)
     return(
-        <form onSubmit={handleFormSubmit}>
-            <input
-            className="block border border-grey-light w-full p-3 rounded mb-4"
+        <form onSubmit={handleFormSubmit} className='flex flex-col items-center gap-2 flex-1 w-full'>
+            <textarea
+            className="custom-inputs p-4 w-full"
             placeholder="Comment"
             type="text"
             value={comment}
             name="comment"
             onChange={handleChange}
             />
-            <input type="submit" />
+            <button type="submit" className='bg-orange-primary text-white py-2 px-4 rounded-lg shadow font-semibold text-center hover:bg-orange-hover'>Submit Comment</button>
         </form>
     )
 
