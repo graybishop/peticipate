@@ -25,7 +25,7 @@ connection.once('open', async () => {
             title: 'First EP Production',
             createdBy: userId[2]._id,
             deadline: new Date(new Date().setDate(new Date().getDate() + 6)),
-            description: "I'm a start up musician that needs help in producing my first EP",
+            description: "I'm a start up musician that needs help in producing my first EP. I'm hoping this Wishing Well can help me reach my dreams.",
             images: ['https://pngimg.com/uploads/vinyl/vinyl_PNG96.png'],
             likes: 42
         },
@@ -33,7 +33,7 @@ connection.once('open', async () => {
             title: 'Amazing New Tech',
             createdBy: userId[3]._id,
             deadline: new Date(new Date().setDate(new Date().getDate() + 24)),
-            description: 'I want to create technology that will change the way we consume natural resources to something more clean and efficient.',
+            description: "I want to create technology that will change the way we consume natural resources to something more clean and efficient. This project will really just be a stepping stone to my space exploration.",
             images: ['http://www.onlygfx.com/wp-content/uploads/2017/12/top-secret-stamp-1-1024x1024.png'],
             likes: 1607
         },
@@ -41,7 +41,7 @@ connection.once('open', async () => {
             title: 'Online Book Retail',
             createdBy: userId[4]._id,
             deadline: new Date(new Date().setDate(new Date().getDate() + 12)),
-            description: 'I want to create a online retail store for every book imaginable... for now.',
+            description: 'I want to create a online retail store for every book imaginable... for now. Eventually I will expand to become the standard of goods acquisition.',
             images: ['https://www.getunderlined.com/wp-content/uploads/2017/08/book-lovers-header.jpg'],
             likes: 158
         },
@@ -49,7 +49,7 @@ connection.once('open', async () => {
             title: 'Local River Needs Cleaning',
             createdBy: userId[5]._id,
             deadline: new Date(new Date().setDate(new Date().getDate() + 4)),
-            description: 'I want to get the community together to help clean out trash polluted river',
+            description: 'I want to get the community together to help clean out trash polluted river. Our community depends on the water from this river and we should take the initiative to help maintain it.',
             images: ['https://s3-ap-southeast-1.amazonaws.com/scrollstorage/1440502167-1109_10.jpg'],
             likes: 16
         },
@@ -57,7 +57,7 @@ connection.once('open', async () => {
             title: 'Against School Uniforms',
             createdBy: userId[5]._id,
             deadline: new Date(new Date().setDate(new Date().getDate() + 2)),
-            description: 'They are trying to force our children to wear uniforms instead of letting them have a healthy way to express themselves. This is totalitarianism',
+            description: 'They are trying to force our children to wear uniforms instead of letting them have a healthy way to express themselves. This is totalitarianism and our community should not stand by this.',
             images: ['https://assets.change.org/photos/5/pc/ax/fSpCaxMPnMLloPB-1600x900-noPad.jpg?1526663748'],
             likes: 137
         },
@@ -65,7 +65,7 @@ connection.once('open', async () => {
             title: 'Teacher Recognition',
             createdBy: userId[6]._id,
             deadline: new Date(new Date().setDate(new Date().getDate() + 1)),
-            description: 'I want to celebrate Ms. Smith for how much she has helped me with my college readiness',
+            description: 'I want to celebrate Ms. Smith for how much she has helped me with my college readiness. I think she deserves a surprise party and a good gift.',
             images: ['https://townsquare.media/site/10/files/2017/09/teacher-getty-3.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89'],
             likes: 9
         }
