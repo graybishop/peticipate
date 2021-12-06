@@ -47,6 +47,10 @@ const BiiggieSchema = new Schema(
         ref: 'Keywords'
       }
     ],
+    likes: {
+      type: Number,
+      default: 0
+    }
   },
   {
     timestamps: true,

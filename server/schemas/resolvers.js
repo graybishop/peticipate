@@ -22,9 +22,9 @@ const resolvers = {
       return await Biiggie.find({}).populate('helpOptions').populate('createdBy').populate('keywords');
 
     },
-    authBiggiesReq: async (parent, args, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('You need to be logged in to pull these Biggies');
+    authBiggiesReq: async (parent, args, context)=>{
+      if(!context.user){
+        throw new AuthenticationError('You need to be logged in to pull these Biiggies')
       }
       return await Biiggie.find({});
     },
