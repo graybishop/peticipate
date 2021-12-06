@@ -19,6 +19,7 @@ const typeDefs = gql`
     }
 
     type HelpOption {
+        _id: ID
         name: String
         description: String
         numOfPeople: Int

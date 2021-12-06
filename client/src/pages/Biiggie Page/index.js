@@ -1,19 +1,88 @@
 import { Link, useParams } from "react-router-dom";
 import { BIIGGIE } from "../../utils/queries";
-import { useQuery } from '@apollo/client';
+import { USER_COMMIT_TO_HELP } from '../../utils/mutations.js';
+import { useQuery, useMutation } from '@apollo/client';
 import CommentForm from "./CommentForm";
 import CommentSection from "./CommentSection";
 import { BsTwitter, BsInstagram, BsFacebook } from 'react-icons/bs';
+import auth from "../../utils/auth.js";
+import { useEffect, useState } from "react";
 
-const HelpOptionCard = ({helpOption}) => {
-  
+const HelpOptionCard = ({ helpOption, userId }) => {
+  const [userCommittedState, setUserCommittedState] = useState(false);
+  const [moneyRemaining, setMoneyRemaining] = useState(helpOption.moneyRequested - helpOption.moneyReceived);
+  const [addToHelpOption] = useMutation(USER_COMMIT_TO_HELP);
+
+
+  let moneyGoal = false;
+  if (!helpOption.numOfPeople) {
+    moneyGoal = true;
+  }
+
+  useEffect(() => {
+    const isUserCommitted = () => {
+      let userHasCommit = false;
+
+      for (const user of helpOption.registeredUsers) {
+        if (user._id === userId) {
+          userHasCommit = true;
+          break;
+        }
+      }
+      console.log('Setting userhascommit to:', userHasCommit);
+      setUserCommittedState(userHasCommit);
+    };
+
+    isUserCommitted();
+  },
+    [helpOption, userId]
+  );
+
+  const handleCommit = async (amount) => {
+    let mutationVars = {
+      helpOptionId: helpOption._id,
+      moneyCommitted: 0
+    };
+    if (amount) {
+      mutationVars.moneyCommitted = amount;
+      setMoneyRemaining(moneyRemaining - amount);
+    }
+    try {
+      await addToHelpOption({
+        variables: { ...mutationVars }
+      });
+      setUserCommittedState(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const moneyButtons = (
+    <div>
+      <button className='border' onClick={() => { handleCommit(5); }}>Commit <span className='font-bold'>$5</span>!</button>
+      <button className='border' onClick={() => { handleCommit(20); }}>Commit <span className='font-bold'>$20</span>!</button>
+      <button className='border' onClick={() => { handleCommit(moneyRemaining); }}>Commit <span className='font-bold'>${moneyRemaining}</span>!</button>
+    </div>
+  );
+
+  const peopleButton = (
+    <div>
+      <button className='border' onClick={() => { handleCommit(); }}>Commit to Help!</button>
+    </div>
+  );
 
   return (
-    <div className='shadow rounded bg-white p-4 '>
-      {helpOption.name}
+    <div className='shadow rounded bg-white p-4'>
+      <div>
+        <h4 className='text-lg'>{helpOption.name}</h4>
+        <p className=''>{helpOption.description}</p>
+      </div>
+      <div>
+        {userCommittedState ? (<div>Thanks for your commitment!</div>) : moneyGoal ? moneyButtons : peopleButton}
+      </div>
     </div>
-  )
-}
+  );
+};
 
 
 const BiiggiePage = ({ biiggie }) => {
@@ -21,9 +90,13 @@ const BiiggiePage = ({ biiggie }) => {
   let { data, loading } = useQuery(BIIGGIE, { variables: { id: biiggieId } });
 
   if (loading) return <p>Loading ...</p>;
+  let userId = null;
+  if (auth.loggedIn()) {
+    userId = auth.getProfile().data._id;
+  }
   data = data.biiggie;
 
-  const mappedHelpOptions = data.helpOptions.map((item)=> <HelpOptionCard helpOption={item} key={item._id}/>)
+  const mappedHelpOptions = data.helpOptions.map((item) => <HelpOptionCard helpOption={item} key={item._id} userId={userId} />);
 
   return (
     <div className='bg-body-background-blue'>

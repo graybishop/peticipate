@@ -59,10 +59,12 @@ query Biiggie($id: ID) {
       keyword
     }
     helpOptions {
+      _id
       name
       description
       numOfPeople
       registeredUsers {
+        _id
         username
       }
       moneyRequested
