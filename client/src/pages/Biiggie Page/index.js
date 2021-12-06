@@ -7,7 +7,7 @@ import CommentSection from "./CommentSection";
 import { BsTwitter, BsInstagram, BsFacebook } from 'react-icons/bs';
 import auth from "../../utils/auth.js";
 import { useEffect, useState } from "react";
-import confetti from 'canvas-confetti'
+import confetti from 'canvas-confetti';
 
 const HelpOptionCard = ({ helpOption, userId }) => {
   const [userCommittedState, setUserCommittedState] = useState(false);
@@ -38,7 +38,6 @@ const HelpOptionCard = ({ helpOption, userId }) => {
           break;
         }
       }
-      console.log('Setting userhascommit to:', userHasCommit);
       setUserCommittedState(userHasCommit);
     };
 
@@ -63,9 +62,9 @@ const HelpOptionCard = ({ helpOption, userId }) => {
         variables: { ...mutationVars }
       });
       confetti({
-        colors:['#FF6F00', '#8FD3FF', '#009BFF', '#D9F0FF'],
+        colors: ['#FF6F00', '#8FD3FF', '#009BFF', '#D9F0FF'],
         particleCount: 200
-      })
+      });
       setUserCommittedState(true);
     } catch (error) {
       console.error(error);
@@ -73,23 +72,29 @@ const HelpOptionCard = ({ helpOption, userId }) => {
   };
 
   const moneyButtons = (
-    <div className='flex flex-row justify-between px-4'>
-      <button className='border' onClick={() => { handleCommit(5); }}>Commit <span className='font-bold'>$5</span>!</button>
-      <button className='border' onClick={() => { handleCommit(20); }}>Commit <span className='font-bold'>$20</span>!</button>
-      <button className='border' onClick={() => { handleCommit(moneyRemaining); }}>Commit <span className='font-bold'>${moneyRemaining}</span>!</button>
+    <div className='flex flex-row justify-center px-4 pt-4 gap-3'>
+      <button
+        className='bg-white text-orange-primary p-2 px-2 rounded-lg shadow font-semibold  text-center hover:text-orange-hover border border-orange-primary'
+        onClick={() => { handleCommit(5); }}>Commit <span className='font-bold'>$5</span>!</button>
+      <button
+        className='bg-white text-orange-primary p-2 px-2 rounded-lg shadow font-semibold  text-center hover:text-orange-hover border border-orange-primary'
+        onClick={() => { handleCommit(20); }}>Commit <span className='font-bold'>$20</span>!</button>
+      <button
+        className='bg-orange-primary text-white p-2 px-2 rounded-lg shadow font-semibold text-center hover:bg-orange-hover'
+        onClick={() => { handleCommit(moneyRemaining); }}>Commit <span className='font-bold'>${moneyRemaining}</span>!</button>
     </div>
   );
 
   const peopleButton = (
-    <div className='flex flex-row justify-center px-4'>
-      <button className='border' onClick={() => { handleCommit(); }}>Commit to Help!</button>
+    <div className='flex flex-row justify-center px-4 pt-4'>
+      <button className='bg-orange-primary text-white p-2 px-2 rounded-lg shadow font-semibold  text-center hover:bg-orange-hover' onClick={() => { handleCommit(); }}>Commit to Help!</button>
     </div>
   );
 
   return (
     <div className={`shadow rounded ${percentageDone() === 100 ? 'bg-green-200' : 'bg-white'} p-4 flex flex-col gap-2`}>
       <div>
-        <h3 className='text-lg'>{helpOption.name}</h3>
+        <h3 className='text-xl font-semibold'>{helpOption.name}</h3>
         <p className=''>{helpOption.description}</p>
       </div>
       {percentageDone() === 100 ? (
@@ -105,7 +110,7 @@ const HelpOptionCard = ({ helpOption, userId }) => {
           {userId === null ?
             (<p>You need to be logged-in to help!</p>) :
             userCommittedState ?
-              (<p>Thanks for your commitment!</p>) :
+              (<p className='bg-white text-green-600 p-2 px-2 rounded-lg shadow font-semibold  text-center border border-green-600 mt-3'>Thanks for your commitment! 🙏</p>) :
               moneyGoal ?
                 moneyButtons : peopleButton}
         </div>
@@ -128,8 +133,15 @@ const BiiggiePage = ({ biiggie }) => {
 
   const mappedHelpOptions = data.helpOptions.map((item) => <HelpOptionCard helpOption={item} key={item._id} userId={userId} />);
 
+  console.log(data.createdBy._id)
+  let userOwnsBiggie = false
+  if (data.createdBy._id === userId){
+    userOwnsBiggie=true
+  }
+
   return (
     <div className='bg-body-background-blue'>
+      {userOwnsBiggie && <div className='text-center p-4 bg-green-100 m-2 border border-green-200 rounded'>This is your biiggie! You can go over the details below, and find a link to it on your profile page. <Link to='/profile' className='underline'>Here's a link to your profile page.</Link></div>}
       <div className='relative w-full h-xl overflow-hidden text-white'>
         <img className='w-full object-cover h-full' src={data.images} alt="" />
         <div className='flex flex-col items-center justify-center gap-2 absolute inset-0 backdrop-filter backdrop-blur backdrop-brightness-75'>
@@ -145,7 +157,7 @@ const BiiggiePage = ({ biiggie }) => {
             </div>
             <div className='flex flex-col items-center mt-6'>
               <h2 className='text-2xl px-2 text-center w-max py-1 bg-blue-nav-button rounded-b shadow text-white font-bold'>Description</h2>
-              <p className=" p-2 m-2 border-blue-nav-button border-2 rounded bg-black bg-opacity-20">{data.description}</p>
+              <p className=" p-2 m-2 border-blue-nav-button border-b-2 rounded bg-black bg-opacity-20">{data.description}</p>
             </div>
             <p className="text-2xl text-center text-orange-light font-semibold animate-pulse"><span className='font-bold'>{Math.floor((new Date(data.deadline) - new Date()) / 1000 / 86400)}</span> Days Left</p>
           </div>
