@@ -61,6 +61,7 @@ function Signup({setLoggedIn}) {
             name="firstName"
             type="text"
             id="firstName"
+            required
             onChange={handleChange}
           />
         <label htmlFor="lastName"></label>
@@ -79,6 +80,7 @@ function Signup({setLoggedIn}) {
             name="username"
             type="text"
             id="username"
+            required
             onChange={handleChange}
           />
           <label htmlFor="email"></label>
@@ -88,6 +90,7 @@ function Signup({setLoggedIn}) {
             name="email"
             type="email"
             id="email"
+            required
             onChange={handleChange}
           />
           <label htmlFor="pwd"></label>
@@ -97,6 +100,7 @@ function Signup({setLoggedIn}) {
             name="password"
             type="password"
             id="pwd"
+            required
             onChange={handleChange}
           />
           {/* <input 

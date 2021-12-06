@@ -4,12 +4,15 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations.js';
 import Auth from '../../utils/auth.js'
 import { Link, useNavigate } from "react-router-dom";
+import { FiAlertCircle } from 'react-icons/fi';
 
 function Login({setLoggedIn}) {
   const [formState, setFormState] = useState({ username: "", password: "" });
   let navigate = useNavigate();
 
   const [loginMutation] = useMutation(LOGIN_USER);
+
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -38,6 +41,10 @@ function Login({setLoggedIn}) {
     });
   };
 
+  const handleClick = () => {
+    setErrorMessage('Incorrect Username or Password');
+  }
+
   return (
     <div className="bg-body-background-blue min-h-screen flex flex-col">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
@@ -65,10 +72,11 @@ function Login({setLoggedIn}) {
             id="pwd"
             onChange={handleChange}
           />
-        <button
+        <button onClick={handleClick}
             type="submit"
             className="bg-orange-primary hover:bg-orange-hover text-white font-bold py-3 my-1 rounded text-center w-full"
             >Login</button>
+            {errorMessage && <div className="text-red-500 italic text-sm text-center border-red-500 border p-2 bg-red-50 rounded m-2"><FiAlertCircle className="inline"/> {errorMessage} </div>}
         </div>
       </form>
       <div className="text-grey-dark mt-6">
