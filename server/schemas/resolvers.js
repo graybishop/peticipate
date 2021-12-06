@@ -12,7 +12,7 @@ const resolvers ={
     },
     biiggie: async (parent, { _id })=>{
       const params = _id ? { _id } : {};
-      return await Biiggie.findById(params).populate('helpOptions');
+      return await Biiggie.findById(params).populate('helpOptions').populate('createdBy');
     },
     biiggies: async ()=>{
       return await Biiggie.find({}).populate('helpOptions').populate('createdBy').populate('keywords')

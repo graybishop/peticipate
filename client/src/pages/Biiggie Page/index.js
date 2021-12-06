@@ -3,6 +3,18 @@ import { BIIGGIE } from "../../utils/queries";
 import { useQuery } from '@apollo/client';
 import CommentForm from "./CommentForm";
 import CommentSection from "./CommentSection";
+import { BsTwitter, BsInstagram, BsFacebook } from 'react-icons/bs';
+
+const HelpOptionCard = ({helpOption}) => {
+  
+
+  return (
+    <div className='shadow rounded bg-white p-4 '>
+      {helpOption.name}
+    </div>
+  )
+}
+
 
 const BiiggiePage = ({ biiggie }) => {
   let { biiggieId } = useParams();
@@ -10,37 +22,51 @@ const BiiggiePage = ({ biiggie }) => {
 
   if (loading) return <p>Loading ...</p>;
   data = data.biiggie;
-  return (
 
-    <div className="container mx-auto flex flex-col gap-1 text-xl">
-      <p className="text-3xl font-extrabold text-center p-8">{data.title}</p>
-      <img src={data.images} alt="" />
-      <div className="bg-blue-nav-button rounded-b-lg divide-x-2">
-        <img className="object-contain  float-left rounded-full min-w-12 h-12" id="profileImage"
-          src="https://source.unsplash.com/featured/1000x1000/?profile" alt="biggie author" />
-        <p className="italic font-bold">{data.createdBy}Taco Bob</p>
-        <p className="content-center font-semibold text-1xl p-2 ">{data.description}</p>
-      </div>
-      {/* <p>Date Created {data.createdAt.toLocaleString()}</p> */}
-      <p className="text-3xl text-center text-orange-hover font-semibold animate-pulse">Deadline: {Math.floor((new Date(data.deadline) - new Date()) / 1000 / 86400)} Days Left!</p>
-      <h2 className="text-xl font-semibold">{data.sources}Sources: </h2>
-      <h3 className="font-semibold">Collaborators: 1/3 {data.numOfPeople}</h3>
-      <div className="space-x-2 justify-items-center">
-        <Link to="/sign-up">
-          <button className="bg-orange-primary text-white italic p-2 shadow font-semibold text-lg rounded-full">  Sign Up  </button>
-        </Link>
-        <Link to="https://www.instagram.com/">
-          <button className="bg-orange-primary text-white italic p-2 shadow font-semibold text-lg rounded-full" >Share on Instagram</button>
-        </Link>
-        <Link to="https://www.reddit.com/">
-          <button className="bg-orange-primary text-white italic p-2 shadow font-semibold rounded-full">Share on Reddit</button>
-        </Link>
-      </div>
-      <div>
-        <CommentForm />
-      </div>
-      <div>
-        <CommentSection comments={data.comments} />
+  const mappedHelpOptions = data.helpOptions.map((item)=> <HelpOptionCard helpOption={item} key={item._id}/>)
+
+  return (
+    <div className='bg-body-background-blue'>
+      <div className="container mx-auto flex flex-col p-4 gap-4 filter drop-shadow items-center">
+        <div className='border-l border-blue-secondary pl-2'>
+          <h1 className="text-4xl">{data.title}</h1>
+          <div className='flex flex-row items-center gap-2'>
+            <img className="object-cover rounded-full border-2 shadow h-20 w-20 border-blue-secondary"
+              src={data.createdBy.image} alt='profile' />
+            <div>
+              <p className="font-bold">{data.createdBy.firstName} {data.createdBy.lastName}</p>
+              <p className="italic">{data.createdBy.username}</p>
+            </div>
+          </div>
+        </div>
+        <img className='shadow rounded' src={data.images} alt="" />
+        <div className='border-t border-blue-secondary '>
+          <p className="p-2 ">{data.description}</p>
+        </div>
+        <div className='flex flex-col gap-2'>
+          {mappedHelpOptions}
+        </div>
+        <p className="text-2xl text-center text-orange-hover font-semibold animate-pulse">{Math.floor((new Date(data.deadline) - new Date()) / 1000 / 86400)} Days Left</p>
+        <div>
+          <h2 className='text-center'>Share this <span className='font-extrabold text-orange-primary'>Biggie</span></h2>
+          <div className="flex justify-center text-2xl gap-2 p-2">
+            <Link to="https://www.instagram.com/">
+              <button className="bg-orange-primary text-white italic p-2 shadow font-semibold rounded-full" ><BsInstagram /></button>
+            </Link>
+            <Link to="https://www.facebook.com/">
+              <button className="bg-orange-primary text-white italic p-2 shadow font-semibold rounded-full"><BsFacebook /></button>
+            </Link>
+            <Link to="https://www.twitter.com/">
+              <button className="bg-orange-primary text-white italic p-2 shadow font-semibold rounded-full"><BsTwitter /></button>
+            </Link>
+          </div>
+        </div>
+        <div>
+          <CommentForm />
+        </div>
+        <div>
+          <CommentSection comments={data.comments} />
+        </div>
       </div>
     </div>
   );
