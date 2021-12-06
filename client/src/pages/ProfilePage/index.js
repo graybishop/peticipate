@@ -29,6 +29,10 @@ const Profile = () => {
 
   console.log(biiggies);
 
+  if (loading || loadingBiiggies) {
+    return <p>loading</p>;
+  }
+
   if (user.createdBiiggies.length !== 0) {
     profileBiiggieCards = user.createdBiiggies.map((item) => {
       return <ProfileBiiggieCard biiggie={item} key={item._id} />;
