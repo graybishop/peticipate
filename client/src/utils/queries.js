@@ -73,12 +73,11 @@ query Biiggie($id: ID) {
     comments {
       author {
         username
+        image
+        firstName
+        lastName
       }
-      title
       body
-      thread {
-        body
-      }
     }
   }
 }

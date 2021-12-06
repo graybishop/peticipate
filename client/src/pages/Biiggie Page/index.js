@@ -122,7 +122,7 @@ const HelpOptionCard = ({ helpOption, userId }) => {
 
 const BiiggiePage = ({ biiggie }) => {
   let { biiggieId } = useParams();
-  let { data, loading } = useQuery(BIIGGIE, { variables: { id: biiggieId } });
+  let { data, loading, refetch } = useQuery(BIIGGIE, { variables: { id: biiggieId } });
 
   if (loading) return <p>Loading ...</p>;
   let userId = null;
@@ -133,10 +133,10 @@ const BiiggiePage = ({ biiggie }) => {
 
   const mappedHelpOptions = data.helpOptions.map((item) => <HelpOptionCard helpOption={item} key={item._id} userId={userId} />);
 
-  console.log(data.createdBy._id)
-  let userOwnsBiggie = false
-  if (data.createdBy._id === userId){
-    userOwnsBiggie=true
+  console.log(data.createdBy._id);
+  let userOwnsBiggie = false;
+  if (data.createdBy._id === userId) {
+    userOwnsBiggie = true;
   }
 
   return (
@@ -185,12 +185,11 @@ const BiiggiePage = ({ biiggie }) => {
             </Link>
           </div>
         </div>
-        <div>
-          <CommentForm />
+        <div className='flex flex-col container items-center'>
+          <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Leave a Comment</h2>
+          <CommentForm refetch={refetch} biiggieId={biiggieId} />
         </div>
-        <div>
-          <CommentSection comments={data.comments} />
-        </div>
+        <CommentSection comments={data.comments} />
       </div>
     </div>
   );
