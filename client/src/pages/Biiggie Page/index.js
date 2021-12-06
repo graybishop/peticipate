@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 const HelpOptionCard = ({ helpOption, userId }) => {
   const [userCommittedState, setUserCommittedState] = useState(false);
   const [moneyRemaining, setMoneyRemaining] = useState(helpOption.moneyRequested - helpOption.moneyReceived);
+  const [numberOfPeopleRemaining, setNumberOfPeopleRemaining] = useState(helpOption.numOfPeople - helpOption.registeredUsers.length);
   const [addToHelpOption] = useMutation(USER_COMMIT_TO_HELP);
 
 
@@ -58,7 +59,7 @@ const HelpOptionCard = ({ helpOption, userId }) => {
   };
 
   const moneyButtons = (
-    <div>
+    <div className='flex flex-row justify-between px-4'>
       <button className='border' onClick={() => { handleCommit(5); }}>Commit <span className='font-bold'>$5</span>!</button>
       <button className='border' onClick={() => { handleCommit(20); }}>Commit <span className='font-bold'>$20</span>!</button>
       <button className='border' onClick={() => { handleCommit(moneyRemaining); }}>Commit <span className='font-bold'>${moneyRemaining}</span>!</button>
@@ -66,16 +67,19 @@ const HelpOptionCard = ({ helpOption, userId }) => {
   );
 
   const peopleButton = (
-    <div>
+    <div className='flex flex-row justify-center px-4'>
       <button className='border' onClick={() => { handleCommit(); }}>Commit to Help!</button>
     </div>
   );
 
   return (
-    <div className='shadow rounded bg-white p-4'>
+    <div className='shadow rounded bg-white p-4 flex flex-col gap-2'>
       <div>
         <h4 className='text-lg'>{helpOption.name}</h4>
         <p className=''>{helpOption.description}</p>
+      </div>
+      <div>
+        Currently % of the way there with {moneyGoal ? `$${moneyRemaining} left to go.` : `${numberOfPeopleRemaining} ${numberOfPeopleRemaining === 1 ? 'person' : 'people'} still needed.`}
       </div>
       <div>
         {userCommittedState ? (<div>Thanks for your commitment!</div>) : moneyGoal ? moneyButtons : peopleButton}
