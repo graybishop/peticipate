@@ -4,29 +4,33 @@ import { QUERY_ME, GET_BIIGIES } from "../../utils/queries";
 import ProfileBiiggieCard from "./ProfileBiiggieCard.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import auth from '../../utils/auth';
+import auth from "../../utils/auth";
+import ContentLoader from "react-content-loader";
+import BiiggiePlaceholder from "./biiggiesPlaceholder";
 
 const Profile = () => {
   let navigate = useNavigate();
   useEffect(() => {
     if (!auth.loggedIn()) {
-      navigate('/login');
+      navigate("/login");
     }
   });
 
   const { loading, data } = useQuery(QUERY_ME);
   const user = data?.me || data?.user || {};
 
-  const { loading: loadingBiiggies, data: biiggiesData } = useQuery(GET_BIIGIES);
+  const { loading: loadingBiiggies, data: biiggiesData } =
+    useQuery(GET_BIIGIES);
   const biiggies = biiggiesData?.biiggies || [];
 
-  let profileBiiggieCards = 
-  <p>Created Biiggies will display here...</p>;
+  let profileBiiggieCards =
+    <BiiggiePlaceholder/>;
+
   console.log(data);
 
-  let profileBiiggiesCommittedToCards = 
-    <p>Biiggies you commit to will show up here...</p>
-
+  let profileBiiggiesCommittedToCards =
+      <BiiggiePlaceholder/>;
+    
   console.log(biiggies);
 
   if (loading || loadingBiiggies) {
@@ -52,13 +56,13 @@ const Profile = () => {
             }
           }
         }
-      }  
+      }
     }
   }
 
   if (biiggiesCommittedTo.length !== 0) {
     profileBiiggiesCommittedToCards = biiggiesCommittedTo.map((item) => {
-      return <ProfileBiiggieCard biiggie={item} key={item._id} />
+      return <ProfileBiiggieCard biiggie={item} key={item._id} />;
     });
   }
 
@@ -113,5 +117,5 @@ const Profile = () => {
       </Link>
     </div>
   );
-}
+};
 export default Profile;
