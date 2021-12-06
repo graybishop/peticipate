@@ -29,15 +29,19 @@ const Profile = () => {
   }
 
   let biiggiesCommittedTo = [];
-  if (biiggies !== []) {
+  if (biiggies != null) {
     for (let biiggie of biiggies) {
-      for (let helpOption of biiggie.helpOptions) {
-        for (let user of helpOption.registeredUsers) {
-          if (user === user._id) {
-            biiggiesCommittedTo.push(biiggie);
+      if (biiggie.helpOptions != null) {
+        for (let helpOption of biiggie.helpOptions) {
+          if (helpOption.registeredUsers != null) {
+            for (let registeredUser of helpOption.registeredUsers) {
+              if (registeredUser._id === user._id) {
+                biiggiesCommittedTo.push(biiggie);
+              }
+            }
           }
         }
-      }
+      }  
     }
   }
 
