@@ -44,6 +44,7 @@ const BiiggieCard = ({ biiggie, rank }) => {
   };
 
   const helpOptionsTotals = processHelpOptions();
+  console.log(biiggie)
 
   return (
     <div className='h-full flex flex-col'>

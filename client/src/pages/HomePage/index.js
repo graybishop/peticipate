@@ -37,7 +37,7 @@ const Home = () => {
       <p>
         {error?.toString()}
       </p>
-      <div className='p-4 container mx-auto flex flex-col gap-6 grid-cols-2 md:grid xl:grid-cols-3'>
+      <div className='p-4 container mx-auto flex flex-col gap-6 md:grid md:grid-cols-2 xl:grid-cols-3'>
         {biggieCards}
       </div>
     </div>
