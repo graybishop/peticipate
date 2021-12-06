@@ -20,7 +20,7 @@ const resolvers ={
     },
     authBiggiesReq: async (parent, args, context)=>{
       if(!context.user){
-        throw new AuthenticationError('You need to be logged in to pull these Biggies')
+        throw new AuthenticationError('You need to be logged in to pull these Biiggies')
       }
       return await Biiggie.find({})
     },

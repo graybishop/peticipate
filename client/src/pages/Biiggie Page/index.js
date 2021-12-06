@@ -141,7 +141,7 @@ const BiiggiePage = ({ biiggie }) => {
 
   return (
     <div className='bg-body-background-blue'>
-      {userOwnsBiggie && <div className='text-center p-4 bg-green-100 m-2 border border-green-200 rounded'>This is your biiggie! You can go over the details below, and find a link to it on your profile page. <Link to='/profile' className='underline'>Here's a link to your profile page.</Link></div>}
+      {userOwnsBiggie && <div className='text-center p-4 bg-green-100 m-2 border border-green-200 rounded'>This is your <span className='font-extrabold text-orange-primary'>Biiggie</span>! You can go over the details below, and find a link to it on your profile page. <Link to='/profile' className='underline'>Here's a link to your profile page.</Link></div>}
       <div className='relative w-full h-xl overflow-hidden text-white'>
         <img className='w-full object-cover h-full' src={data.images} alt="" />
         <div className='flex flex-col items-center justify-center gap-2 absolute inset-0 backdrop-filter backdrop-blur backdrop-brightness-75'>
@@ -172,7 +172,7 @@ const BiiggiePage = ({ biiggie }) => {
           {mappedHelpOptions}
         </div>
         <div>
-          <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Share this <span className='font-extrabold text-orange-primary'>Biggie</span></h2>
+          <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Share this <span className='font-extrabold text-orange-primary'>Biiggie</span></h2>
           <div className="flex justify-center text-2xl gap-2 p-2">
             <Link to="https://www.instagram.com/">
               <button className="bg-orange-primary text-white italic p-2 shadow font-semibold rounded-full" ><BsInstagram /></button>
