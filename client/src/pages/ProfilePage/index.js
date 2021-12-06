@@ -79,6 +79,17 @@ jk
           {/* Renders the users biiggies */}
           {profileBiiggieCards}
         </div>
+        <div className="text-left">
+          <p className="pt-10 text-orange-primary font-semibold text-lg border-b-4 border-orange-primary">
+            COMMITTED <span className="font-extrabold">Biiggies</span>
+          </p>
+        </div>
+        <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+          {/* <!--Card 1--> */}
+          {/* if (loading) { return (<p>Loading ...</p>)} */}
+          {/* Renders the users biiggies */}
+          {profileBiiggiesCommittedToCards}
+        </div>
       </div>
       <Link
         to="/new-biiggie"
