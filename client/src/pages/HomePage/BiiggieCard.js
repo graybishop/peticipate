@@ -43,6 +43,10 @@ const BiiggieCard = ({ biiggie, rank }) => {
     return { moneyRequestedTotal, moneyReceivedTotal, numOfPeopleReqTotal, registeredUsersTotal };
   };
 
+  const daysRemaining = () => {
+    return Math.floor((new Date(biiggie.deadline) - new Date()) / 1000 / 86400) + 1
+  }
+
   const helpOptionsTotals = processHelpOptions();
   console.log(biiggie)
 
@@ -77,7 +81,7 @@ const BiiggieCard = ({ biiggie, rank }) => {
         </div>
         {/* END BIIGGIE INFO */}
         <div className="bg-blue-secondary flex flex-row px-4 py-2 justify-between">
-          <p className='font-bold'>15 <FiThumbsUp className='inline' /></p>
+          <p className='font-bold'>{biiggie.likes || '0'} <FiThumbsUp className='inline' /></p>
           <p className='font-bold'>
             {helpOptionsTotals.registeredUsersTotal} / {helpOptionsTotals.numOfPeopleReqTotal} Collaborators
           </p>
@@ -87,7 +91,9 @@ const BiiggieCard = ({ biiggie, rank }) => {
         </div>
       </div>
       <div className="bg-blue-nav-button flex flex-row px-4 py-2 justify-evenly text-white rounded-b-lg text-lg font-semibold shadow">
-        <p className='w-6/12 text-center border-r-2'>ONLY {Math.floor((new Date(biiggie.deadline) - new Date()) / 1000 / 86400)} Days Left!</p>
+        {daysRemaining() < 0 ? (<p className='w-6/12 text-center border-r-2 text-red-300'>EXPIRED</p>) : daysRemaining() === 0 ?(<p className='w-6/12 text-center border-r-2'>Expires Tonight</p>):(<p className='w-6/12 text-center border-r-2'>
+        {daysRemaining() < 7 ? 'ONLY ' : '' }{daysRemaining()} {daysRemaining() === 1 ? 'Day ' : 'Days' } Left!
+        </p>)}
         <Link to={`/biiggie/${biiggie._id}`} className='w-6/12 text-center'>View <span className='font-extrabold'>Biiggie</span></Link>
       </div>
     </div>

@@ -19,7 +19,7 @@ const resolvers = {
         .populate({path: 'comments', populate:{ path: 'author'}});
     },
     biiggies: async () => {
-      return await Biiggie.find({}).populate('helpOptions').populate('createdBy').populate('keywords');
+      return await Biiggie.find({}).populate('helpOptions').populate('createdBy').populate('keywords').sort({likes: -1});
     },
     authBiggiesReq: async (parent, args, context)=>{
       if(!context.user){
