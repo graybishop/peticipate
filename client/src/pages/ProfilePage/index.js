@@ -1,12 +1,16 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { QUERY_ME } from '../../utils/queries';
+import { QUERY_ME, GET_BIIGIES } from '../../utils/queries';
 import ProfileBiiggieCard from './ProfileBiiggieCard.js';
 import { Link } from 'react-router-dom';
 
 const Profile = () => {
     const { loading, data } = useQuery(QUERY_ME)
     const user = data?.me || data?.user || {};
+
+    const { loadingBiiggies, biiggiesData } = useQuery(GET_BIIGIES)
+    const biiggies = biiggiesData?.biiggies || {};
+    console.log(biiggies)
     let profileBiiggieCards = <p>Created Biiggies will display here...</p>
     console.log(data);
     let profileBiiggieCommits = <p>Biiggies you commit to will show up here...</p>
@@ -19,7 +23,7 @@ const Profile = () => {
       return profileBiiggieCards;
     }
 
-    
+    // if ()
   
 
     // let profileBiiggieCards = user.CreatedBiiggies.map((item) => {
