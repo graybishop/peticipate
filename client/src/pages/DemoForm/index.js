@@ -96,7 +96,7 @@ const ThirdStep = (props) => {
       <h3 className='text-xl'>The<span className='font-extrabold text-orange-primary'> Biiggie</span> Picture</h3>
       <form action="" className='flex flex-col gap-2'>
         <div className='flex flex-col'>
-          <label htmlFor="images">As the saying goes, "A picture is worth a thousand words." On<span className='font-extrabold text-orange-primary'> Biiggie</span>, a picture is often worth thousands of likes and sometimes dollars, too. Choose your image very carefully!<br></br>You must enter a URL address for the image you want to use. Usually, the simplest way to do this is to right-click your mouse on the image you want to use, and select "Copy Image Link." You can then paste it into the blank field below.</label>
+          <label htmlFor="images">As the saying goes, "A picture is worth a thousand words." On<span className='font-extrabold text-orange-primary'> Biiggie</span>, a picture is often worth thousands of likes and sometimes dollars, too. Choose your image very carefully!<br></br>You must enter a URL address for the image you want to use. Usually, the simplest way to do this is to right-click your mouse on the image you want to use, and select "Copy image address." You can then paste it into the blank field below.</label>
           <input className="custom-inputs" type="text" name='images' onBlur={handleChange} defaultValue={props.biiggie.images[0]} />
         </div>
         <button type='submit' onClick={handleSubmit} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>Next Step: Choose Keyword</button>
@@ -142,15 +142,15 @@ const HelpOptionsForm = (props) => {
   let [formState, setFormState] = useState({
     name: "",
     description: "",
-    numOfPeople: 10,
-    moneyRequested: 150,
+    numOfPeople: '',
+    moneyRequested: '',
   });
 
   let [needPeopleSelector, setNeedPeopleSelector] = useState('options');
 
   const updateOptionType = (event) => {
     setNeedPeopleSelector(event.target.value);
-    setFormState({ ...formState, numOfPeople: null, moneyRequested: null });
+    setFormState({ ...formState, numOfPeople: '', moneyRequested: '' });
   };
 
   const handleChange = (event) => {
