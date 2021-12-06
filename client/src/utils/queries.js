@@ -74,11 +74,7 @@ query Biiggie($id: ID) {
       author {
         username
       }
-      title
       body
-      thread {
-        body
-      }
     }
   }
 }

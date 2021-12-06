@@ -186,7 +186,7 @@ const BiiggiePage = ({ biiggie }) => {
           </div>
         </div>
         <div>
-          <CommentForm />
+          <CommentForm biiggieId={biiggieId}/>
         </div>
         <div>
           <CommentSection comments={data.comments} />

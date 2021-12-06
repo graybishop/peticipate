@@ -1,26 +1,29 @@
 import React, { useState } from "react"
-// import { Link } from "react-router-dom";
+import { useMutation } from '@apollo/client';
+import { ADD_COMMENT } from '../../utils/mutations.js';
 
 
-const CommentForm = (params) => {
-
-    // function comment() {
+const CommentForm = ({biiggieId}) => {
     const [comment, setComment] = useState("");
-
-    const handleFormSubmit = (event) => {
+    const [addComment] = useMutation(ADD_COMMENT);
+    
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
+        let result = await addComment({
+            variables: {
+                body: comment,
+                biiggieId
+            }
+        })
+        console.log(result)
     }
-
+    
     const handleChange = (event) => {
-        console.log(event)
-        const { name, value } = event.target;
-        console.log(name,value)
+        const { value } = event.target;
         setComment(value)
-        // setFormState({
-        //   ...formState,
-        //   [comment]: value,
-        // });
-      };
+    };
+
+    console.log('comment form biiggieId', biiggieId, comment)
     return(
         <form onSubmit={handleFormSubmit}>
             <input
@@ -32,8 +35,6 @@ const CommentForm = (params) => {
             onChange={handleChange}
             />
             <input type="submit" />
-
-
         </form>
     )
 

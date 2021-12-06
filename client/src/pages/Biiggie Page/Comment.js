@@ -5,6 +5,7 @@ export default function Comment(props) {
     const cardStyle = {
         width: '18rem',
       };
+    console.log(props)
 
     return (
         <div className="container">
@@ -15,8 +16,8 @@ export default function Comment(props) {
               alt="profile"
             />
             <div className="card-body">
-            <h5 className="card-author">Comment By{props.comments.author}</h5>
-              <p className="card-body">My Comment{props.comments.body}</p>
+            <h5 className="card-author">Comment By{props.comment?.author.username}</h5>
+              <p className="card-body">My Comment{props.comment?.body}</p>
             </div>
           </div>
         </div>

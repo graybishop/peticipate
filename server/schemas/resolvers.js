@@ -12,7 +12,7 @@ const resolvers ={
     },
     biiggie: async (parent, { _id })=>{
       const params = _id ? { _id } : {};
-      return await Biiggie.findById(params).populate('helpOptions').populate('createdBy');
+      return await Biiggie.findById(params).populate('helpOptions').populate('createdBy').populate('comments');
     },
     biiggies: async ()=>{
       return await Biiggie.find({}).populate('helpOptions').populate('createdBy').populate('keywords')
@@ -136,6 +136,24 @@ const resolvers ={
         //return the doc to apollo to serve to the client
         return helpOption
       }
+    },
+    addComment: async (parent, args, context) =>{
+      if(!context.user){
+        throw new AuthenticationError('You need to be logged in to commit to an Idea.')
+      }
+
+      let newComment = {
+        author: context.user._id,
+        body: args.body
+      }
+
+      let biiggie = await Biiggie.findById(args.biiggieId)
+
+      biiggie.comments.push(newComment)
+
+      await biiggie.save()
+
+      return biiggie
     }
   }
 }
