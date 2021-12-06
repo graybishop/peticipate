@@ -7,6 +7,7 @@ import CommentSection from "./CommentSection";
 import { BsTwitter, BsInstagram, BsFacebook } from 'react-icons/bs';
 import auth from "../../utils/auth.js";
 import { useEffect, useState } from "react";
+import confetti from 'canvas-confetti'
 
 const HelpOptionCard = ({ helpOption, userId }) => {
   const [userCommittedState, setUserCommittedState] = useState(false);
@@ -24,7 +25,6 @@ const HelpOptionCard = ({ helpOption, userId }) => {
     if (moneyGoal) {
       return Math.floor((1 - (moneyRemaining / helpOption.moneyRequested)) * 100);
     }
-
     return Math.floor((1 - (numberOfPeopleRemaining / helpOption.numOfPeople)) * 100);
   };
 
@@ -62,6 +62,10 @@ const HelpOptionCard = ({ helpOption, userId }) => {
       await addToHelpOption({
         variables: { ...mutationVars }
       });
+      confetti({
+        colors:['#FF6F00', '#8FD3FF', '#009BFF', '#D9F0FF'],
+        particleCount: 200
+      })
       setUserCommittedState(true);
     } catch (error) {
       console.error(error);
@@ -83,25 +87,29 @@ const HelpOptionCard = ({ helpOption, userId }) => {
   );
 
   return (
-    <div className='shadow rounded bg-white p-4 flex flex-col gap-2'>
+    <div className={`shadow rounded ${percentageDone() === 100 ? 'bg-green-200' : 'bg-white'} p-4 flex flex-col gap-2`}>
       <div>
-        <h4 className='text-lg'>{helpOption.name}</h4>
+        <h3 className='text-lg'>{helpOption.name}</h3>
         <p className=''>{helpOption.description}</p>
       </div>
-      <div>
-        Currently {percentageDone()}% of the way there with {moneyGoal ?
-          `$${moneyRemaining} left to go.` :
-          `${numberOfPeopleRemaining} ${numberOfPeopleRemaining === 1 ?
-            'person' : 'people'} still needed.`}
-      </div>
-      <div>
-        {userId === null ?
-          (<p>You need to be logged-in to help!</p>) :
-          userCommittedState ?
-            (<p>Thanks for your commitment!</p>) :
-            moneyGoal ?
-              moneyButtons : peopleButton}
-      </div>
+      {percentageDone() === 100 ? (
+        <div>Wow, this option has been completely filled out. Thank you everyone! 🎉</div>
+      ) : (
+        <div>
+          <p>
+            Currently {percentageDone()}% of the way there with {moneyGoal ?
+              `$${moneyRemaining} left to go.` :
+              `${numberOfPeopleRemaining} ${numberOfPeopleRemaining === 1 ?
+                'person' : 'people'} still needed.`}
+          </p>
+          {userId === null ?
+            (<p>You need to be logged-in to help!</p>) :
+            userCommittedState ?
+              (<p>Thanks for your commitment!</p>) :
+              moneyGoal ?
+                moneyButtons : peopleButton}
+        </div>
+      )}
     </div>
   );
 };
@@ -122,35 +130,37 @@ const BiiggiePage = ({ biiggie }) => {
 
   return (
     <div className='bg-body-background-blue'>
-      <div className='relative w-full h-xl overflow-hidden'>
+      <div className='relative w-full h-xl overflow-hidden text-white'>
         <img className='w-full object-cover h-full' src={data.images} alt="" />
         <div className='flex flex-col items-center justify-center gap-2 absolute inset-0 backdrop-filter backdrop-blur backdrop-brightness-75'>
-          <h1 className="text-4xl px-2 text-center w-max py-1 bg-blue-nav-button rounded-b shadow text-white">{data.title}</h1>
-          <div className='flex flex-row items-center gap-2 text-white'>
-            <img className="object-cover rounded-full border-2 shadow h-20 w-20 border-blue-secondary"
-              src={data.createdBy.image} alt='profile' />
-            <div>
-              <p className="font-bold">{data.createdBy.firstName} {data.createdBy.lastName}</p>
-              <p className="italic">{data.createdBy.username}</p>
+          <div className='flex flex-col items-center justify-center gap-2'>
+            <h1 className="text-4xl px-2 text-center w-max py-1 bg-blue-nav-button rounded-b shadow text-white font-bold">{data.title}</h1>
+            <div className='flex flex-row items-center gap-2 text-white'>
+              <img className="object-cover rounded-full border-2 shadow h-20 w-20 border-blue-nav-button"
+                src={data.createdBy.image} alt='profile' />
+              <div>
+                <p className="font-bold">{data.createdBy.firstName} {data.createdBy.lastName}</p>
+                <p className="italic">{data.createdBy.username}</p>
+              </div>
             </div>
+            <div className='flex flex-col items-center mt-6'>
+              <h2 className='text-2xl px-2 text-center w-max py-1 bg-blue-nav-button rounded-b shadow text-white font-bold'>Description</h2>
+              <p className=" p-2 m-2 border-blue-nav-button border-2 rounded bg-black bg-opacity-20">{data.description}</p>
+            </div>
+            <p className="text-2xl text-center text-orange-light font-semibold animate-pulse"><span className='font-bold'>{Math.floor((new Date(data.deadline) - new Date()) / 1000 / 86400)}</span> Days Left</p>
           </div>
         </div>
       </div>
-      <div className="container mx-auto flex flex-col p-4 gap-4 filter drop-shadow items-center">
-        <div className='flex flex-col items-center'>
-          <h2 className='px-2 text-2xl text-center w-max py-1 bg-blue-nav-button rounded text-white  shadow'>Description</h2>
-          <p className="p-2 ">{data.description}</p>
-        </div>
+      <div className="container mx-auto flex flex-col p-4 gap-16 filter drop-shadow items-center mt-4">
         <div className='flex flex-col gap-2'>
           <div className='flex flex-col items-center'>
-            <h2 className='px-2 text-2xl text-center w-max py-1 bg-blue-nav-button  text-white rounded-b shadow'>Ways to Help</h2>
+            <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Ways to Help</h2>
             <p className='p-2'>You can help make this <span className='font-extrabold text-orange-primary'>Biiggie</span> a reality by committing to help make these goals come true.</p>
           </div>
           {mappedHelpOptions}
         </div>
-        <p className="text-2xl text-center text-orange-hover font-semibold animate-pulse">{Math.floor((new Date(data.deadline) - new Date()) / 1000 / 86400)} Days Left</p>
         <div>
-          <h2 className='text-center'>Share this <span className='font-extrabold text-orange-primary'>Biggie</span></h2>
+          <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Share this <span className='font-extrabold text-orange-primary'>Biggie</span></h2>
           <div className="flex justify-center text-2xl gap-2 p-2">
             <Link to="https://www.instagram.com/">
               <button className="bg-orange-primary text-white italic p-2 shadow font-semibold rounded-full" ><BsInstagram /></button>

@@ -20,7 +20,7 @@ const Header = ({loggedIn}) => {
         <h1 className='text-4xl'>Ende<span className='text-sm underline align-top transform scale-150'>a</span><span className='text-purple-700'>V</span>or</h1>
       </div> */}
         <div>
-          <h1 className='text-4xl font-extrabold text-orange-primary'><Link to="/">Biiggie</Link></h1>
+          <h1 className='text-4xl font-extrabold text-orange-primary filter drop-shadow-lg hover:text-orange-hover'><Link to="/">Biiggie</Link></h1>
         </div>
         <div className='flex flex-row items-center gap-2 text-3xl text-blue-nav-button'>
           {/* <Link to="/">Home Page</Link> */}
