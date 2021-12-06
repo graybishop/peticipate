@@ -27,10 +27,10 @@ const Home = () => {
           <div className='flex flex-col gap-2 w-8/12 justify-center md:flex-row md:w-full md:gap-4'>
             <Link to='/new-biiggie'
               className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>
-              Build My <span className='font-extrabold'>Biggie</span> Now</Link>
+              Build My <span className='font-extrabold'>Biiggie</span> Now</Link>
             <Link to='/search'
               className='text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover'>
-              Find a <span className='font-extrabold'>Biggie</span></Link>
+              Find a <span className='font-extrabold'>Biiggie</span></Link>
           </div>
         </div>
       </section>

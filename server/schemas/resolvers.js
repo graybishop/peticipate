@@ -29,7 +29,7 @@ const resolvers ={
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id }).populate('createdBiiggies').populate({path: 'createdBiiggies', populate: [ { path: 'keywords' }, { path: 'helpOptions'}]});
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -79,6 +79,9 @@ const resolvers ={
       
       const createBiiggie = async (helpOptionIds) => {
         const biiggie = await Biiggie.create({...args, helpOptions: helpOptionIds, createdBy: context.user._id});
+        let userDocument = await User.findOne({ _id: context.user._id});
+        userDocument.createdBiiggies.push(biiggie._id);
+        await userDocument.save();
         return biiggie;
       }
       
