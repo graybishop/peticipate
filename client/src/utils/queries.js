@@ -9,6 +9,7 @@ query GiveMeTheBiiggies {
     description
     sources
     images
+    likes
     createdBy{
       _id
       firstName
@@ -48,6 +49,7 @@ query Biiggie($id: ID) {
     description
     sources
     images
+    likes
     createdBy{
       _id
       username

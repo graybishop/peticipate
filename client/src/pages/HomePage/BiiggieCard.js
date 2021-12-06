@@ -77,7 +77,7 @@ const BiiggieCard = ({ biiggie, rank }) => {
         </div>
         {/* END BIIGGIE INFO */}
         <div className="bg-blue-secondary flex flex-row px-4 py-2 justify-between">
-          <p className='font-bold'>15 <FiThumbsUp className='inline' /></p>
+          <p className='font-bold'>{biiggie.likes || '0'} <FiThumbsUp className='inline' /></p>
           <p className='font-bold'>
             {helpOptionsTotals.registeredUsersTotal} / {helpOptionsTotals.numOfPeopleReqTotal} Collaborators
           </p>

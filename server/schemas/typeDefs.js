@@ -45,6 +45,7 @@ const typeDefs = gql`
     type Biiggie {
         _id: ID
         title: String
+        likes: Int
         deadline: Float!
         description: String
         sources: [String]
