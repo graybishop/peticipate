@@ -101,3 +101,20 @@ export const USER_COMMIT_TO_HELP = gql`
     }
   }
 `;
+
+
+export const ADD_COMMENT = gql`
+mutation Mutation($body: String!, $biiggieId: ID!) {
+  addComment(body: $body, biiggieId: $biiggieId) {
+    _id
+    title
+    comments {
+      author {
+        username
+        _id
+      }
+      body
+    }
+  }
+}
+`

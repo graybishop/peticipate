@@ -26,6 +26,15 @@ const BiiggieSchema = new Schema(
     images: {
       type: [String],
     },
+    comments: [{
+      author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      body: {
+        type: String
+      }
+    }],
     helpOptions: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -37,12 +46,6 @@ const BiiggieSchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Keywords'
       }
-    ],
-    comments: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment",
-      },
     ],
     likes: {
       type: Number,
