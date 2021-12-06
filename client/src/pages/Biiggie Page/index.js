@@ -86,7 +86,7 @@ const HelpOptionCard = ({ helpOption, userId }) => {
   );
 
   const peopleButton = (
-    <div className='flex flex-row justify-center px-4 pt-4'>
+    <div className='flex flex-row justify-center px-4 pt-4 md-grid xl:grid-cols-3'>
       <button className='bg-orange-primary text-white p-2 px-2 rounded-lg shadow font-semibold  text-center hover:bg-orange-hover' onClick={() => { handleCommit(); }}>Commit to Help!</button>
     </div>
   );
@@ -169,7 +169,9 @@ const BiiggiePage = ({ biiggie }) => {
             <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Ways to Help</h2>
             <p className='p-2'>You can help make this <span className='font-extrabold text-orange-primary'>Biiggie</span> a reality by committing to help make these goals come true.</p>
           </div>
+          <div className='p-4 container mx-auto flex flex-col gap-6 grid-cols-2 md:grid xl:grid-cols-3'>
           {mappedHelpOptions}
+          </div>
         </div>
         <div>
           <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Share this <span className='font-extrabold text-orange-primary'>Biiggie</span></h2>
