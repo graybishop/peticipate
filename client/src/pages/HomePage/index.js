@@ -17,7 +17,7 @@ const Home = () => {
 
     <div className='flex flex-col bg-body-background-blue'>
       <section className=' bg-bottom bg-cover' style={{ backgroundImage: `url(${honeycombImage})` }}>
-        <div className='flex flex-col gap-8 py-20 px-4 items-center backdrop-filter'>
+        <div className='flex flex-col justify-center gap-8 py-20 px-4 items-center backdrop-filter h-xl'>
           <h2 className='text-center text-4xl font-semibold'>What's <em>your</em> <span className='font-extrabold text-orange-primary'>Biiggie</span> idea?</h2>
           <div className='text-center text-xl flex flex-col gap-2 md:w-8/12 lg:w-6/12 xl:w-2/6'>
             <p><span className='font-extrabold text-orange-primary'>Biiggie</span> is how dreams become reality.</p>

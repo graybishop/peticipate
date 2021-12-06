@@ -13,6 +13,10 @@ module.exports = {
         'blue-nav-button':'#009BFF',
         'blue-hover' :'#0073BF',
         'body-background-blue': '#F1F9FF'
+      },
+      height:{
+        xl: '36rem',
+        '2xl': '48rem',
       }
     },
   },
