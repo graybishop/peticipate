@@ -8,7 +8,7 @@ export default function Comment(props) {
     console.log(props)
 
     return (
-        <div className="container bg-white shadow rounded p-2">
+        <div className="bg-white shadow rounded p-2">
           <div className="card" style={cardStyle}>
             <div className='flex flex-row items-center gap-2 text-black'>
             <img

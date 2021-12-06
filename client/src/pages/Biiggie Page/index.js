@@ -133,10 +133,10 @@ const BiiggiePage = ({ biiggie }) => {
 
   const mappedHelpOptions = data.helpOptions.map((item) => <HelpOptionCard helpOption={item} key={item._id} userId={userId} />);
 
-  console.log(data.createdBy._id)
-  let userOwnsBiggie = false
-  if (data.createdBy._id === userId){
-    userOwnsBiggie=true
+  console.log(data.createdBy._id);
+  let userOwnsBiggie = false;
+  if (data.createdBy._id === userId) {
+    userOwnsBiggie = true;
   }
 
   return (
@@ -186,12 +186,10 @@ const BiiggiePage = ({ biiggie }) => {
           </div>
         </div>
         <div className='flex flex-col container items-center'>
-        <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Leave a Comment</h2>
-          <CommentForm refetch={refetch} biiggieId={biiggieId}/>
+          <h2 className='px-2 text-2xl w-max py-1 border-b-2 border-blue-nav-button font-bold'>Leave a Comment</h2>
+          <CommentForm refetch={refetch} biiggieId={biiggieId} />
         </div>
-        <div>
-          <CommentSection comments={data.comments} />
-        </div>
+        <CommentSection comments={data.comments} />
       </div>
     </div>
   );

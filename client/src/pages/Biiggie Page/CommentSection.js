@@ -8,7 +8,7 @@ export default function CommentSection(props) {
         return <Comment comment={item} key={item._id} />;
       });
     
-    return (<div className='flex flex-col gap-4'>
+    return (<div className='flex flex-col gap-4 w-full'>
       {commentsElementArray}
       </div>)
 }
