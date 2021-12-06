@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { useQuery } from '@apollo/client';
 import { GET_BIIGIES } from '../../utils/queries.js';
 import BiiggieCard from './BiiggieCard.js';
@@ -8,6 +9,10 @@ const Home = () => {
   const { data, error } = useQuery(GET_BIIGIES,{
     pollInterval: 500
   });
+
+  useEffect(() => {
+    document.title='Biiggie || Change the world';
+  }, [])
 
   let biggieCards = data?.biiggies.map((item, index) => {
     return <BiiggieCard biiggie={item} key={item._id} rank={index+1}/>;

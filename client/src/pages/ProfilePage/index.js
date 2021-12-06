@@ -14,6 +14,10 @@ const Profile = () => {
     }
   });
 
+  useEffect(() => {
+    document.title='Profile';
+  }, [])
+
   const { loading, data } = useQuery(QUERY_ME);
   const user = data?.me || data?.user || {};
 

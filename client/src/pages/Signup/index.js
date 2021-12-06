@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 // import Auth from '../utils/auth';
@@ -45,6 +45,10 @@ function Signup({setLoggedIn}) {
     });
   };
 
+  useEffect(() => {
+    document.title='Sign-up';
+  }, [])
+  
   return (
     <div className="bg-body-background-blue min-h-screen flex flex-col">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
