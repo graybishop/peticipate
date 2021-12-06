@@ -40,6 +40,14 @@ jk
     }
   }
 
+  if (biiggiesCommittedTo != null) {
+    profileBiiggiesCommittedToCards = biiggiesCommittedTo.map((item) => {
+      return <ProfileBiiggieCard biiggie={item} key={item._id} />
+    });
+  } else {
+    return profileBiiggiesCommittedToCards;
+  }
+
   // let profileBiiggieCards = user.CreatedBiiggies.map((item) => {
   //   return <ProfileBiiggieCard biiggie={item} key={item._id} />;
   // });
