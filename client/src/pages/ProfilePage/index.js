@@ -9,6 +9,7 @@ const Profile = () => {
     const user = data?.me || data?.user || {};
     let profileBiiggieCards = <p>Created Biiggies will display here...</p>
     console.log(data);
+    let profileBiiggieCommits = <p>Biiggies you commit to will show up here...</p>
 
     if (user.createdBiiggies != null) {
       profileBiiggieCards = user.createdBiiggies.map((item) => {
