@@ -12,9 +12,10 @@ import honeycombImage from "../../assets/images/hex-bg-5.png";
 
 const FirstStep = (props) => {
   let [formState, setFormState] = useState({
-    title: '',
-    description: ''
+    title: props.biiggie.title,
+    description: props.biiggie.description
   });
+
 
   const handleChange = (event) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
@@ -77,7 +78,7 @@ const SecondStep = (props) => {
 
 const ThirdStep = (props) => {
   let [formState, setFormState] = useState({
-    images: []
+    images: [props.biiggie.images[0]]
   });
 
   const handleChange = (event) => {
@@ -108,7 +109,7 @@ const ThirdStep = (props) => {
 
 const ForthStep = (props) => {
   let [formState, setFormState] = useState({
-    keywords: []
+    keywords: [props.biiggie.keywords[0]]
   });
 
   const handleChange = (event) => {
