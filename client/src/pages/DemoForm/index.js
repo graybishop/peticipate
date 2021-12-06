@@ -309,6 +309,7 @@ const DemoForm = () => {
         },
       });
       setNewBiiggieId(newBiiggie.data.createBiiggie._id);
+      navigate(`/biiggie/${newBiiggie.data.createBiiggie._id}`)
       moveForward({});
     } catch (err) {
       console.error(err);
