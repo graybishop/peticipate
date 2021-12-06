@@ -12,14 +12,14 @@ const resolvers ={
     },
     biiggie: async (parent, { _id })=>{
       const params = _id ? { _id } : {};
-      return await Biiggie.findById(params).populate('helpOptions');
+      return await Biiggie.findById(params).populate('helpOptions').populate('createdBy');
     },
     biiggies: async ()=>{
       return await Biiggie.find({}).populate('helpOptions').populate('createdBy').populate('keywords')
     },
     authBiggiesReq: async (parent, args, context)=>{
       if(!context.user){
-        throw new AuthenticationError('You need to be logged in to pull these Biggies')
+        throw new AuthenticationError('You need to be logged in to pull these Biiggies')
       }
       return await Biiggie.find({})
     },

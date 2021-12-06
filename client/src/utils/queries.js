@@ -48,14 +48,23 @@ query Biiggie($id: ID) {
     description
     sources
     images
+    createdBy{
+      _id
+      username
+      firstName
+      lastName
+      image
+    }
     keywords {
       keyword
     }
     helpOptions {
+      _id
       name
       description
       numOfPeople
       registeredUsers {
+        _id
         username
       }
       moneyRequested

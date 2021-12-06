@@ -9,14 +9,15 @@ const Profile = () => {
   const user = data?.me || data?.user || {};
 
   const { loading: loadingBiiggies, data: biiggiesData } = useQuery(GET_BIIGIES);
-  const biiggies = biiggiesData?.biiggies || {};
+  const biiggies = biiggiesData?.biiggies || [];
 
-  let profileBiiggieCards = <p>Created Biiggies will display here...</p>;
+  let profileBiiggieCards = 
+  <p>Created Biiggies will display here...</p>;
   console.log(data);
-jk
-  let profileBiiggiesCommittedToCards = (
+
+  let profileBiiggiesCommittedToCards = 
     <p>Biiggies you commit to will show up here...</p>
-  );
+
   console.log(biiggies);
 
   if (user.createdBiiggies != null) {
@@ -27,9 +28,9 @@ jk
     return profileBiiggieCards;
   }
 
-  const biiggiesCommittedTo = [];
-  if (biiggiesData.length != null) {
-    for (let biiggie of biiggiesData) {
+  let biiggiesCommittedTo = [];
+  if (biiggies !== []) {
+    for (let biiggie of biiggies) {
       for (let helpOption of biiggie.helpOptions) {
         for (let user of helpOption.registeredUsers) {
           if (user === user._id) {
@@ -99,4 +100,5 @@ jk
       </Link>
     </div>
   );
+}
 export default Profile;

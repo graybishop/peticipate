@@ -19,48 +19,55 @@ connection.once('open', async () => {
             deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
             description: 'I need help getting my dream taco food truck business off the ground. I serve all types of tacos and have worked very hard renovating an old truck I but. Any help is welcome!',
             images: ['https://mobile-cuisine.com/wp-content/uploads/2015/09/food-truck-branding.jpg'],
+            likes: 23
         },
         {
             title: 'First EP Production',
             createdBy: userId[2]._id,
-            deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
+            deadline: new Date(new Date().setDate(new Date().getDate() + 6)),
             description: "I'm a start up musician that needs help in producing my first EP",
-            images: ['https://pngimg.com/uploads/vinyl/vinyl_PNG96.png']
+            images: ['https://pngimg.com/uploads/vinyl/vinyl_PNG96.png'],
+            likes: 42
         },
         {
             title: 'Amazing New Tech',
             createdBy: userId[3]._id,
-            deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
+            deadline: new Date(new Date().setDate(new Date().getDate() + 24)),
             description: 'I want to create technology that will change the way we consume natural resources to something more clean and efficient.',
-            images: ['http://www.onlygfx.com/wp-content/uploads/2017/12/top-secret-stamp-1-1024x1024.png']
+            images: ['http://www.onlygfx.com/wp-content/uploads/2017/12/top-secret-stamp-1-1024x1024.png'],
+            likes: 1607
         },
         {
             title: 'Online Book Retail',
             createdBy: userId[4]._id,
-            deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
+            deadline: new Date(new Date().setDate(new Date().getDate() + 12)),
             description: 'I want to create a online retail store for every book imaginable... for now.',
-            images: ['https://www.getunderlined.com/wp-content/uploads/2017/08/book-lovers-header.jpg']
+            images: ['https://www.getunderlined.com/wp-content/uploads/2017/08/book-lovers-header.jpg'],
+            likes: 158
         },
         {
             title: 'Local River Needs Cleaning',
             createdBy: userId[5]._id,
-            deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
+            deadline: new Date(new Date().setDate(new Date().getDate() + 4)),
             description: 'I want to get the community together to help clean out trash polluted river',
-            images: ['https://s3-ap-southeast-1.amazonaws.com/scrollstorage/1440502167-1109_10.jpg']
+            images: ['https://s3-ap-southeast-1.amazonaws.com/scrollstorage/1440502167-1109_10.jpg'],
+            likes: 16
         },
         {
             title: 'Against School Uniforms',
             createdBy: userId[5]._id,
-            deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
+            deadline: new Date(new Date().setDate(new Date().getDate() + 2)),
             description: 'They are trying to force our children to wear uniforms instead of letting them have a healthy way to express themselves. This is totalitarianism',
-            images: ['https://assets.change.org/photos/5/pc/ax/fSpCaxMPnMLloPB-1600x900-noPad.jpg?1526663748']
+            images: ['https://assets.change.org/photos/5/pc/ax/fSpCaxMPnMLloPB-1600x900-noPad.jpg?1526663748'],
+            likes: 137
         },
         {
             title: 'Teacher Recognition',
             createdBy: userId[6]._id,
-            deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
+            deadline: new Date(new Date().setDate(new Date().getDate() + 1)),
             description: 'I want to celebrate Ms. Smith for how much she has helped me with my college readiness',
-            images: ['https://townsquare.media/site/10/files/2017/09/teacher-getty-3.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89']
+            images: ['https://townsquare.media/site/10/files/2017/09/teacher-getty-3.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89'],
+            likes: 9
         }
     ];
     await db.Biiggie.deleteMany({});
