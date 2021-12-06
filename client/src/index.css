@@ -6,5 +6,10 @@
 @layer components{
   .test{
     @apply bg-green-400
+
   }
+  .custom-inputs {
+    @apply bg-white bg-opacity-40 border-blue-secondary border-2 p-2 mt-2 rounded-lg
+  } 
+  
 }
