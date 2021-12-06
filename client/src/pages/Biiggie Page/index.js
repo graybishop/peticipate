@@ -122,15 +122,17 @@ const BiiggiePage = ({ biiggie }) => {
 
   return (
     <div className='bg-body-background-blue'>
-      <img className='' src={data.images} alt="" />
-      <div className='flex flex-col items-center gap-2'>
-        <h1 className="text-4xl px-2 text-center w-max py-1 bg-blue-nav-button rounded-b shadow text-white">{data.title}</h1>
-        <div className='flex flex-row items-center gap-2'>
-          <img className="object-cover rounded-full border-2 shadow h-20 w-20 border-blue-secondary"
-            src={data.createdBy.image} alt='profile' />
-          <div>
-            <p className="font-bold">{data.createdBy.firstName} {data.createdBy.lastName}</p>
-            <p className="italic">{data.createdBy.username}</p>
+      <div className='relative w-full h-xl overflow-hidden'>
+        <img className='w-full object-cover h-full' src={data.images} alt="" />
+        <div className='flex flex-col items-center justify-center gap-2 absolute inset-0 backdrop-filter backdrop-blur backdrop-brightness-75'>
+          <h1 className="text-4xl px-2 text-center w-max py-1 bg-blue-nav-button rounded-b shadow text-white">{data.title}</h1>
+          <div className='flex flex-row items-center gap-2 text-white'>
+            <img className="object-cover rounded-full border-2 shadow h-20 w-20 border-blue-secondary"
+              src={data.createdBy.image} alt='profile' />
+            <div>
+              <p className="font-bold">{data.createdBy.firstName} {data.createdBy.lastName}</p>
+              <p className="italic">{data.createdBy.username}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -141,8 +143,8 @@ const BiiggiePage = ({ biiggie }) => {
         </div>
         <div className='flex flex-col gap-2'>
           <div className='flex flex-col items-center'>
-            <h2 className='px-2 text-2xl text-center w-max py-1 bg-blue-nav-button  text-white rounded-b shadow'>Ways to help</h2>
-            <p className='p-2'>You can help make this Biiggie a reality by committing to help make these goals come true.</p>
+            <h2 className='px-2 text-2xl text-center w-max py-1 bg-blue-nav-button  text-white rounded-b shadow'>Ways to Help</h2>
+            <p className='p-2'>You can help make this <span className='font-extrabold text-orange-primary'>Biiggie</span> a reality by committing to help make these goals come true.</p>
           </div>
           {mappedHelpOptions}
         </div>

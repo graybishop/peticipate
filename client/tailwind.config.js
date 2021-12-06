@@ -11,6 +11,10 @@ module.exports = {
         'blue-header' : '#D9F0FF',
         'blue-nav-button':'#009BFF',
         'body-background-blue': '#F1F9FF'
+      },
+      height:{
+        xl: '36rem',
+        '2xl': '48rem',
       }
     },
   },
