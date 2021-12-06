@@ -2,9 +2,18 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME, GET_BIIGIES } from "../../utils/queries";
 import ProfileBiiggieCard from "./ProfileBiiggieCard.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import auth from '../../utils/auth';
 
 const Profile = () => {
+  let navigate = useNavigate();
+  useEffect(() => {
+    if (!auth.loggedIn()) {
+      navigate('/login');
+    }
+  });
+
   const { loading, data } = useQuery(QUERY_ME);
   const user = data?.me || data?.user || {};
 
@@ -20,12 +29,10 @@ const Profile = () => {
 
   console.log(biiggies);
 
-  if (user.createdBiiggies != null) {
+  if (user.createdBiiggies.length !== 0) {
     profileBiiggieCards = user.createdBiiggies.map((item) => {
       return <ProfileBiiggieCard biiggie={item} key={item._id} />;
     });
-  } else {
-    return profileBiiggieCards;
   }
 
   let biiggiesCommittedTo = [];
@@ -45,12 +52,10 @@ const Profile = () => {
     }
   }
 
-  if (biiggiesCommittedTo != null) {
+  if (biiggiesCommittedTo.length !== 0) {
     profileBiiggiesCommittedToCards = biiggiesCommittedTo.map((item) => {
       return <ProfileBiiggieCard biiggie={item} key={item._id} />
     });
-  } else {
-    return profileBiiggiesCommittedToCards;
   }
 
   // let profileBiiggieCards = user.CreatedBiiggies.map((item) => {
