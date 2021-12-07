@@ -119,7 +119,7 @@ const BiiggieCard = ({ biiggie, rank, user }) => {
           {biiggieLiked ? <p className='text-green-600 bg-green-200 px-2  rounded shadow font-semibold border border-green-600 text-center flex flex-row items-center gap-2'>
             Saved <FiCheck className='' />
           </p> :
-          <button onClick={handleLikeClick} className='text-orange-primary bg-white px-2 rounded shadow font-semibold border border-orange-primary text-center hover:text-orange-hover flex flex-row items-center gap-2'>
+          <button onClick={handleLikeClick} className='text-orange-primary bg-blue-header px-2 rounded shadow font-semibold border border-orange-primary text-center hover:text-orange-hover flex flex-row items-center gap-2'>
             {biiggie.likes || '0'} <FiThumbsUp className='' />
           </button>
           }
