@@ -162,11 +162,11 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in to like an Idea.');
       }
-
+      let biiggie = await Biiggie.findById(args.biiggieId)
+      biiggie.likes++
+      await biiggie.save()
       let user = await User.findById(context.user._id);
-
       user.liked.push(args.biiggieId);
-
       await user.save();
 
       return user;

@@ -23,9 +23,11 @@ const BiiggieCard = ({ biiggie, rank, user }) => {
   };
 
   useEffect(()=>{
-    for (const item of user.liked) {
-      if(item._id === biiggie._id){
-        setBiiggieLiked(true)
+    if(user.liked){
+      for (const item of user.liked) {
+        if(item._id === biiggie._id){
+          setBiiggieLiked(true)
+        }
       }
     }
   }, [user.liked, biiggie._id])
