@@ -47,7 +47,7 @@ const typeDefs = gql`
         _id: ID
         title: String
         likes: Int
-        deadline: Float!
+        deadline: Float
         description: String
         sources: [String]
         images: [String]

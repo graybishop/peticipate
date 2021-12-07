@@ -12,7 +12,7 @@ const BiiggieCard = ({ biiggie, rank }) => {
     event.preventDefault();
     const biiggieId = biiggie._id
     try {
-        let result = await addLike({
+        await addLike({
             variables: {
                 biiggieId
             }
