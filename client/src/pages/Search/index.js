@@ -10,6 +10,7 @@ import React, { useState } from "react";
 
 
 const SearchPage = () => {
+  const [foundBiiggies, setFoundBiiggies] = useState([]);
   const { data: biiggiesData, error: biiggiesError } = useQuery(GET_BIIGIES);
   console.log(biiggiesData);
 
@@ -43,18 +44,22 @@ const SearchPage = () => {
 
   //   console.log("Handle Form", biiggiesState);
 
-  let biiggieCards = biiggiesData?.biiggies.map((item, index) => {
-    return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} user={user}/>;
+  let searchedBiiggieCards = foundBiiggies.map((item, index) => {
+    return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} user={user} />;
   });
 
-//   const [biiggiesState, setBiiggiesState] = useState({
-//     freshBiiggieCards: [...biiggieCards],
-//   });
+  let biiggieCards = biiggiesData?.biiggies.map((item, index) => {
+    return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} user={user} />;
+  });
 
-//   const updateBiiggieState = (newState) =>
-//     setBiiggiesState(Object.assign({}, biiggiesState, newState));
+  //   const [biiggiesState, setBiiggiesState] = useState({
+  //     freshBiiggieCards: [...biiggieCards],
+  //   });
 
-//   const { freshBiiggieCards } = biiggiesState;
+  //   const updateBiiggieState = (newState) =>
+  //     setBiiggiesState(Object.assign({}, biiggiesState, newState));
+
+  //   const { freshBiiggieCards } = biiggiesState;
 
   const handleOnSearch = (string, results) => {
     console.log(string, results);
@@ -69,20 +74,20 @@ const SearchPage = () => {
     // event.preventDefault();
     console.log(item);
     for (let keyword of keywordsData.keywords) {
-        console.log(keyword)
-        console.log(item.word)
+      console.log(keyword);
+      console.log(item.word);
       if (keyword.keyword === item.word) {
-          console.log("made it")
-          console.log(keyword.biiggie)
-          if (keyword.biiggie.length !== 0) {
-            for (let searchedBiiggie of keyword.biiggie) {
-                searchedBiiggiesArray.push(searchedBiiggie);
-                console.log(searchedBiiggiesArray);
-              }
-          } else {
-          searchedBiiggiesArray.push(keywordsData.keywords.biiggie);
+        console.log("made it");
+        console.log(keyword.biiggie);
+        if (keyword.biiggie.length !== 0) {
+          for (let searchedBiiggie of keyword.biiggie) {
+            searchedBiiggiesArray.push(searchedBiiggie);
+            console.log(searchedBiiggiesArray);
           }
-        
+        } else {
+          searchedBiiggiesArray.push(keywordsData.keywords.biiggie);
+        }
+
       }
     }
     // updateBiiggieState({ freshBiiggieCards: [] });
@@ -90,6 +95,7 @@ const SearchPage = () => {
       return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} />;
     });
     console.log(searchedBiiggiesArray);
+    setFoundBiiggies(searchedBiiggiesArray);
   };
 
   const handleOnFocus = () => {
@@ -128,8 +134,8 @@ const SearchPage = () => {
               and treasure.{" "}
             </p>
           </div>
-          <div className="flex flex-col w-12/12 justify-center md:flex-row md:w-full md:gap-4">
-            <form aciton="/" method="get">
+          <div className="flex flex-row w-11/12 justify-center gap-4 md:w-6/12 lg:w-4/12">
+            <form aciton="/" method="get" className='w-full'>
               <ReactSearchAutocomplete
                 items={keywordsArray}
                 fuseOptions={{ keys: ["word"] }} // Search on both fields
@@ -156,25 +162,30 @@ const SearchPage = () => {
                   clearIconMargin: "3px 8px 0 0",
                 }}
               />
-              <button
-                type="submit"
-                className="text-orange-primary bg-white py-3 w-auto rounded-lg shadow font-semibold text-lg mt-12 mr-1 border-orange-primary text-center hover:text-orange-hover"
-              >
-                <Link
-                  to="/new-biiggie"
-                  className="bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover"
-                >
-                  Build My <span className="font-extrabold">Biiggie</span> Now
-                </Link>
-              </button>
             </form>
           </div>
         </div>
       </section>
-      <p>{biiggiesError?.toString()}</p>
-      <div className="p-4 container mx-auto flex flex-col gap-6 md:grid md:grid-cols-2 xl:grid-cols-3">
-        {biiggieCards}
-      </div>
+      {/* <p>{biiggiesError?.toString()}</p> */}
+      {foundBiiggies.length === 0 ? (
+        <div>
+          <h3 className="text-center text-2xl font">
+            Use the search bar above to filter through these biiggies
+          </h3>
+          <div className="p-4 container mx-auto flex flex-col gap-6 md:grid md:grid-cols-2 xl:grid-cols-3">
+            {biiggieCards}
+          </div>
+        </div>
+      ) :
+        (<div>
+          <h3 className="text-center text-4xl font-semibold">
+            Your Search Results
+          </h3>
+          <div className="p-4 container mx-auto flex flex-col gap-6 md:grid md:grid-cols-2 xl:grid-cols-3">
+            {searchedBiiggieCards}
+          </div>
+        </div>)
+      }
     </div>
   );
 };
