@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_LIKE } from '../../utils/mutations.js';
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router";
+import auth from "../../utils/auth.js";
 
 const BiiggieCard = ({ biiggie, rank, user }) => {
   const [biiggieLiked, setBiiggieLiked] = useState(false);
   const [addLike] = useMutation(ADD_LIKE);
-
+  const navigate = useNavigate()
   const handleLikeClick = async (event) => {
     event.preventDefault();
+    if (!auth.loggedIn()) {
+      navigate('/login');
+    }
+    if (!user.liked) return
     const biiggieId = biiggie._id;
     try {
       await addLike({
