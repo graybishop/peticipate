@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useQuery } from '@apollo/client';
-import { GET_BIIGIES } from '../../utils/queries.js';
+import { GET_BIIGIES, QUERY_ME } from '../../utils/queries.js';
 import BiiggieCard from './BiiggieCard.js';
 import { Link } from "react-router-dom";
 import honeycombImage from "../../assets/images/hex-bg-5.png";
@@ -14,8 +14,14 @@ const Home = () => {
     document.title='Biiggie || Change the world';
   }, [])
 
+  const { data:userData } = useQuery(QUERY_ME, {
+    pollInterval: 1000
+  });
+  let user = userData?.me || userData?.user || {};
+  console.log(user)
+
   let biggieCards = data?.biiggies.map((item, index) => {
-    return <BiiggieCard biiggie={item} key={item._id} rank={index+1}/>;
+    return <BiiggieCard biiggie={item} key={item._id} rank={index+1} user={user}/>;
   });
 
   return (
@@ -42,7 +48,7 @@ const Home = () => {
       <p>
         {error?.toString()}
       </p>
-      <div className='p-4 container mx-auto flex flex-col gap-6 md:grid md:grid-cols-2 xl:grid-cols-3'>
+      <div className='p-4 container mx-auto flex flex-col gap-6 md:grid lg:grid-cols-2 xl:grid-cols-3'>
         {biggieCards}
       </div>
     </div>

@@ -1,26 +1,35 @@
-import { FiThumbsUp } from 'react-icons/fi';
+import { FiThumbsUp, FiCheck } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_LIKE } from '../../utils/mutations.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const BiiggieCard = ({ biiggie, rank }) => {
-  const [biiggieLiked, setBiiggieLiked] = useState(false)
+const BiiggieCard = ({ biiggie, rank, user }) => {
+  const [biiggieLiked, setBiiggieLiked] = useState(false);
   const [addLike] = useMutation(ADD_LIKE);
 
   const handleLikeClick = async (event) => {
     event.preventDefault();
-    const biiggieId = biiggie._id
+    const biiggieId = biiggie._id;
     try {
-        await addLike({
-            variables: {
-                biiggieId
-            }
-        })
+      await addLike({
+        variables: {
+          biiggieId
+        }
+      });
     } catch (error) {
-        console.error(error)
+      console.error(error);
     }
-}
+  };
+
+  useEffect(()=>{
+    for (const item of user.liked) {
+      if(item._id === biiggie._id){
+        setBiiggieLiked(true)
+        console.log('found a liked one')
+      }
+    }
+  }, [user.liked, biiggie._id])
 
   const getFullName = () => {
     if (!biiggie.createdBy) {
@@ -64,8 +73,8 @@ const BiiggieCard = ({ biiggie, rank }) => {
   };
 
   const daysRemaining = () => {
-    return Math.floor((new Date(biiggie.deadline) - new Date()) / 1000 / 86400) + 1
-  }
+    return Math.floor((new Date(biiggie.deadline) - new Date()) / 1000 / 86400) + 1;
+  };
 
   const helpOptionsTotals = processHelpOptions();
 
@@ -100,9 +109,13 @@ const BiiggieCard = ({ biiggie, rank }) => {
         </div>
         {/* END BIIGGIE INFO */}
         <div className="bg-blue-secondary flex flex-row px-4 py-2 justify-between">
-          <button onClick={handleLikeClick} className='font-bold border bg-gray-300 rounded px-2 flex flex-row items-center gap-2'>
+          {biiggieLiked ? <p className='text-green-600 bg-green-200 px-2  rounded shadow font-semibold border border-green-600 text-center flex flex-row items-center gap-2'>
+            Saved <FiCheck className='' />
+          </p> :
+          <button onClick={handleLikeClick} className='text-orange-primary bg-white px-2 rounded shadow font-semibold border border-orange-primary text-center hover:text-orange-hover flex flex-row items-center gap-2'>
             {biiggie.likes || '0'} <FiThumbsUp className='' />
-            </button>
+          </button>
+          }
           <p className='font-bold'>
             {helpOptionsTotals.registeredUsersTotal} / {helpOptionsTotals.numOfPeopleReqTotal} Collaborators
           </p>
@@ -112,8 +125,8 @@ const BiiggieCard = ({ biiggie, rank }) => {
         </div>
       </div>
       <div className="bg-blue-nav-button flex flex-row px-4 py-2 justify-evenly text-white rounded-b-lg text-lg font-semibold shadow">
-        {daysRemaining() < 0 ? (<p className='w-6/12 text-center border-r-2 text-red-300'>EXPIRED</p>) : daysRemaining() === 0 ?(<p className='w-6/12 text-center border-r-2'>Expires Tonight</p>):(<p className='w-6/12 text-center border-r-2'>
-        {daysRemaining() < 7 ? 'ONLY ' : '' }{daysRemaining()} {daysRemaining() === 1 ? 'Day ' : 'Days' } Left!
+        {daysRemaining() < 0 ? (<p className='w-6/12 text-center border-r-2 text-red-300'>EXPIRED</p>) : daysRemaining() === 0 ? (<p className='w-6/12 text-center border-r-2'>Expires Tonight</p>) : (<p className='w-6/12 text-center border-r-2'>
+          {daysRemaining() < 7 ? 'ONLY ' : ''}{daysRemaining()} {daysRemaining() === 1 ? 'Day ' : 'Days'} Left!
         </p>)}
         <Link to={`/biiggie/${biiggie._id}`} className='w-6/12 text-center'>View <span className='font-extrabold'>Biiggie</span></Link>
       </div>
