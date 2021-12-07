@@ -20,12 +20,6 @@ const SearchPage = () => {
     console.log("error");
   }
 
-  const [biiggiesState, setBiiggiesState] = useState({
-    freshBiiggies: [],
-  });
-
-  const { freshBiiggies } = biiggiesState;
-
   let keywordsArray = [];
   let i = 0;
   if (keywordsData != null) {
@@ -42,11 +36,20 @@ const SearchPage = () => {
 
   console.log(keywordsArray);
 
-  setBiiggiesState({freshBiiggies: [...freshBiiggies, biiggiesData?.biiggies]})
+  //   console.log("Handle Form", biiggiesState);
 
   let biiggieCards = biiggiesData?.biiggies.map((item, index) => {
     return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} />;
   });
+
+//   const [biiggiesState, setBiiggiesState] = useState({
+//     freshBiiggieCards: [...biiggieCards],
+//   });
+
+//   const updateBiiggieState = (newState) =>
+//     setBiiggiesState(Object.assign({}, biiggiesState, newState));
+
+//   const { freshBiiggieCards } = biiggiesState;
 
   const handleOnSearch = (string, results) => {
     console.log(string, results);
@@ -58,15 +61,26 @@ const SearchPage = () => {
 
   let searchedBiiggiesArray = [];
   const handleOnSelect = (item) => {
+    // event.preventDefault();
     console.log(item);
     for (let keyword of keywordsData.keywords) {
-      if (keyword == item.word) {
-        for (let searchedBiiggie of keywordsData.keywords.biiggie) {
-          searchedBiiggiesArray.push(searchedBiiggie);
-          console.log(searchedBiiggiesArray);
-        }
+        console.log(keyword)
+        console.log(item.word)
+      if (keyword.keyword === item.word) {
+          console.log("made it")
+          console.log(keyword.biiggie)
+          if (keyword.biiggie.length !== 0) {
+            for (let searchedBiiggie of keyword.biiggie) {
+                searchedBiiggiesArray.push(searchedBiiggie);
+                console.log(searchedBiiggiesArray);
+              }
+          } else {
+          searchedBiiggiesArray.push(keywordsData.keywords.biiggie);
+          }
+        
       }
     }
+    // updateBiiggieState({ freshBiiggieCards: [] });
     biiggieCards = searchedBiiggiesArray.map((item, index) => {
       return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} />;
     });
