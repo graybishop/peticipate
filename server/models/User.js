@@ -29,7 +29,7 @@ const UserSchema = new Schema(
     },
     image: {
       type: String,
-      default: 'https://images.unsplash.com/photo-1521754040860-ed38b308ac9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
+      default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Eo_circle_orange_letter-b.svg/2048px-Eo_circle_orange_letter-b.svg.png'
     },
     createdBiiggies: [
       {

@@ -7,6 +7,7 @@ import Login from "./pages/Login/index.js";
 import Signup from "./pages/Signup/index.js";
 import Header from "./components/PageComponents/Header.js";
 import Footer from "./components/PageComponents/Footer.js";
+import SearchPage from "./pages/Search/index.js";
 import TestPage from "./pages/TestPage/index.js";
 import { setContext } from '@apollo/client/link/context';
 import Profile from "./pages/ProfilePage/index.js";
@@ -56,6 +57,7 @@ function App() {
           <Route path="/login" element={<Login setLoggedIn={setLoggedIn}/>} />
           <Route path="/sign-up" element={<Signup setLoggedIn={setLoggedIn}/>} />
           <Route path="/new-biiggie" element={<DemoForm />} />
+          <Route path="/search" element={<SearchPage />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/biiggie/" element={<BiiggiePage />} />
