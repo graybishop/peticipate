@@ -4,7 +4,8 @@ import { GET_BIIGIES, GET_KEYWORDS } from "../../utils/queries.js";
 import { Link } from "react-router-dom";
 import BiiggieCard from "../../pages/HomePage/BiiggieCard.js";
 import honeycombImage from "../../assets/images/hex-bg-5.png";
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import React from "react";
 
 const SearchPage = () => {
   const { data: biiggiesData, error: biiggiesError } = useQuery(GET_BIIGIES);
@@ -14,6 +15,18 @@ const SearchPage = () => {
   console.log(keywordsData);
 
   document.title = "Search || Search Keywords";
+
+  let keywordsArray = [];
+
+  if (keywordsData.keywords != null) {
+    for (let keyword of keywordsData.keywords) {
+      if (keyword.biiggie.length !== 0) {
+        keywordsArray.push(keyword.keyword);
+      }
+    }
+  }
+
+  console.log(keywordsArray);
 
   let biiggieCards = biiggiesData?.biiggies.map((item, index) => {
     return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} />;
@@ -49,7 +62,11 @@ const SearchPage = () => {
           </div>
           <div className="flex flex-col gap-2 w-8/12 justify-center md:flex-row md:w-full md:gap-4">
             <form aciton="/" method="get">
-                <input type="search" id="keyword-search" placeholder="Keyword..." name="search" className="bg-white p-4 rounded-lg shadow font-semibold text-lg border text-left"/>
+              {/* <input type="search" id="keyword-search" placeholder="Keyword..." name="search" className="bg-white p-4 rounded-lg shadow font-semibold text-lg border text-left"/> */}
+              <ReactSearchAutocomplete
+                items={keywordsData}
+                // onSearch={handleOnSearch}
+              />
               <button
                 type="submit"
                 className="text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover"
