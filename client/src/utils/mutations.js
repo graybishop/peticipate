@@ -118,3 +118,14 @@ mutation Mutation($body: String!, $biiggieId: ID!) {
   }
 }
 `
+export const ADD_LIKE = gql`
+mutation Mutation($biiggieId: ID!) {
+  addLike(biiggieId: $biiggieId) {
+    _id
+    username
+    liked {
+      _id
+    }
+  }
+}
+`

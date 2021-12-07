@@ -271,7 +271,7 @@ const BiiggiePreview = (props) => {
         </p>
       </div>
       <div className="my-4 px-6">
-        <BiiggieCard biiggie={fullBiiggieData} />
+        <BiiggieCard biiggie={fullBiiggieData} user={{}} />
       </div>
       <button onClick={props.submitBiiggie} className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>Next Step: Publish My<span className='font-extrabold'> Biiggie</span>!</button>
       <button onClick={props.goBack} className='text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover'>Previous Step: Add Another Support Option</button>

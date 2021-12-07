@@ -128,30 +128,99 @@ export const BIIGGIE = gql`
 `;
 
 export const QUERY_ME = gql`
-  query Query {
-    me {
+query Query {
+  me {
+    _id
+    username
+    email
+    firstName
+    lastName
+    firstName
+    image
+    liked{
       _id
-      username
-      email
-      firstName
-      lastName
-      firstName
-      image
-      createdBiiggies {
-        _id
-        title
-        deadline
+      title
+      deadline
+      description
+      sources
+      images
+      helpOptions {
+        name
         description
-        sources
-        images
-        helpOptions {
-          name
-          description
-          numOfPeople
-          moneyRequested
-          moneyReceived
+        numOfPeople
+        moneyRequested
+        moneyReceived
+      }
+    }
+    createdBiiggies {
+      _id
+      title
+      deadline
+      description
+      sources
+      images
+      likes
+      createdBy {
+        _id
+        username
+        firstName
+        lastName
+        image
+      }
+      keywords {
+        keyword
+      }
+      helpOptions {
+        _id
+        name
+        description
+        numOfPeople
+        registeredUsers {
+          _id
+          username
         }
+        moneyRequested
+        moneyReceived
+      }
+      comments {
+        author {
+          username
+          image
+          firstName
+          lastName
+        }
+        body
       }
     }
   }
+}
 `;
+
+// export const QUERY_ME = gql`
+//   query Query {
+//     me {
+//       _id
+//       username
+//       email
+//       firstName
+//       lastName
+//       firstName
+//       image
+//       createdBiiggies {
+//         _id
+//         title
+//         deadline
+//         description
+//         sources
+//         images
+//         helpOptions {
+//           name
+//           description
+//           numOfPeople
+//           moneyRequested
+//           moneyReceived
+//         }
+//       }
+//     }
+//   }
+// `;

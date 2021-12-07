@@ -17,9 +17,9 @@ connection.once('open', async () => {
             title: 'Taco Food Truck Startup',
             createdBy: userId[1]._id,
             deadline: new Date(new Date().setDate(new Date().getDate() + 9)),
-            description: 'I need help getting my dream taco food truck business off the ground. I serve all types of tacos and have worked very hard renovating an old truck I but. Any help is welcome!',
+            description: 'I need help getting my dream taco food truck business off the ground. I serve all types of tacos and have worked very hard renovating an old truck I. Any help is welcome!',
             images: ['https://mobile-cuisine.com/wp-content/uploads/2015/09/food-truck-branding.jpg'],
-            likes: 23
+            likes: 42
         },
         {
             title: 'First EP Production',

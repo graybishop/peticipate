@@ -1,6 +1,6 @@
 // import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { GET_BIIGIES, GET_KEYWORDS } from "../../utils/queries.js";
+import { GET_BIIGIES, GET_KEYWORDS, QUERY_ME } from "../../utils/queries.js";
 import { Link } from "react-router-dom";
 import BiiggieCard from "../../pages/HomePage/BiiggieCard.js";
 import honeycombImage from "../../assets/images/hex-bg-5.png";
@@ -16,9 +16,12 @@ const SearchPage = () => {
   const { data: keywordsData, error: keywordsError } = useQuery(GET_KEYWORDS);
   console.log(keywordsData);
 
+  const { data: userData, error: userError } = useQuery(QUERY_ME);
+  
+
   document.title = "Search || Search Keywords";
 
-  if (keywordsError || biiggiesError) {
+  if (keywordsError || biiggiesError || userError) {
     console.log("error");
   }
 

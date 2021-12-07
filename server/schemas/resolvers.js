@@ -32,7 +32,7 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('createdBiiggies').populate({ path: 'createdBiiggies', populate: [{ path: 'keywords' }, { path: 'helpOptions' }] });
+        return User.findOne({ _id: context.user._id }).populate('createdBiiggies').populate({ path: 'createdBiiggies', populate: [{ path: 'keywords' }, { path: 'helpOptions' }] }).populate('liked');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -157,7 +157,20 @@ const resolvers = {
       await biiggie.save();
 
       return biiggie;
-    }
+    },
+    addLike: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in to like an Idea.');
+      }
+      let biiggie = await Biiggie.findById(args.biiggieId)
+      biiggie.likes++
+      await biiggie.save()
+      let user = await User.findById(context.user._id);
+      user.liked.push(args.biiggieId);
+      await user.save();
+
+      return user;
+    },
   }
 };
 // Temp resolver for server testing
