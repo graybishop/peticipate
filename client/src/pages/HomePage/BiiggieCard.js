@@ -1,7 +1,11 @@
 import { FiThumbsUp } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { ADD_LIKE } from '../../utils/mutations.js';
 
 const BiiggieCard = ({ biiggie, rank }) => {
+  const [addComment] = useMutation(ADD_LIKE);
+
   const getFullName = () => {
     if (!biiggie.createdBy) {
       return `Your Name Here!`;
@@ -81,7 +85,9 @@ const BiiggieCard = ({ biiggie, rank }) => {
         </div>
         {/* END BIIGGIE INFO */}
         <div className="bg-blue-secondary flex flex-row px-4 py-2 justify-between">
-          <p className='font-bold'>{biiggie.likes || '0'} <FiThumbsUp className='inline' /></p>
+          <button className='font-bold border bg-gray-300 rounded px-2 flex flex-row items-center gap-2'>
+            {biiggie.likes || '0'} <FiThumbsUp className='' />
+            </button>
           <p className='font-bold'>
             {helpOptionsTotals.registeredUsersTotal} / {helpOptionsTotals.numOfPeopleReqTotal} Collaborators
           </p>
