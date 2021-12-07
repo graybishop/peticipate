@@ -7,8 +7,8 @@ const BiiggiePlaceholder = (props) => (
     width={1100}
     height={500}
     viewBox="0 0 600 300"
-    backgroundColor="#FF6F00"
-    foregroundColor="#D9EFFF"
+    backgroundColor="#D9EFFF"
+    foregroundColor="#FF6F00"
     {...props}
   >
     <rect x="6" y="48" rx="0" ry="0" width="7" height="219" /> 
