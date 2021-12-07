@@ -36,7 +36,7 @@ const BiiggieCard = ({ biiggie }) => {
     console.log(biiggie._id)
   return (
     <Link to={`/biiggie/${biiggie._id}`}>
-      <div className="rounded overflow-hidden shadow-lg">
+      <div className="rounded overflow-hidden shadow-lg h-full">
         <img className="w-full" src={biiggie.images[0]} alt="Biiggie" />
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">{biiggie.title}</div>
