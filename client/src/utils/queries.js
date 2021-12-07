@@ -29,7 +29,7 @@ query GiveMeTheBiiggies {
     }
   }
 }
-`
+`;
 
 export const AUTH_BIGGIES = gql`
 query AuthBiggiesReq {
@@ -39,7 +39,8 @@ query AuthBiggiesReq {
     description
   }
 }
-`
+`;
+
 export const BIIGGIE = gql`
 query Biiggie($id: ID) {
   biiggie(_id: $id) {
@@ -83,7 +84,7 @@ query Biiggie($id: ID) {
     }
   }
 }
-`
+`;
 
 export const QUERY_ME = gql`
 query Query {
