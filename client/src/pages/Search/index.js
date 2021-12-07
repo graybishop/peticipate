@@ -10,3 +10,5 @@ const Search = () => {
     const { data: keywordsData, error: keywordsError} = useQuery(GET_KEYWORDS);
     console.log(keywordsData);
 }
+
+export default Search;
