@@ -26,7 +26,6 @@ const BiiggieCard = ({ biiggie, rank, user }) => {
     for (const item of user.liked) {
       if(item._id === biiggie._id){
         setBiiggieLiked(true)
-        console.log('found a liked one')
       }
     }
   }, [user.liked, biiggie._id])

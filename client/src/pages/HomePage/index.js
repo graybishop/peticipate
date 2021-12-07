@@ -18,7 +18,6 @@ const Home = () => {
     pollInterval: 1000
   });
   let user = userData?.me || userData?.user || {};
-  console.log(user)
 
   let biggieCards = data?.biiggies.map((item, index) => {
     return <BiiggieCard biiggie={item} key={item._id} rank={index+1} user={user}/>;
