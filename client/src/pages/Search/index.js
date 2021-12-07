@@ -42,6 +42,8 @@ const SearchPage = () => {
 
   console.log(keywordsArray);
 
+  setBiiggiesState({freshBiiggies: [...freshBiiggies, biiggiesData?.biiggies]})
+
   let biiggieCards = biiggiesData?.biiggies.map((item, index) => {
     return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} />;
   });
