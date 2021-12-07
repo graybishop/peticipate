@@ -157,7 +157,20 @@ const resolvers = {
       await biiggie.save();
 
       return biiggie;
-    }
+    },
+    addLike: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in to like an Idea.');
+      }
+
+      let user = await User.findById(context.user._id);
+
+      user.liked.push(args.biiggieId);
+
+      await user.save();
+
+      return user;
+    },
   }
 };
 // Temp resolver for server testing

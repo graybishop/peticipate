@@ -11,6 +11,7 @@ const typeDefs = gql`
         lastName: String
         createdBiiggies: [Biiggie]
         image: String
+        liked: [Biiggie]
     }
 
     type Auth {
@@ -84,6 +85,7 @@ const typeDefs = gql`
         login(username: String!, password: String!): Auth
         commitToHelp(helpOptionId: ID!, moneyCommitted: Int): HelpOption
         addComment(body: String!, biiggieId: ID!): Biiggie
+        addLike(biiggieId: ID!): User
     }
     `;
 

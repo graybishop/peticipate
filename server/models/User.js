@@ -37,6 +37,12 @@ const UserSchema = new Schema(
         ref: 'Biiggie'
       }
     ],
+    liked: [
+      {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Biiggie'
+      }
+    ],
   },
   {
     timestamps: true,
