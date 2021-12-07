@@ -17,7 +17,7 @@ const SearchPage = () => {
   console.log(keywordsData);
 
   const { data: userData, error: userError } = useQuery(QUERY_ME);
-  
+  let user = userData?.me || userData?.user || {};
 
   document.title = "Search || Search Keywords";
 
@@ -44,7 +44,7 @@ const SearchPage = () => {
   //   console.log("Handle Form", biiggiesState);
 
   let biiggieCards = biiggiesData?.biiggies.map((item, index) => {
-    return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} />;
+    return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} user={user}/>;
   });
 
 //   const [biiggiesState, setBiiggiesState] = useState({
