@@ -92,19 +92,18 @@ const Profile = () => {
     <div className='bg-body-background-blue'>
       <div className="text-center py-4 px-12 container m-4 mx-auto">
         <img
-          className="object-cover rounded-full border shadow h-60 w-60  mx-auto"
+          className="object-cover rounded-full border-2 border-blue-nav-button shadow h-52 w-52  mx-auto"
           id="profileImage"
           src={user.image}
           alt="user profile"
         />
-        <div className="box-border">{user.username}</div>
-        <div>{user.email}</div>
-        <div>
+        <p className="font-bold text-2xl">
           {user.firstName} {user.lastName}{" "}
-        </div>
+        </p>
+        <p className="italic text-2xl">{user.username}</p>
         <div>
           <div className="text-left">
-            <h2 className="pt-10 text-orange-primary font-semibold text-lg border-b-4 border-orange-primary">
+            <h2 className="pt-10 text-orange-primary font-semibold text-xl border-b-2 border-orange-primary">
               CREATED <span className="font-extrabold">Biiggies</span>
             </h2>
           </div>
@@ -119,7 +118,7 @@ const Profile = () => {
             {profileBiiggieCards}
           </div>
           <div className="text-left">
-            <h2 className="pt-10 text-orange-primary font-semibold text-lg border-b-4 border-orange-primary">
+            <h2 className="pt-10 text-orange-primary font-semibold text-xl border-b-2 border-orange-primary">
               COMMITTED <span className="font-extrabold">Biiggies</span>
             </h2>
           </div>
@@ -129,7 +128,7 @@ const Profile = () => {
           {mappedLikes.length !== 0 ? (
             <div>
               <div className="text-left">
-                <h2 className="pt-10 text-orange-primary font-semibold text-lg border-b-4 border-orange-primary">
+                <h2 className="pt-10 text-orange-primary font-semibold text-xl border-b-2 border-orange-primary">
                   Liked <span className="font-extrabold">Biiggies</span>
                 </h2>
               </div>
