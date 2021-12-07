@@ -7,6 +7,8 @@ import honeycombImage from "../../assets/images/hex-bg-5.png";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import React, { useState } from "react";
 
+
+
 const SearchPage = () => {
   const { data: biiggiesData, error: biiggiesError } = useQuery(GET_BIIGIES);
   console.log(biiggiesData);
@@ -155,13 +157,13 @@ const SearchPage = () => {
                 type="submit"
                 className="text-orange-primary bg-white py-3 w-auto rounded-lg shadow font-semibold text-lg mt-12 mr-1 border-orange-primary text-center hover:text-orange-hover"
               >
-                <Link
+                <span className="font-extrabold">Search</span>
+              </button>
+              <Link
                   to="/new-biiggie"
                   className="bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover"
-                >
-                  Build My <span className="font-extrabold">Biiggie</span> Now
+                >Build My <span className="font-extrabold">Biiggie</span> Now
                 </Link>
-              </button>
             </form>
           </div>
         </div>
