@@ -13,6 +13,7 @@ import Profile from "./pages/ProfilePage/index.js";
 import BiiggiePage from "./pages/Biiggie Page/index.js";
 import DemoForm from "./pages/DemoForm/index.js";
 import auth from "./utils/auth";
+import ThankYou from "./pages/ThankYou/index.js";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -59,6 +60,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/biiggie/" element={<BiiggiePage />} />
           <Route path="/biiggie/:biiggieId" element={<BiiggiePage />} />
+          <Route path="/thank-you" element={<ThankYou />} />
           <Route
             path="*"
             element={
