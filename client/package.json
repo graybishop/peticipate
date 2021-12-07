@@ -26,7 +26,9 @@
     "react-scripts": "4.0.3",
     "react-search-autocomplete": "^5.4.4",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "fuse.js": "^6.4.4",
+    "styled-component": "^2.8.0"
   },
   "scripts": {
     "start": "craco start",

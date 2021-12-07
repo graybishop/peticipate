@@ -16,11 +16,21 @@ const SearchPage = () => {
 
   document.title = "Search || Search Keywords";
 
+if (keywordsError || biiggiesError ) {
+    console.log("error");
+}
+
   let keywordsArray = [];
+  let i = 0;
   if (keywordsData != null) {
     for (let keyword of keywordsData.keywords) {
       if (keyword.biiggie.length !== 0) {
-        keywordsArray.push(keyword.keyword);
+        keywordsArray.push({
+          id: i,
+          word: 
+          keyword.keyword
+        });
+        i++;
       }
     }
   }
@@ -30,6 +40,26 @@ const SearchPage = () => {
   let biiggieCards = biiggiesData?.biiggies.map((item, index) => {
     return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} />;
   });
+
+  const handleOnSearch = (string, results) => {
+    console.log(string, results);
+  };
+
+  const handleOnHover = (result) => {
+    console.log(result);
+  };
+
+  const handleOnSelect = (item) => {
+    console.log(item);
+  };
+
+  const handleOnFocus = () => {
+    console.log("Focused");
+  };
+
+  const handleOnClear = () => {
+    console.log("Cleared");
+  };
 
   return (
     <div className="flex flex-col bg-body-background-blue">
@@ -63,12 +93,32 @@ const SearchPage = () => {
             <form aciton="/" method="get">
               <ReactSearchAutocomplete
                 items={keywordsArray}
-                // onSearch={handleOnSearch}
-                styling={{color: "#FF6F00"}}
+                fuseOptions={{ keys: ["word"] }} // Search on both fields
+                resultStringKeyName="word" // String to display in the results
+                onSearch={handleOnSearch}
+                onHover={handleOnHover}
+                onSelect={handleOnSelect}
+                onFocus={handleOnFocus}
+                onClear={handleOnClear}
+                showIcon={true}
+                styling={{
+                  height: "34px",
+                  borderRadius: "4px",
+                  backgroundColor: "white",
+                  boxShadow: "none",
+                  hoverBackgroundColor: "#D9EFFF",
+                  color: "#FF6F00",
+                  fontSize: "12px",
+                  fontFamily: "Courier",
+                  iconColor: "#FF6F00",
+                  lineColor: "#FF6F00",
+                  placeholderColor: "#FF6F00",
+                  clearIconMargin: "3px 8px 0 0",
+                }}
               />
               <button
                 type="submit"
-                className="text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover"
+                className="text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border-2 mt-1 mr-1 border-orange-primary text-center hover:text-orange-hover"
               >
                 Find a <span className="font-extrabold">Biiggie</span>
               </button>
