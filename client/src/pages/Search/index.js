@@ -30,9 +30,9 @@ const SearchPage = () => {
             <p>Support interests closest to your heart with your time, talents, and treasure. </p>
           </div>
           <div className='flex flex-col gap-2 w-8/12 justify-center md:flex-row md:w-full md:gap-4'>
-            <Link to='/search'
+            <button type="submit"
               className='text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover'>
-              Find a <span className='font-extrabold'>Biiggie</span></Link>
+              Find a <span className='font-extrabold'>Biiggie</span></button>
               <Link to='/new-biiggie'
               className='bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover'>
               Build My <span className='font-extrabold'>Biiggie</span> Now</Link>
