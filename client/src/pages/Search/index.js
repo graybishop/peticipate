@@ -17,8 +17,7 @@ const SearchPage = () => {
   document.title = "Search || Search Keywords";
 
   let keywordsArray = [];
-
-  if (keywordsData.keywords != null) {
+  if (keywordsData != null) {
     for (let keyword of keywordsData.keywords) {
       if (keyword.biiggie.length !== 0) {
         keywordsArray.push(keyword.keyword);
@@ -62,10 +61,10 @@ const SearchPage = () => {
           </div>
           <div className="flex flex-col gap-2 w-8/12 justify-center md:flex-row md:w-full md:gap-4">
             <form aciton="/" method="get">
-              {/* <input type="search" id="keyword-search" placeholder="Keyword..." name="search" className="bg-white p-4 rounded-lg shadow font-semibold text-lg border text-left"/> */}
               <ReactSearchAutocomplete
-                items={keywordsData}
+                items={keywordsArray}
                 // onSearch={handleOnSearch}
+                styling={{color: "#FF6F00"}}
               />
               <button
                 type="submit"
