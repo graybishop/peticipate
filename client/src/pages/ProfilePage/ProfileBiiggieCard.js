@@ -34,33 +34,23 @@ const BiiggieCard = ({ biiggie }) => {
 
     const helpOptionsTotals = processHelpOptions();
     console.log(biiggie._id)
+
   return (
     <Link to={`/biiggie/${biiggie._id}`}>
-      <div className="rounded overflow-hidden shadow-lg h-full">
-        <img className="w-full" src={biiggie.images[0]} alt="Biiggie" />
-        <div className="px-6 py-4">
+      <div className="rounded overflow-hidden flex flex-col shadow-lg h-full">
+        <img className="object-cover h-72" src={biiggie.images[0]} alt="Biiggie" />
+        <div className="px-6 py-4 flex-grow">
           <div className="font-bold text-xl mb-2">{biiggie.title}</div>
-          <p className="text-gray-700 text-base">{biiggie.description}</p>
+          <p className="text-gray-700 text-base line-clamp-3 leading-tight">{biiggie.description}</p>
         </div>
-        <div className="bg-blue-secondary flex flex-row px-4 py-2 justify-between">
-          <p className='font-bold'>15 <FiThumbsUp className='inline' /></p>
+        <div className="bg-blue-secondary flex flex-row px-4 py-2 justify-between justify-self-end">
+          <p className='font-bold'>{biiggie.likes || '0'} <FiThumbsUp className='inline' /></p>
           <p className='font-bold'>
             {helpOptionsTotals.registeredUsersTotal} / {helpOptionsTotals.numOfPeopleReqTotal} Collaborators
           </p>
           <p className='font-bold'>
             ${helpOptionsTotals.moneyReceivedTotal} / ${helpOptionsTotals.moneyRequestedTotal}
           </p>
-        </div>
-        <div className="px-6 pt-4 pb-2">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            Food
-          </span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            Politics
-          </span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            Education
-          </span>
         </div>
       </div>
     </Link>
