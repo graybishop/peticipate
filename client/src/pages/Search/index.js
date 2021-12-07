@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import BiiggieCard from "../../pages/HomePage/BiiggieCard.js";
 import honeycombImage from "../../assets/images/hex-bg-5.png";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import React from "react";
+import React, { useState } from "react";
 
 const SearchPage = () => {
   const { data: biiggiesData, error: biiggiesError } = useQuery(GET_BIIGIES);
@@ -16,9 +16,15 @@ const SearchPage = () => {
 
   document.title = "Search || Search Keywords";
 
-if (keywordsError || biiggiesError ) {
+  if (keywordsError || biiggiesError) {
     console.log("error");
-}
+  }
+
+  const [biiggiesState, setBiiggiesState] = useState({
+    freshBiiggies: [],
+  });
+
+  const { freshBiiggies } = biiggiesState;
 
   let keywordsArray = [];
   let i = 0;
@@ -27,8 +33,7 @@ if (keywordsError || biiggiesError ) {
       if (keyword.biiggie.length !== 0) {
         keywordsArray.push({
           id: i,
-          word: 
-          keyword.keyword
+          word: keyword.keyword,
         });
         i++;
       }
@@ -49,8 +54,21 @@ if (keywordsError || biiggiesError ) {
     console.log(result);
   };
 
+  let searchedBiiggiesArray = [];
   const handleOnSelect = (item) => {
     console.log(item);
+    for (let keyword of keywordsData.keywords) {
+      if (keyword == item.word) {
+        for (let searchedBiiggie of keywordsData.keywords.biiggie) {
+          searchedBiiggiesArray.push(searchedBiiggie);
+          console.log(searchedBiiggiesArray);
+        }
+      }
+    }
+    biiggieCards = searchedBiiggiesArray.map((item, index) => {
+      return <BiiggieCard biiggie={item} key={item._id} rank={index + 1} />;
+    });
+    console.log(searchedBiiggiesArray);
   };
 
   const handleOnFocus = () => {
@@ -89,7 +107,7 @@ if (keywordsError || biiggiesError ) {
               and treasure.{" "}
             </p>
           </div>
-          <div className="flex flex-col gap-2 w-8/12 justify-center md:flex-row md:w-full md:gap-4">
+          <div className="flex flex-col w-12/12 justify-center md:flex-row md:w-full md:gap-4">
             <form aciton="/" method="get">
               <ReactSearchAutocomplete
                 items={keywordsArray}
@@ -102,14 +120,15 @@ if (keywordsError || biiggiesError ) {
                 onClear={handleOnClear}
                 showIcon={true}
                 styling={{
-                  height: "34px",
-                  borderRadius: "4px",
+                  height: "3rem",
+                  borderRadius: "1rem",
                   backgroundColor: "white",
                   boxShadow: "none",
                   hoverBackgroundColor: "#D9EFFF",
                   color: "#FF6F00",
                   fontSize: "12px",
-                  fontFamily: "Courier",
+                  fontFamily:
+                    '"ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                   iconColor: "#FF6F00",
                   lineColor: "#FF6F00",
                   placeholderColor: "#FF6F00",
@@ -118,16 +137,15 @@ if (keywordsError || biiggiesError ) {
               />
               <button
                 type="submit"
-                className="text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border-2 mt-1 mr-1 border-orange-primary text-center hover:text-orange-hover"
+                className="text-orange-primary bg-white py-3 w-auto rounded-lg shadow font-semibold text-lg mt-12 mr-1 border-orange-primary text-center hover:text-orange-hover"
               >
-                Find a <span className="font-extrabold">Biiggie</span>
+                <Link
+                  to="/new-biiggie"
+                  className="bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover"
+                >
+                  Build My <span className="font-extrabold">Biiggie</span> Now
+                </Link>
               </button>
-              <Link
-                to="/new-biiggie"
-                className="bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover"
-              >
-                Build My <span className="font-extrabold">Biiggie</span> Now
-              </Link>
             </form>
           </div>
         </div>
