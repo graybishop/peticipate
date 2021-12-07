@@ -120,7 +120,7 @@ mutation Mutation($body: String!, $biiggieId: ID!) {
 `
 export const ADD_LIKE = gql`
 mutation Mutation($biiggieId: ID!) {
-  addComment(biiggieId: $biiggieId) {
+  addLike(biiggieId: $biiggieId) {
     _id
     username
     liked {

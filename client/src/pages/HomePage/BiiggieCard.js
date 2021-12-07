@@ -2,9 +2,25 @@ import { FiThumbsUp } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_LIKE } from '../../utils/mutations.js';
+import { useState } from 'react';
 
 const BiiggieCard = ({ biiggie, rank }) => {
-  const [addComment] = useMutation(ADD_LIKE);
+  const [biiggieLiked, setBiiggieLiked] = useState(false)
+  const [addLike] = useMutation(ADD_LIKE);
+
+  const handleLikeClick = async (event) => {
+    event.preventDefault();
+    const biiggieId = biiggie._id
+    try {
+        let result = await addLike({
+            variables: {
+                biiggieId
+            }
+        })
+    } catch (error) {
+        console.error(error)
+    }
+}
 
   const getFullName = () => {
     if (!biiggie.createdBy) {
@@ -52,7 +68,6 @@ const BiiggieCard = ({ biiggie, rank }) => {
   }
 
   const helpOptionsTotals = processHelpOptions();
-  console.log(biiggie)
 
   return (
     <div className='h-full flex flex-col'>
@@ -85,7 +100,7 @@ const BiiggieCard = ({ biiggie, rank }) => {
         </div>
         {/* END BIIGGIE INFO */}
         <div className="bg-blue-secondary flex flex-row px-4 py-2 justify-between">
-          <button className='font-bold border bg-gray-300 rounded px-2 flex flex-row items-center gap-2'>
+          <button onClick={handleLikeClick} className='font-bold border bg-gray-300 rounded px-2 flex flex-row items-center gap-2'>
             {biiggie.likes || '0'} <FiThumbsUp className='' />
             </button>
           <p className='font-bold'>
