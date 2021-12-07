@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BsTwitter, BsLinkedin, BsInstagram, BsFacebook } from 'react-icons/bs';
+import { BsTwitter, BsLinkedin, BsInstagram, BsFacebook, BsFillHeartFill } from 'react-icons/bs';
 
 const Footer = () => {
     return (
@@ -13,7 +13,7 @@ const Footer = () => {
                 <Link to=""><BsFacebook /></Link>
             </div>
             <div>
-            <p className="text-center text-sm font-bold italic">Made with ❤ by Biiggie ©2021</p>
+            <p className="text-center text-sm font-bold italic">Made with <Link to='/thank-you'> <BsFillHeartFill className='inline text-red-600 hover:text-red-900'/> </Link>by Biiggie ©2021</p>
             </div>
         </div>
     </div>
