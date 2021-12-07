@@ -32,7 +32,7 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('createdBiiggies').populate({ path: 'createdBiiggies', populate: [{ path: 'keywords' }, { path: 'helpOptions' }] });
+        return User.findOne({ _id: context.user._id }).populate('createdBiiggies').populate({ path: 'createdBiiggies', populate: [{ path: 'keywords' }, { path: 'helpOptions' }] }).populate('liked');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
