@@ -4,6 +4,7 @@ import { GET_BIIGIES, GET_KEYWORDS } from "../../utils/queries.js";
 import { Link } from "react-router-dom";
 import BiiggieCard from "../../pages/HomePage/BiiggieCard.js";
 import honeycombImage from "../../assets/images/hex-bg-5.png";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 const SearchPage = () => {
   const { data: biiggiesData, error: biiggiesError } = useQuery(GET_BIIGIES);
@@ -48,7 +49,7 @@ const SearchPage = () => {
           </div>
           <div className="flex flex-col gap-2 w-8/12 justify-center md:flex-row md:w-full md:gap-4">
             <form aciton="/" method="get">
-                <input type="text" id="keyword-search" placeholder="Search Biiggies using keywords" name="search"/>
+                <input type="search" id="keyword-search" placeholder="Keyword..." name="search" className="bg-white p-4 rounded-lg shadow font-semibold text-lg border text-left"/>
               <button
                 type="submit"
                 className="text-orange-primary bg-white p-4 rounded-lg shadow font-semibold text-lg border border-orange-primary text-center hover:text-orange-hover"
