@@ -19,15 +19,15 @@ const Profile = () => {
     document.title = 'Profile';
   }, []);
 
-  const { loading, data } = useQuery(QUERY_ME,{
+  const { loading, data } = useQuery(QUERY_ME, {
     pollInterval: 1000
   });
   const user = data?.me || data?.user || {};
 
-  const { loading: loadingBiiggies, data: biiggiesData } = useQuery(GET_BIIGIES,{
-      pollInterval: 1000
-    });
-    
+  const { loading: loadingBiiggies, data: biiggiesData } = useQuery(GET_BIIGIES, {
+    pollInterval: 1000
+  });
+
   const biiggies = biiggiesData?.biiggies || [];
 
   let profileBiiggieCards = (
@@ -83,26 +83,29 @@ const Profile = () => {
     });
   }
 
+  let mappedLikes = user.liked.map((item) => {
+    return <ProfileBiiggieCard biiggie={item} key={item._id} />;
+  });
+
 
   return (
     <div className='bg-body-background-blue'>
       <div className="text-center py-4 px-12 container m-4 mx-auto">
         <img
-          className="object-cover rounded-full border shadow h-60 w-60  mx-auto"
+          className="object-cover rounded-full border-2 border-blue-nav-button shadow h-52 w-52  mx-auto"
           id="profileImage"
           src={user.image}
           alt="user profile"
         />
-        <div className="box-border">{user.username}</div>
-        <div>{user.email}</div>
-        <div>
+        <p className="font-bold text-2xl">
           {user.firstName} {user.lastName}{" "}
-        </div>
+        </p>
+        <p className="italic text-2xl">{user.username}</p>
         <div>
           <div className="text-left">
-            <p className="pt-10 text-orange-primary font-semibold text-lg border-b-4 border-orange-primary">
+            <h2 className="pt-10 text-orange-primary font-semibold text-xl border-b-2 border-orange-primary">
               CREATED <span className="font-extrabold">Biiggies</span>
-            </p>
+            </h2>
           </div>
           <div className="p-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
             <div className='col-span-1 md:col-span-2 xl:col-span-3'>
@@ -115,16 +118,28 @@ const Profile = () => {
             {profileBiiggieCards}
           </div>
           <div className="text-left">
-            <p className="pt-10 text-orange-primary font-semibold text-lg border-b-4 border-orange-primary">
+            <h2 className="pt-10 text-orange-primary font-semibold text-xl border-b-2 border-orange-primary">
               COMMITTED <span className="font-extrabold">Biiggies</span>
-            </p>
+            </h2>
           </div>
           <div className="p-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
             {profileBiiggiesCommittedToCards}
           </div>
-        </div>
-
+          {mappedLikes.length !== 0 ? (
+            <div>
+              <div className="text-left">
+                <h2 className="pt-10 text-orange-primary font-semibold text-xl border-b-2 border-orange-primary">
+                  Liked <span className="font-extrabold">Biiggies</span>
+                </h2>
+              </div>
+              <div className="p-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                {mappedLikes}
+              </div>
+            </div> 
+        ): null}
       </div>
+
+    </div>
     </div>
   );
 };

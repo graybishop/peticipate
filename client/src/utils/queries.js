@@ -95,6 +95,21 @@ query Query {
     lastName
     firstName
     image
+    liked{
+      _id
+      title
+      deadline
+      description
+      sources
+      images
+      helpOptions {
+        name
+        description
+        numOfPeople
+        moneyRequested
+        moneyReceived
+      }
+    }
     createdBiiggies {
       _id
       title
