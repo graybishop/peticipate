@@ -16,24 +16,31 @@ const Profile = () => {
   });
 
   useEffect(() => {
-    document.title='Profile';
-  }, [])
+    document.title = 'Profile';
+  }, []);
 
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data } = useQuery(QUERY_ME,{
+    pollInterval: 1000
+  });
   const user = data?.me || data?.user || {};
 
-  const { loading: loadingBiiggies, data: biiggiesData } =
-    useQuery(GET_BIIGIES);
+  const { loading: loadingBiiggies, data: biiggiesData } = useQuery(GET_BIIGIES,{
+      pollInterval: 1000
+    });
+    
   const biiggies = biiggiesData?.biiggies || [];
 
-  let profileBiiggieCards =
-    <BiiggiePlaceholder/>;
+  let profileBiiggieCards = (
+    <div className='flex flex-col'>
+      <BiiggiePlaceholder />
+    </div>
+  );
 
   console.log(data);
 
   let profileBiiggiesCommittedToCards =
-      <BiiggiePlaceholder/>;
-    
+    <BiiggiePlaceholder />;
+
   console.log(biiggies);
 
   if (loading || loadingBiiggies) {
@@ -76,55 +83,48 @@ const Profile = () => {
     });
   }
 
-  // let profileBiiggieCards = user.CreatedBiiggies.map((item) => {
-  //   return <ProfileBiiggieCard biiggie={item} key={item._id} />;
-  // });
 
   return (
-    <div className="text-center box-border p-4 border-4 m-4 mx-auto">
-      <img
-        className="object-cover rounded-full border shadow h-60 w-60  mx-auto"
-        id="profileImage"
-        src={user.image}
-        alt="user profile"
-      />
-      <div className="box-border">{user.username}</div>
-      <div>{user.email}</div>
-      <div>
-        {user.firstName} {user.lastName}{" "}
+    <div className='bg-body-background-blue'>
+      <div className="text-center py-4 px-12 container m-4 mx-auto">
+        <img
+          className="object-cover rounded-full border shadow h-60 w-60  mx-auto"
+          id="profileImage"
+          src={user.image}
+          alt="user profile"
+        />
+        <div className="box-border">{user.username}</div>
+        <div>{user.email}</div>
+        <div>
+          {user.firstName} {user.lastName}{" "}
+        </div>
+        <div>
+          <div className="text-left">
+            <p className="pt-10 text-orange-primary font-semibold text-lg border-b-4 border-orange-primary">
+              CREATED <span className="font-extrabold">Biiggies</span>
+            </p>
+          </div>
+          <div className="p-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+            <div className='col-span-1 md:col-span-2 xl:col-span-3'>
+              {user.createdBiiggies.length === 0 ? <Link
+                to="/new-biiggie"
+                className="bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover">
+                Start Building A <span className="font-extrabold">Biiggie</span> Now
+              </Link> : null}
+            </div>
+            {profileBiiggieCards}
+          </div>
+          <div className="text-left">
+            <p className="pt-10 text-orange-primary font-semibold text-lg border-b-4 border-orange-primary">
+              COMMITTED <span className="font-extrabold">Biiggies</span>
+            </p>
+          </div>
+          <div className="p-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+            {profileBiiggiesCommittedToCards}
+          </div>
+        </div>
+
       </div>
-      {/* <div>{user.description}</div> */}
-      {/* <div>{user.createdBiiggies}</div> */}
-      <div>
-        <div className="text-left">
-          <p className="pt-10 text-orange-primary font-semibold text-lg border-b-4 border-orange-primary">
-            CREATED <span className="font-extrabold">Biiggies</span>
-          </p>
-        </div>
-        <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-          {/* <!--Card 1--> */}
-          {/* if (loading) { return (<p>Loading ...</p>)} */}
-          {/* Renders the users biiggies */}
-          {profileBiiggieCards}
-        </div>
-        <div className="text-left">
-          <p className="pt-10 text-orange-primary font-semibold text-lg border-b-4 border-orange-primary">
-            COMMITTED <span className="font-extrabold">Biiggies</span>
-          </p>
-        </div>
-        <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-          {/* <!--Card 1--> */}
-          {/* if (loading) { return (<p>Loading ...</p>)} */}
-          {/* Renders the users biiggies */}
-          {profileBiiggiesCommittedToCards}
-        </div>
-      </div>
-      <Link
-        to="/new-biiggie"
-        className="bg-orange-primary text-white p-4 rounded-lg shadow font-semibold text-lg text-center hover:bg-orange-hover"
-      >
-        Build My <span className="font-extrabold">Biiggie</span> Now
-      </Link>
     </div>
   );
 };

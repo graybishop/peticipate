@@ -179,8 +179,11 @@ const HelpOptionsForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(event);
+    let clonedFormState = {...formState}
+    if (clonedFormState.numOfPeople === '') clonedFormState.numOfPeople = 0
+    if (clonedFormState.moneyRequested === '') clonedFormState.moneyRequested = 0
     event.target.parentElement.reset();
-    props.addHelpOption({ ...formState });
+    props.addHelpOption({ ...clonedFormState });
     setNeedPeopleSelector("options");
     if (!visible) {
       show();
