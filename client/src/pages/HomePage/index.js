@@ -7,7 +7,7 @@ import honeycombImage from "../../assets/images/hex-bg-5.png";
 
 const Home = () => {
   const { data, error } = useQuery(GET_BIIGIES,{
-    pollInterval: 750
+    pollInterval: 500
   });
 
   useEffect(() => {
